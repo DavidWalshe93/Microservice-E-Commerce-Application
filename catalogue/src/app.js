@@ -18,6 +18,9 @@ const db = mysql.createConnection({
     database: process.env.SQL_DATABASE
 });
 
+// Create express instance
+const app = express();
+
 var cart = [];
 var theuser = null;
 var theuserid = null;
