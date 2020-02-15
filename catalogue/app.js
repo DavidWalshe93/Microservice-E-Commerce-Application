@@ -1,8 +1,9 @@
-const http = require('http'),
-    fs = require('fs'),
-    url = require('url');
+const http = require('http');
+const fs = require('fs');
+const url = require('url');
 const p = require('path');
 const qs = require('querystring');
+const express = require("express");
 const mysql = require('mysql');
 const root = __dirname;
 const headers = [
@@ -10,16 +11,13 @@ const headers = [
 ];
 
 
-console.log(process.env.SQL_HOST);
-console.log(process.env.SQL_USERNAME);
-console.log(process.env.SQL_PASSWORD);
-console.log(process.env.SQL_DATABASE);
-var db = mysql.createConnection({
+const db = mysql.createConnection({
     host: process.env.SQL_HOST,
     user: process.env.SQL_USERNAME,
     password: process.env.SQL_PASSWORD,
     database: process.env.SQL_DATABASE
 });
+
 var cart = [];
 var theuser = null;
 var theuserid = null;
