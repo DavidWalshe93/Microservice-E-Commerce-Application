@@ -1,6 +1,6 @@
 // Created by David Walshe on 15/02/2020
 
-const app = require("/src/app");
+const app = require("./app");
 
 const port = process.env.PORT;
 
