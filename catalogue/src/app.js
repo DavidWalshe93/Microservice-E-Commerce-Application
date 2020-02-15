@@ -4,19 +4,10 @@ const url = require('url');
 const p = require('path');
 const qs = require('querystring');
 const express = require("express");
-const mysql = require('mysql');
 const root = __dirname;
 const headers = [
     "Product Name", "Price", "Picture", "Buy Button"
 ];
-
-
-const db = mysql.createConnection({
-    host: process.env.SQL_HOST,
-    user: process.env.SQL_USERNAME,
-    password: process.env.SQL_PASSWORD,
-    database: process.env.SQL_DATABASE
-});
 
 // Create express instance
 const app = express();
