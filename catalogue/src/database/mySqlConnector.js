@@ -1,9 +1,9 @@
 // Created by David Walshe on 15/02/2020
 
-const mySqlConnector = require('mysql');
+const mysql = require('mysql');
 
 // Create MySQL database connection
-const db = mySqlConnector.createConnection({
+const db = mysql.createConnection({
     host: process.env.SQL_HOST,
     user: process.env.SQL_USERNAME,
     password: process.env.SQL_PASSWORD,
