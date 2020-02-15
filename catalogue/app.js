@@ -1,25 +1,30 @@
-var http = require('http'),
+const http = require('http'),
     fs = require('fs'),
     url = require('url');
-var p = require('path');
-var qs = require('querystring');
-var mysql = require('mysql');
-var root = __dirname;
-var headers = [
+const p = require('path');
+const qs = require('querystring');
+const mysql = require('mysql');
+const root = __dirname;
+const headers = [
     "Product Name", "Price", "Picture", "Buy Button"
 ];
 
 
+console.log(process.env.SQL_HOST);
+console.log(process.env.SQL_USERNAME);
+console.log(process.env.SQL_PASSWORD);
+console.log(process.env.SQL_DATABASE);
 var db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'asdf1234',
-    database: 'shop'
+    host: process.env.SQL_HOST,
+    user: process.env.SQL_USERNAME,
+    password: process.env.SQL_PASSWORD,
+    database: process.env.SQL_DATABASE
 });
 var cart = [];
 var theuser = null;
 var theuserid = null;
 var server = http.createServer(function (request, response) {
+
     var path = url.parse(request.url).pathname;
     var url1 = url.parse(request.url);
     if (request.method == 'POST') {

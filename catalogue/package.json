@@ -3,7 +3,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "env-cmd -f config/dev.env nodemon app.js"
   },
   "dependencies": {
     "mysql": "^2.18.1"
