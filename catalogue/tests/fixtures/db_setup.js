@@ -44,10 +44,8 @@ const mock_order_generator = (size = 3) => {
     mock_orders = [];
     for (let i = 1; i < size + 1; i++) {
         mock_orders.push({
-            name: "test_product_" + i,
-            quantity: i,
-            price: 10 * i,
-            image: "fake" + i + ".png"
+            customerID: i,
+            saledate: i + "-02-2020"
         });
     }
 
