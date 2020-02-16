@@ -8,7 +8,9 @@ const Order = require("../src/model/order");
 
 const {setupDatabase} = require("./fixtures/db_setup");
 
-beforeEach(setupDatabase);
+beforeAll(() => {
+    setupDatabase("order")
+});
 
 
 test("Should return all orders", async () => {
@@ -23,7 +25,7 @@ test("Should return a specified order based on its orderID", async () => {
     await request(app)
         .get("/getOrder/2")
         .send()
-        .expect(200)
+        .expect(200);
 });
 
 test("Should create a new Order", async () => {

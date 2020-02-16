@@ -11,7 +11,12 @@ const sequelize = new Sequelize(
     {
         dialect: "mysql",
         host: process.env.HOST,
-        logging: process.env.SQL_LOGGER | console.log
+        logging: process.env.SQL_LOGGER | console.log,
+        pool: {
+            max: 151,
+            min: 1,
+            idle: 10
+        }
     }
 );
 

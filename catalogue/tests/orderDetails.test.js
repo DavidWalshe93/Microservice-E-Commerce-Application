@@ -8,7 +8,9 @@ const OrderDetails = require("../src/model/orderDetails");
 
 const {setupDatabase} = require("./fixtures/db_setup");
 
-beforeEach(setupDatabase);
+beforeAll(() => {
+    setupDatabase("orderDetails")
+});
 
 
 test("Should return all orderDetails", async () => {
@@ -16,6 +18,35 @@ test("Should return all orderDetails", async () => {
         .get("/getOrderDetails")
         .send()
         .expect(200);
+});
 
-    console.log(response)
+
+test("Should create a new OrderDetails item", async () => {
+
+    // Check if endpoint returns expected response.
+    const response = await request(app)
+        .post("/newOrderDetails")
+        .send({
+            orderID: 10,
+            productID: 100,
+            quantity: 1000
+        })
+        .expect(201);
+
+    // Retrieve the newly created product.
+    const orderDetail = await OrderDetails.findOne({
+        where: {
+            orderdetailsID: response.body.orderDetailsID
+        }
+    });
+
+    // Test the object exists in the database.
+    expect(orderDetail).not.toBeNull();
+
+    // Test the correct information was saved about the product
+    expect(orderDetail).toMatchObject({
+        orderID: 10,
+        productID: 100,
+        quantity: 1000
+    })
 });

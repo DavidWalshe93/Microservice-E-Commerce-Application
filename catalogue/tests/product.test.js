@@ -9,7 +9,9 @@ const Product = require("../src/model/product");
 const {setupDatabase} = require("./fixtures/db_setup");
 
 
-beforeEach(setupDatabase);
+beforeAll(() => {
+    setupDatabase("product")
+});
 
 
 test("Should return all products", async () => {

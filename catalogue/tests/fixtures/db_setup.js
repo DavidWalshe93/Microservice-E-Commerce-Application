@@ -10,7 +10,6 @@ const Customer = require("../../src/model/customer");
 // ==================================================================================
 // PRODUCT SETUP
 // ==================================================================================
-
 var mock_products = [];
 const mock_product_generator = (size = 3) => {
     mock_products = [];
@@ -40,7 +39,6 @@ const setupProductTable = async () => {
 // ==================================================================================
 // ORDER SETUP
 // ==================================================================================
-
 var mock_orders = [];
 const mock_order_generator = (size = 3) => {
     mock_orders = [];
@@ -69,7 +67,6 @@ const setupOrderTable = async () => {
 // ==================================================================================
 // ORDER DETAILS SETUP
 // ==================================================================================
-
 var mock_order_details = [];
 const mock_order_details_generator = (size = 3) => {
     mock_order_details = [];
@@ -96,7 +93,7 @@ const setupOrderDetailsTable = async () => {
 };
 
 // ==================================================================================
-// CUS SETUP
+// CUSTOMER SETUP
 // ==================================================================================
 
 var mock_customer_details = [];
@@ -127,12 +124,23 @@ const setupCustomerTable = async () => {
 // ==================================================================================
 // Database SETUP
 // ==================================================================================
-
-const setupDatabase = async () => {
-    await setupProductTable();
-    await setupOrderTable();
-    await setupOrderDetailsTable();
-    await setupCustomerTable();
+const setupDatabase = async (testCase) => {
+    switch (testCase) {
+        // case "customer":
+        //     await setupCustomerTable();
+        //     break;
+        // case "product":
+        //
+        //     await setupProductTable();
+        //     break;
+        // case "order":
+        //     await setupOrderTable();
+        //     break;
+        // case "orderDetails":
+        //     console.log("IM HERE");
+        //     await setupOrderDetailsTable();
+        //     break;
+    }
 };
 
 module.exports = {setupDatabase, mock_products, mock_orders};
