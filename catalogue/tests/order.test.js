@@ -16,3 +16,10 @@ test("Should return all orders", async () => {
         .send()
         .expect(200)
 });
+
+test("Should return a specified order based on its orderID", async () => {
+    await request(app)
+        .get("/getOrder/2")
+        .send()
+        .expect(200)
+});
