@@ -1,7 +1,6 @@
 // Created by David Walshe on 15/02/2020
 
 // NPM Imports
-const db = require("./../database/mySqlConnector");
 const Product = require("./../model/product");
 const express = require("express");
 

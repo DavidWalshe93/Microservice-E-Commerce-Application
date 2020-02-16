@@ -1,15 +1,8 @@
-const http = require('http');
-const fs = require('fs');
-const url = require('url');
-const p = require('path');
-const qs = require('querystring');
 const express = require("express");
-const root = __dirname;
-const headers = [
-    "Product Name", "Price", "Picture", "Buy Button"
-];
-const db = require("./database/mySqlConnector");
-const cars = require("./routers/product");
+
+// Import ORM for Product
+const Product = require("./routers/product");
+
 // Create express instance
 const app = express();
 
@@ -17,7 +10,7 @@ const app = express();
 app.use(express.json());
 
 // Add customer routers to express
-app.use(cars);
+app.use(Product);
 
 // Export for use by index.js
 module.exports = app;
