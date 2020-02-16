@@ -1,14 +1,15 @@
 // Created by David Walshe on 15/02/2020
 
 // NPM Imports
-const Product = require("./../model/product");
 const express = require("express");
+// Local imports
+const Product = require("./../model/product");
 
 // Init express endpoint router
 const router = new express.Router();
 
 
-// Get all car items.
+// Get all product items.
 router.get(["/getProducts"], async (req, res) => {
     console.log("/getProducts called");
     try {
@@ -25,7 +26,7 @@ router.get(["/getProducts"], async (req, res) => {
 });
 
 
-// Get a specific car item by its ID.
+// Get a specific product item by its ID.
 router.get(["/getProduct/:id"], async (req, res) => {
     const productId = req.params.id;
 
@@ -53,7 +54,7 @@ router.get(["/getProduct/:id"], async (req, res) => {
 });
 
 
-// Create a new car item.
+// Create a new product item.
 router.post(["/newProduct"], async (req, res) => {
     try {
         const product = await Product.create(req.body);
