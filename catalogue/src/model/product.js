@@ -1,7 +1,7 @@
 // Created by David Walshe on 15/02/2020
 
 // NPM imports
-const {Model, DataTypes} = require("sequelize");
+const {DataTypes} = require("sequelize");
 // Local imports
 const {sequelize, testConnection} = require("./../database/sequelize");
 

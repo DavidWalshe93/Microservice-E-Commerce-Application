@@ -14,11 +14,10 @@ router.get(["/getProducts"], async (req, res) => {
     console.log("/getProducts called");
     try {
         // Use Sequelize Model to find all products
-        const products = await Product.findAll({
-            attributes: ["productID", "name", "quantity", "price", "image"]
-        }).map(p => p.get({
-            plain: true     // Remove outer metadata object and return only raw data results.
-        }));
+        const products = await Product.findAll()
+            .map(p => p.get({
+                plain: true     // Remove outer metadata object and return only raw data results.
+            }));
 
         return res.status(200).send(products)
     } catch (e) {
@@ -33,7 +32,6 @@ router.get(["/getProduct/:id"], async (req, res) => {
 
     try {
         const product = await Product.findOne({
-            attributes: ["productID", "name", "quantity", "price", "image"],
             where: {
                 productID: productId
             }
@@ -59,8 +57,8 @@ router.get(["/getProduct/:id"], async (req, res) => {
 // Create a new car item.
 router.post(["/newProduct"], async (req, res) => {
     try {
-        await Product.create(req.body);
-        res.status(201).send();
+        const product = await Product.create(req.body);
+        res.status(201).send(product);
     } catch (e) {
         res.status(400).send(e)
     }
