@@ -48,5 +48,14 @@ router.get(["/getOrder/:id"], async (req, res) => {
     }
 });
 
+router.post(["/newOrder"], async (req, res) => {
+    try {
+        const order = await Order.create(req.body);
+        res.status(201).send(order);
+    } catch (e) {
+        res.status(400).send()
+    }
+});
+
 // Export router
 module.exports = router;
