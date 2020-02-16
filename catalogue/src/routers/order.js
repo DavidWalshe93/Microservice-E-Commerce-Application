@@ -23,4 +23,4 @@ router.get(["/getOrders"], async (req, res) => {
 });
 
 // Export router
-module.exports = Order;
+module.exports = router;
