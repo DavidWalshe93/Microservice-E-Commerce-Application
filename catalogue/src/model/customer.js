@@ -31,4 +31,5 @@ const Customer = sequelize.define("customer", {
     timestamps: false
 });
 
+// Export Model
 module.exports = Customer;
