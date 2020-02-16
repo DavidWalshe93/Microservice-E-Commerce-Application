@@ -7,3 +7,7 @@
 /cart/node_modules/
 /front-end/node_modules/
 /catalogue/config/
+/users service/node_modules/
+/users service/.idea/
+/front-end service/node_modules/
+/front-end service/.idea/

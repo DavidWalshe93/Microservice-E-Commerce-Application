@@ -8,6 +8,7 @@ const Customer = require("../src/model/customer");
 
 const {setupDatabase} = require("./fixtures/db_setup");
 
+
 beforeAll(() => {
     setupDatabase("customer")
 });
@@ -27,6 +28,7 @@ test("Should return a specified customer based on its customerID", async () => {
         .send()
         .expect(200);
 });
+
 
 test("Should create a new Customer", async () => {
 
