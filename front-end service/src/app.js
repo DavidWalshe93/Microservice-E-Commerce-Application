@@ -15,9 +15,9 @@ const partialsPath = path.join(__dirname, "..", "templates", "partials");
 const app = express();
 
 // Setup handlebar (hbs) engine and views path location with express
-app.set("views engine", "hbs");
 app.set("views", viewsPath);
 hbs.registerPartials(partialsPath);
+app.set("view engine", "hbs");
 
 // Setup static resources for express
 app.use(express.static(publicDirectoryPath));
@@ -26,5 +26,12 @@ app.use(express.static(publicDirectoryPath));
 app.use(express.json());
 
 // Add routers to express
+app.get("", (req, res) => {
+    try {
+        res.render("index", {})
+    } catch (e) {
+        console.log(e)
+    }
+});
 
 module.exports = app;
