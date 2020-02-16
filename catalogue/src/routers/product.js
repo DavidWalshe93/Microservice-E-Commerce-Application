@@ -20,7 +20,6 @@ router.get(["/getProducts"], async (req, res) => {
             plain: true     // Remove outer metadata object and return only raw data results.
         }));
 
-        console.log(products);
         return res.status(200).send(products)
     } catch (e) {
         res.status(500).send()
@@ -39,7 +38,7 @@ router.get(["/getProduct/:id"], async (req, res) => {
                 productID: productId
             }
         });
-        console.log(product);
+
         // Check if the client passed valid information for lookup.
         if (product === null) {
             return res.status(400).send({
@@ -59,7 +58,12 @@ router.get(["/getProduct/:id"], async (req, res) => {
 
 // Create a new car item.
 router.post(["/newProduct"], async (req, res) => {
-
+    try {
+        await Product.create(req.body);
+        res.status(201).send();
+    } catch (e) {
+        res.status(400).send(e)
+    }
 });
 
 module.exports = router;
