@@ -8,10 +8,12 @@ const sequelize = new Sequelize(
     process.env.SQL_PASSWORD,
     {
         host: process.env.HOST,
-        dialect: "mysql"
+        dialect: "mysql",
+        logging: process.env.SQL_LOGGER | console.log
     }
 );
 
+// Helper function to test Sequelize connection
 const testConnection = async (msg) => {
     try {
         await sequelize.authenticate();
