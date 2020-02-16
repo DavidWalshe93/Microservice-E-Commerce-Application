@@ -7,5 +7,5 @@ const port = process.env.PORT;
 
 // Run application.
 app.listen(port, () => {
-    console.log("Server is running on port", port)
+    console.log("Catalog Service is running on port", port)
 });
