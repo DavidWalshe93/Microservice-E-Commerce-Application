@@ -3,6 +3,7 @@ const express = require("express");
 // Import ORM for Product
 const Product = require("./routers/product");
 const Order = require("./routers/order");
+const OrderDetails = require("./routers/orderDetails");
 
 // Create express instance
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 // Add routers to express
 app.use(Product);
 app.use(Order);
+app.use(OrderDetails);
 
 // Export for use by index.js
 module.exports = app;
