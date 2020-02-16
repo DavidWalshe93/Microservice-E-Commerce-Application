@@ -40,7 +40,8 @@ test("Should create a new Product", async () => {
             price: 1234.00,
             quantity: 40,
             image: "myTest.png"
-        }).expect(201);
+        })
+        .expect(201);
 
     // Retrieve the newly created product.
     const product = await Product.findOne({
@@ -58,5 +59,5 @@ test("Should create a new Product", async () => {
         price: "1234.00",
         quantity: 40,
         image: "myTest.png"
-    })
+    });
 });
