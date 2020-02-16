@@ -1,13 +1,15 @@
 // Created by David Walshe on 16/02/2020
 
+// NPM imports
 const request = require("supertest");
-const app = require("../../src/app");
-const Product = require("../../src/model/product");
+// Local imports
+const app = require("../src/app");
+const Product = require("../src/model/product");
 
-const {setupProductTable} = require("./../fixtures/db_setup");
+const {setupDatabase} = require("./fixtures/db_setup");
 
 
-beforeEach(setupProductTable);
+beforeEach(setupDatabase);
 
 
 test("Should return all products", async () => {
