@@ -5,8 +5,10 @@ const {DataTypes} = require("sequelize");
 // Local imports
 const {sequelize, testConnection} = require("./../database/sequelize");
 
+// Test connection to db.
 testConnection("Product Model");
 
+// Define data model for Products table.
 const Product = sequelize.define("product", {
     productID: {
         type: DataTypes.BIGINT,

@@ -1,7 +1,9 @@
 // Created by David Walshe on 15/02/2020
 
+// NPM imports
 const {Sequelize} = require("sequelize");
 
+// Connect sequelize instance to MySql db.
 const sequelize = new Sequelize(
     process.env.SQL_DATABASE,
     process.env.SQL_USERNAME,
