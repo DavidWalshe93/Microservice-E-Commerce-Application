@@ -2,6 +2,7 @@ const express = require("express");
 
 // Import ORM for Product
 const Product = require("./routers/product");
+const Order = require("./routers/order");
 
 // Create express instance
 const app = express();
@@ -9,8 +10,9 @@ const app = express();
 // Adds json "body" field to the "request" parameter via middleware.
 app.use(express.json());
 
-// Add customer routers to express
+// Add routers to express
 app.use(Product);
+app.use(Order);
 
 // Export for use by index.js
 module.exports = app;

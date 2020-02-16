@@ -21,3 +21,6 @@ router.get(["/getOrders"], async (req, res) => {
         res.status(500).send(e)
     }
 });
+
+// Export router
+module.exports = Order;
