@@ -9,7 +9,7 @@ const headers = [
     "Product Name", "Price", "Picture", "Buy Button"
 ];
 const db = require("./database/mySqlConnector");
-const cars = require("./routers/cars");
+const cars = require("./routers/product");
 // Create express instance
 const app = express();
 
