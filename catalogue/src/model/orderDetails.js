@@ -29,3 +29,6 @@ const OrderDetails = sequelize.define("orderDetails", {
         allowNull: false
     }
 });
+
+// Export Model
+module.exports = OrderDetails;
