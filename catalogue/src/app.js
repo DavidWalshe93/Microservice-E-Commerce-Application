@@ -4,6 +4,7 @@ const express = require("express");
 const Product = require("./routers/product");
 const Order = require("./routers/order");
 const OrderDetails = require("./routers/orderDetails");
+const Customer = require("./routers/customer");
 
 // Create express instance
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(Product);
 app.use(Order);
 app.use(OrderDetails);
+app.use(Customer);
 
 // Export for use by index.js
 module.exports = app;
