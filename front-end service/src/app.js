@@ -4,6 +4,7 @@
 const path = require("path");
 // NPM Imports
 const express = require("express");
+const cors = require("cors");
 const hbs = require("hbs");
 
 // Define paths for resources
@@ -24,6 +25,7 @@ app.use(express.static(publicDirectoryPath));
 
 // Adds json "body" field to the "request" parameter via middleware.
 app.use(express.json());
+app.use(cors());
 
 // Add routers to express
 app.get("", (req, res) => {

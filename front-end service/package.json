@@ -10,6 +10,7 @@
     "async": "^1.5.2",
     "body-parser": "^1.15.1",
     "cookie-parser": "^1.4.3",
+    "cors": "^2.8.5",
     "epimetheus": "^1.0.46",
     "express": "^4.17.1",
     "express-session": "^1.13.0",

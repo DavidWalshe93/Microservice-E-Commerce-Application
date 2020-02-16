@@ -1,0 +1,27 @@
+<productDisplay>
+    <div class="container">
+        <h1>Format</h1>
+        <p>Use <code>formatter</code> column option to format the display of bootstrap table column.</p>
+        <table class="table-striped" id="table"
+               data-toggle="table"
+               data-height="460"
+               data-url="http://localhost:3002/getProducts">
+            <thead>
+            <tr>
+                <th data-field="name">Product Name</th>
+                <th data-field="price">Price</th>
+                <th data-field="image" data-formatter="imageFormatter">Picture</th>
+                <th data-field="quantity">Quantity</th>
+                <th>Login ID</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <script>
+        function imageFormatter(value, row) {
+            console.log('<img src="/public/images/' + value + '" />');
+            return '<img src="/public/images/' + value + '" />';
+        }
+    </script>
+</productDisplay>
+

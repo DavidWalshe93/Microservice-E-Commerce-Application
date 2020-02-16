@@ -1,4 +1,6 @@
+
 const express = require("express");
+const cors = require("cors");
 
 // Import ORM for Product
 const Product = require("./routers/product");
@@ -11,6 +13,7 @@ const app = express();
 
 // Adds json "body" field to the "request" parameter via middleware.
 app.use(express.json());
+app.use(cors());
 
 // Add routers to express
 app.use(Product);
