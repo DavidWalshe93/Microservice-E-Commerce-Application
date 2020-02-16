@@ -15,13 +15,13 @@ router.get(["/getOrderDetails"], async (req, res) => {
     try {
         // Use Sequelize Model to find all orderDetails
         const orderDetails = await OrderDetails.findAll()
-            .map(p => p.get({
+            .map(od => od.get({
                 plain: true     // Remove outer metadata object and return only raw data results.
             }));
 
         return res.status(200).send(orderDetails)
     } catch (e) {
-        res.status(500).send()
+        res.status(500).send(e)
     }
 });
 
