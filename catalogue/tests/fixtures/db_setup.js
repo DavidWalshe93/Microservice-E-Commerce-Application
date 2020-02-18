@@ -101,9 +101,17 @@ const mock_customer_generator = (size = 3) => {
     mock_customer_details = [];
     for (let i = 1; i < size + 1; i++) {
         mock_customer_details.push({
-            name: "John" + 1,
-            password: "password" + 1,
-            address: `Apartment ${i}, 700 South Mall, Cork`
+            fname: "John",
+            lname: "Murphy",
+            username: "testme",
+            email: "jm@example.com",
+            password: "16-02-2020",
+            phone: "0121234567",
+            zipcode: "A00A000",
+            streetname: "testStreet",
+            city: "testCity",
+            county: "testCounty",
+            country: "testCountry"
         });
     }
 
@@ -130,7 +138,6 @@ const setupDatabase = async (testCase) => {
         //     await setupCustomerTable();
         //     break;
         // case "product":
-        //
         //     await setupProductTable();
         //     break;
         // case "order":

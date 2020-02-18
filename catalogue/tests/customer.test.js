@@ -36,9 +36,17 @@ test("Should create a new Customer", async () => {
     const response = await request(app)
         .post("/newCustomer")
         .send({
-            name: "John",
+            fname: "John",
+            lname: "Murphy",
+            username: "testme",
+            email: "jm@example.com",
             password: "16-02-2020",
-            address: "Hello World, Ireland"
+            phone: "0121234567",
+            zipcode: "A00A000",
+            streetname: "testStreet",
+            city: "testCity",
+            county: "testCounty",
+            country: "testCountry"
         })
         .expect(201);
 
@@ -54,9 +62,17 @@ test("Should create a new Customer", async () => {
 
     // Test the correct information was saved about the customer.
     expect(customer).toMatchObject({
-        name: "John",
+        fname: "John",
+        lname: "Murphy",
+        username: "testme",
+        email: "jm@example.com",
         password: "16-02-2020",
-        address: "Hello World, Ireland"
+        phone: "0121234567",
+        zipcode: "A00A000",
+        streetname: "testStreet",
+        city: "testCity",
+        county: "testCounty",
+        country: "testCountry"
     });
 
 });

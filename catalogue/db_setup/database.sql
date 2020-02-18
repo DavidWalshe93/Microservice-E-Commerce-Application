@@ -25,10 +25,10 @@ CREATE TABLE Customer (
     password VARCHAR(40) NOT NULL,
     phone VARCHAR(40) NOT NULL,
     zipcode VARCHAR(40),
-    streetname VARCHAR(40),
-    city VARCHAR(40),
-    county VARCHAR(40),
-    country VARCHAR(40),
+    streetname VARCHAR(40) NOT NULL,
+    city VARCHAR(40) NOT NULL,
+    county VARCHAR(40) NOT NULL,
+    country VARCHAR(40) NOT NULL,
     PRIMARY KEY  (customerID)
    
 );

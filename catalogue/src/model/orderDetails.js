@@ -28,6 +28,8 @@ const OrderDetails = sequelize.define("orderDetails", {
         type: DataTypes.BIGINT,
         allowNull: false
     }
+}, {
+    timestamps: false
 });
 
 // Export Model

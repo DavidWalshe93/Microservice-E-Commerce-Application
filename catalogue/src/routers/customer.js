@@ -18,6 +18,7 @@ router.get(["/getCustomers"], async (req, res) => {
 
         return res.status(200).send(customers)
     } catch (e) {
+        console.log(e);
         res.status(500).send(e)
     }
 });
