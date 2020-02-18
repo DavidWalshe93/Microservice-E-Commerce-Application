@@ -19,8 +19,7 @@
     <script>
         // Adds a formatted image element to the table.
         function imageFormatter(value, row) {
-            console.log('<img src="images/' + value + '" style="width:104px;height:100px;">');
-            return '<img src="images/' + value + '" style="width:104px;height:100px;">';
+            return `<img src="images/${value}" style="width:104px;height:100px;" alt="404 - No image found">`;
         }
 
         // Adds a formatted button with a callback to the table.
