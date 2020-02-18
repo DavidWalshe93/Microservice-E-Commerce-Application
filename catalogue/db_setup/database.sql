@@ -5,32 +5,36 @@ CREATE TABLE IF NOT EXISTS products (
          productID    INT UNSIGNED  NOT NULL AUTO_INCREMENT,
          name         VARCHAR(30)   NOT NULL DEFAULT '',
          quantity     INT UNSIGNED  NOT NULL DEFAULT 0,
-         price        DECIMAL(7,2)  NOT NULL DEFAULT 99999.99,
+         price        DECIMAL(7,2)  NOT NULL DEFAULT -1,
          image        VARCHAR(30)   NOT NULL DEFAULT '',
          PRIMARY KEY  (productID)
        );
 INSERT INTO products (name, quantity, price, image)
 VALUES
-     ('Car 1', 10000, 0.48,'car1.jpeg'),
-     ('Car 2', 8000, 0.49, 'car2.jpeg'),
-    ('Car 5', 100, 0.22, 'car3.jpeg'),
-    ('Car 6', 80, 0.33, 'car4.jpeg');
+     ('Car 1', 30, 10.10, 'car1.jpeg'),
+     ('Car 2', 20, 50.80, 'car2.jpeg'),
+    ('Car 5', 15, 55.30, 'car3.jpeg'),
+    ('Car 6', 25, 100.50, 'car4.jpeg');
 
 CREATE TABLE Customer (
     customerID    INT UNSIGNED  NOT NULL AUTO_INCREMENT,
-    name VARCHAR(40) NOT NULL,
+    fname VARCHAR(40) NOT NULL,
+    lname VARCHAR(40) NOT NULL,
+    username VARCHAR(40) NOT NULL,
+    email VARCHAR(100) NOT NULL,
     password VARCHAR(40) NOT NULL,
-    address VARCHAR(60),
+    phone VARCHAR(40) NOT NULL,
+    zipcode VARCHAR(40),
+    streetname VARCHAR(40),
+    city VARCHAR(40),
+    county VARCHAR(40),
+    country VARCHAR(40),
     PRIMARY KEY  (customerID)
    
 );
-INSERT INTO Customer (name, password, address) VALUES
-         ('joe', 'joe', 'cork'),
-         ('mary', 'mary', 'dublin');
-
-INSERT INTO Customer (name, password, address) VALUES
-         ('joey', 'joey', 'london'),
-         ('fred', 'fred', 'dublin');
+INSERT INTO Customer (fname, lname, username, email, password, phone, zipcode, streetname, city, county, country) VALUES
+         ('joe', 'murphy', 'jmurph', 'jmurphy@example.com', "mypass1", "0871234567", "A00A000", "street", "city", "county", "country"),
+         ('mary', 'flynn', 'mflynn', 'mflynn@example.com', "mypass2", "0877654321", "B00B000", "street", "city", "county", "country");
 
 CREATE TABLE Orders (
     orderID INT UNSIGNED  NOT NULL AUTO_INCREMENT,
