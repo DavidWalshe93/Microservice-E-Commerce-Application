@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(cors());
 
 // Add routers to express
-app.get(["", "/", "index", "index.html"], (req, res) => {
+app.get(["", "/", "products", "index", "index.html"], (req, res) => {
     try {
         res.render("index", {})
     } catch (e) {
@@ -39,6 +39,14 @@ app.get(["", "/", "index", "index.html"], (req, res) => {
 app.get("/admin", (req, res) => {
     try {
         res.render("admin", {})
+    } catch (e) {
+        console.log(e);
+    }
+});
+
+app.get(["/signup", "/sign-up"], (req, res) => {
+    try {
+        res.render("sign-up", {})
     } catch (e) {
         console.log(e);
     }

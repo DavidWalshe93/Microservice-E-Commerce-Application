@@ -1,9 +1,9 @@
 <productDisplay>
-    <div class="container">
+    <div class="container" id="productList">
         <h1>Products</h1>
         <table class="table-striped" id="table"
                data-toggle="table"
-               data-height="460"
+               data-height="800"
                data-url="http://localhost:3002/getProducts">
             <thead>
             <tr>
@@ -19,7 +19,7 @@
     <script>
         // Adds a formatted image element to the table.
         function imageFormatter(value, row) {
-            return `<img src="images/${value}" style="width:104px;height:100px;" alt="404 - No image found">`;
+            return `<img src="images/${value}" style="width:150px;height:100px;">`;
         }
 
         // Adds a formatted button with a callback to the table.
@@ -29,7 +29,7 @@
 
         // Callback for adding an item to the cart.
         const addToCart = (productID) => {
-            console.log(`Added productID #${productID} to cart`, event);
+            console.log(`Added productID #${productID} to cart`);
         }
     </script>
 </productDisplay>
