@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(cors());
 
 // Add routers to express
-app.get(["", "/", "products", "index", "index.html"], (req, res) => {
+app.get(["", "/", "/products", "/index", "/index.html"], (req, res) => {
     try {
         res.render("index", {})
     } catch (e) {
