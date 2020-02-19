@@ -1,12 +1,20 @@
 // Created by David Walshe on 19/02/2020
 
 // NPM imports
+const sqlite = require("sqlite3");
 const {Sequelize} = require("sequelize");
 
+// Get DB path
+const DATABASE_PATH = process.env.SQLITE_DB_PATH;
+
+// Create database
+const db = new sqlite.Database(DATABASE_PATH);
 // Connect sequelize instance to a In-Memory SQLite DB.
-const sequelize = new Sequelize({
+const sequelize = new Sequelize("database", "", "", {
         dialect: "sqlite",
-        storage: ":memory"
+        storage: DATABASE_PATH,
+        logging: process.env.SQL_LOGGER | console.log,
+        // storage: ":memory"
     }
 );
 
@@ -20,4 +28,12 @@ const testConnection = async (msg) => {
     }
 };
 
-module.exports = {sequelize, testConnection};
+const syncDatabase = async () => {
+    try {
+        await sequelize.sync()
+    } catch (e) {
+        console.error("Could not sync database with model")
+    }
+};
+
+module.exports = {sequelize, testConnection, syncDatabase};
