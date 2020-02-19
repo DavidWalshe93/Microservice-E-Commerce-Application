@@ -1,87 +1,19 @@
-var express = require("express")
-    , morgan = require("morgan")
-    , path = require("path")
-    , bodyParser = require("body-parser")
+// Created by David Walshe on 19/02/2020
 
-    , app = express();
+// NPM imports
+const express = require("express");
+const Cart = require("./routers/cart");
 
+// Create an express instance
+const app = express();
 
-app.use(morgan('combined'));
-app.use(morgan("dev", {}));
-app.use(bodyParser.json());
+// Include middleware
+app.use(express.json());
 
-//app.use(morgan("dev", {}));
-var cart = [];
+// Add routers
+app.use(Cart);
 
-app.post("/add", function (req, res, next) {
-    var obj = req.body;
-    console.log("add ");
-    console.log("Attempting to add to cart: " + JSON.stringify(req.body));
+// Export for use by index.js
+module.exports = app;
 
 
-    //  var obj = JSON.parse(body);
-
-    //       console.log('addToCart id '+id)
-    var max = 0;
-    var ind = 0;
-    if (cart["" + obj.custId] === undefined)
-        cart["" + obj.custId] = [];
-    var c = cart["" + obj.custId];
-    for (ind = 0; ind < c.length; ind++)
-        if (max < c[ind].cartid)
-            max = c[ind].cartid;
-    var cartid = max + 1;
-    var data = {
-        "cartid": cartid,
-        "productID": obj.productID,
-        "name": obj.name,
-        "price": obj.price,
-        "image": obj.image,
-        "quantity": obj.quantity
-    };
-    console.log(JSON.stringify(data));
-    c.push(data);
-
-    res.status(201);
-
-    res.send("");
-
-
-});
-
-/* toDO */
-app.delete("/cart/:custId/items/:id", function (req, res, next) {
-    var body = '';
-    console.log("Delete item from cart: for custId " + req.url + ' ' +
-        req.params.id.toString());
-    console.log("delete ");
-
-
-    res.send(' ');
-
-
-});
-
-
-app.get("/cart/:custId/items", function (req, res, next) {
-
-
-    var custId = req.params.custId;
-    console.log("getCart" + custId);
-
-
-    console.log('custID ' + custId);
-
-
-    console.log(JSON.stringify(cart["" + custId], null, 2));
-
-    res.send(JSON.stringify(cart["" + custId]));
-    console.log("cart sent");
-
-});
-
-
-var server = app.listen(process.env.PORT || 3003, function () {
-    var port = server.address().port;
-    console.log("App now running in %s mode on port %d", app.get("env"), port);
-});
