@@ -2,6 +2,7 @@
 
 // NPM modules
 const express = require("express");
+const Item = require("./../model/item");
 
 // Create a Express router
 const router = express.Router();

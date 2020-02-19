@@ -2,7 +2,7 @@
 
 // NPM imports
 const express = require("express");
-const Cart = require("./routers/cart");
+const Item = require("./routers/item");
 
 // Create an express instance
 const app = express();
@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 // Add routers
-app.use(Cart);
+app.use(Item);
 
 // Export for use by index.js
 module.exports = app;
