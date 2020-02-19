@@ -7,6 +7,8 @@ const Item = require("./../model/item");
 // Create a Express router
 const router = express.Router();
 
+
+// Adds an item to the database, or if it exists already, updates it.
 router.post("/add", async (req, res) => {
     const item = req.body;
     try {
@@ -44,11 +46,30 @@ router.post("/add", async (req, res) => {
     }
 });
 
-router.delete("/cart/:custID/items/:id", (req, res, next) => {
-    // Todo Remove an item from the cart database
+
+// Deletes a specified item from the cart.
+router.delete("/cart/:custId/items/:id", async (req, res) => {
+    // Get request parameters
+    const customerID = req.params.custId;
+    const productID = req.params.id;
+
+    // Try and delete the row specified in the request
+    try {
+        await Item.destroy({
+            where: {
+                customerID,
+                productID
+            }
+        });
+
+        res.status(200).send();
+    } catch (e) {
+        console.log(e);
+        res.status(400).send()
+    }
 });
 
-router.get("/cart/:custId/items", (req, res, next) => {
+router.get("/cart/:custId/items", (req, res) => {
     // Todo get the item list for the customer.
 });
 
