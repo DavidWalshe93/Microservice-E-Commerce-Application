@@ -23,6 +23,7 @@ const sequelize = new Sequelize(
 // Helper function to test Sequelize connection
 const testConnection = async (msg) => {
     try {
+        // TODO implement a logger here.
         await sequelize.authenticate();
         console.log("SUCCESS", msg)
     } catch (e) {
