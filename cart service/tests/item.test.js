@@ -30,4 +30,21 @@ test("Should add a new item to the cart", async () => {
 });
 
 
+test("Should delete an item from the cart depending on customerID and productID", async () => {
+    await request(app)
+        .delete("/cart/2/items/2")
+        .send()
+        .expect(200);
+
+    // Check if the item was actually deleted.
+    const item = await Item.findOne({
+        where: {
+            customerID: 2,
+            productID: 2
+        }
+    });
+
+    //
+    expect(item).toBeNull();
+});
 
