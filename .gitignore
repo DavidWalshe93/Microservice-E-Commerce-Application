@@ -13,3 +13,4 @@
 /front-end service/.idea/
 /front-end service/config/
 /cart service/config/
+/cart service/persistence/database.sqlite
