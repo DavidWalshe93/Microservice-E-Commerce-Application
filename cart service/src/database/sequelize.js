@@ -14,7 +14,6 @@ const sequelize = new Sequelize("database", "", "", {
         dialect: "sqlite",
         storage: DATABASE_PATH,
         logging: process.env.SQL_LOGGER | console.log,
-        // storage: ":memory"
     }
 );
 
