@@ -1,8 +1,10 @@
+// Created by David Walshe on 16/02/2020
 
+//NPM modules
 const express = require("express");
 const cors = require("cors");
 
-// Import ORM for Product
+// Import Routers for express
 const Product = require("./routers/product");
 const Order = require("./routers/order");
 const OrderDetails = require("./routers/orderDetails");

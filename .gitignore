@@ -14,3 +14,4 @@
 /front-end service/config/
 /cart service/config/
 /cart service/persistence/database.sqlite
+/cart service/persistence/database_test.sqlite

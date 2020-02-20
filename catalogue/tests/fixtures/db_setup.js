@@ -1,7 +1,6 @@
 // Created by David Walshe on 16/02/2020
 
 // Local module imports
-const {sequelize} = require("../../src/database/sequelize");
 const Product = require("../../src/model/product");
 const Order = require("../../src/model/order");
 const OrderDetails = require("../../src/model/orderDetails");

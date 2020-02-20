@@ -23,7 +23,7 @@ test("Should return all orders", async () => {
 
 test("Should return a specified order based on its orderID", async () => {
     await request(app)
-        .get("/getOrder/2w")
+        .get("/getOrder/1")
         .send()
         .expect(200);
 });

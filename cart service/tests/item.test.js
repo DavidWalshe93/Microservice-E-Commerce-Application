@@ -10,16 +10,15 @@ const setupItemsTable = require("./fixtures/db_setup");
 
 
 beforeAll(() => {
-    setupItemsTable()
+    return setupItemsTable()
 });
 
 
 test("Should add a new item to the cart", async () => {
-    await request(app)
+    const response = await request(app)
         .post("/add")
         .send({
-            itemID: 4,
-            customerID: 4,
+            customerID: 2,
             productID: 4,
             name: "name" + 4,
             quantity: 4 * 10,
@@ -27,5 +26,8 @@ test("Should add a new item to the cart", async () => {
             totalPrice: 10 * 4,
             image: "myTestImage.jpg"
         })
-        .expect(201)
+        .expect(201);
 });
+
+
+
