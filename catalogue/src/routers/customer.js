@@ -49,6 +49,7 @@ router.get(["/getCustomer/:id"], async (req, res) => {
     }
 });
 
+// Adds a new customer to the database.
 router.post(["/newCustomer"], async (req, res) => {
     try {
         const customer = await Customer.create(req.body);

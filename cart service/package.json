@@ -4,7 +4,8 @@
   "description": "cart microservice.",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "env-cmd -f config/dev.env nodemon src/index.js"
+    "dev": "env-cmd -f config/dev.env nodemon src/index.js",
+    "test": "env-cmd -f config/test.env jest --silent --watch --runInBand"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
