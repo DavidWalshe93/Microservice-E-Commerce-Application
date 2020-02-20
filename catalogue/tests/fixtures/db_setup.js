@@ -95,7 +95,6 @@ const setupOrderDetailsTable = async () => {
 // ==================================================================================
 // CUSTOMER SETUP
 // ==================================================================================
-
 var mock_customer_details = [];
 const mock_customer_generator = (size = 3) => {
     mock_customer_details = [];

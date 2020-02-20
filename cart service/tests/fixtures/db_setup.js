@@ -16,7 +16,7 @@ const mock_item_generator = (size = 3) => {
             name: "name" + i,
             quantity: i * 10,
             price: i * 1.5,
-            totalPrice: 10 * 3,
+            totalPrice: 30 * i,
             image: "myTestImage.jpg"
         })
     }
