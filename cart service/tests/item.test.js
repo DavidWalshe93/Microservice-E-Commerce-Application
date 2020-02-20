@@ -9,7 +9,7 @@ const Item = require("../src/model/item");
 const setupItemsTable = require("./fixtures/db_setup");
 
 
-beforeAll(() => {
+beforeEach(() => {
     return setupItemsTable()
 });
 
@@ -44,7 +44,15 @@ test("Should delete an item from the cart depending on customerID and productID"
         }
     });
 
-    //
     expect(item).toBeNull();
 });
 
+
+test("Should get all cart entries for a specific customer", async () => {
+    const response = await request(app)
+        .get("/cart/1/items")
+        .send()
+        .expect(200);
+
+    expect(response.body.length).toBe(11);
+});

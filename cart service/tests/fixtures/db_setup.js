@@ -9,7 +9,6 @@ const mock_item_generator = (size = 3) => {
     let mock_items = [];
     for (let i = 1; i < size + 1; i++) {
         mock_items.push({
-            itemID: i,
             customerID: i,
             productID: i,
             name: "name" + i,
@@ -30,6 +29,9 @@ const setupItemsTable = async () => {
     const mocks = mock_item_generator();
     for (let i = 0; i < mocks.length; i++) {
         await Item.create(mocks[i])
+    }
+    for (let i = 0; i < 10; i++) {
+        await Item.create(mocks[0])
     }
 };
 
