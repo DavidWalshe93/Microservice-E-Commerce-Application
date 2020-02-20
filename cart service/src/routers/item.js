@@ -70,8 +70,25 @@ router.delete("/cart/:custId/items/:id", async (req, res) => {
     }
 });
 
-router.get("/cart/:custId/items", (req, res) => {
-    // Todo get the item list for the customer.
+
+// Returns all items for a designated customer.
+router.get("/cart/:custId/items", async (req, res) => {
+    const customerID = req.params.custId;
+
+    try {
+        // Find all the items with the corresponding customerID
+        const customerItems = await Item.findAll({
+            where: {
+                customerID
+            }
+        }).map(o => o.get({
+            plain: true
+        }));
+
+        return res.status(200).send(customerItems);
+    } catch (e) {
+        res.status(500).send(e);
+    }
 });
 
 // Export router for external usage.
