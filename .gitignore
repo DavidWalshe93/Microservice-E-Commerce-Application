@@ -16,3 +16,4 @@
 /cart service/persistence/database.sqlite
 /cart service/persistence/database_test.sqlite
 /users service/config/
+/order_service/config/

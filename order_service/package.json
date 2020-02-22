@@ -1,0 +1,36 @@
+{
+  "name": "order_service",
+  "version": "1.0.0",
+  "description": "Manages orders and their details for a microservice e-commerce application.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "env-cmd -f config/test.env jest --watch --runInBand"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidWalshe93/Microservice-E-Commerce-Application.git"
+  },
+  "keywords": [
+    "Microservice"
+  ],
+  "author": "David Walshe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidWalshe93/Microservice-E-Commerce-Application/issues"
+  },
+  "homepage": "https://github.com/DavidWalshe93/Microservice-E-Commerce-Application#readme",
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "sequelize": "^5.21.5",
+    "sqlite3": "^4.1.1"
+  }
+}
