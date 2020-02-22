@@ -6,8 +6,6 @@ const cors = require("cors");
 
 // Import Routers for express
 const Product = require("./routers/product");
-const Order = require("./routers/order");
-const OrderDetails = require("./routers/orderDetails");
 
 // Create express instance
 const app = express();
@@ -18,9 +16,6 @@ app.use(cors());
 
 // Add routers to express
 app.use(Product);
-app.use(Order);
-app.use(OrderDetails);
-
 
 // Export for use by index.js and tests via jest
 module.exports = app;
