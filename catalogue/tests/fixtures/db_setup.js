@@ -4,7 +4,7 @@
 const Product = require("../../src/model/product");
 const Order = require("../../src/model/order");
 const OrderDetails = require("../../src/model/orderDetails");
-const Customer = require("../../src/model/customer");
+const Customer = require("../../../users service/src/model/customer");
 
 // ==================================================================================
 // PRODUCT SETUP
