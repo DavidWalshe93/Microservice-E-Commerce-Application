@@ -2,8 +2,8 @@
   "name": "node-api",
   "main": "server.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
   },
   "dependencies": {
     "mysql": "^2.13.0"
