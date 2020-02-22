@@ -8,7 +8,6 @@ const cors = require("cors");
 const Product = require("./routers/product");
 const Order = require("./routers/order");
 const OrderDetails = require("./routers/orderDetails");
-const Customer = require("./routers/customer");
 
 // Create express instance
 const app = express();
@@ -21,7 +20,7 @@ app.use(cors());
 app.use(Product);
 app.use(Order);
 app.use(OrderDetails);
-app.use(Customer);
 
-// Export for use by index.js
+
+// Export for use by index.js and tests via jest
 module.exports = app;
