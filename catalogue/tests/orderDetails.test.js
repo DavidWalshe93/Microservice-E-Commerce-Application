@@ -9,7 +9,7 @@ const OrderDetails = require("../src/model/orderDetails");
 const {setupDatabase} = require("./fixtures/db_setup");
 
 beforeAll(() => {
-    setupDatabase("orderDetails")
+    return setupDatabase("orderDetails")
 });
 
 
