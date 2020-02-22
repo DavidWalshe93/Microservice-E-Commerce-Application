@@ -4,13 +4,13 @@
 const request = require("supertest");
 // Local imports
 const app = require("../src/app");
-const Customer = require("../../users service/src/model/customer");
+const Customer = require("../src/model/customer");
 
-const {setupDatabase} = require("./fixtures/db_setup");
+const setupCustomerTable = require("./fixtures/db_setup");
 
 
 beforeAll(() => {
-    setupDatabase("customer")
+    return setupCustomerTable("customer")
 });
 
 
