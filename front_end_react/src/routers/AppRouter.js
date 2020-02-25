@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import ProductPage from "../components/ProductPage";
 import CartPage from "../components/CartPage"
 import LoginPage from "../components/LoginPage";
+import RegisterPage from "../components/RegisterPage";
 
 
 const AppRouter = () => (
@@ -17,6 +18,7 @@ const AppRouter = () => (
                 <Route path={["/", "/products"]} componet={ProductPage} exact={true}/>
                 <Route path={"/cart"} component={CartPage}/>
                 <Route path={"/login"} component={LoginPage}/>
+                <Route path={"/register"} component={RegisterPage}/>
             </Switch>
         </>
     </Router>
