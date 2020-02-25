@@ -5,7 +5,7 @@ import React from "react";
 const Products = () => {
     return (
         <>
-            <p>Hello</p>
+            <p>Product</p>
         </>
     )
 };

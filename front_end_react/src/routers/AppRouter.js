@@ -6,12 +6,14 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 // local imports
 import Products from "../components/Products";
+import Cart from "../components/Cart"
 
 const AppRouter = () => (
     <Router>
         <>
             <Switch>
                 <Route path={["/", "/products"]} component={Products} exact={true}/>
+                <Route path={"/cart"} component={Cart}/>
             </Switch>
         </>
     </Router>
