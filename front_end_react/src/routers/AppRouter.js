@@ -5,15 +5,18 @@ import React from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 // local imports
-import Products from "../components/Products";
-import Cart from "../components/Cart"
+import ProductPage from "../components/ProductPage";
+import CartPage from "../components/CartPage"
+import LoginPage from "../components/LoginPage";
+
 
 const AppRouter = () => (
     <Router>
         <>
             <Switch>
-                <Route path={["/", "/products"]} component={Products} exact={true}/>
-                <Route path={"/cart"} component={Cart}/>
+                <Route path={["/", "/products"]} componet={ProductPage} exact={true}/>
+                <Route path={"/cart"} component={CartPage}/>
+                <Route path={"/login"} component={LoginPage}/>
             </Switch>
         </>
     </Router>

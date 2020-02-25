@@ -3,10 +3,10 @@
 // npm import
 import React from "react";
 
-const Cart = () => (
+const CartPage = () => (
     <>
         <p>Cart Page</p>
     </>
 );
 
-export default Cart;
+export default CartPage;
