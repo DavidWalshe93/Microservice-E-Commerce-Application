@@ -17,3 +17,6 @@
 /cart service/persistence/database_test.sqlite
 /users service/config/
 /order_service/config/
+/front_end_react/yarn.lock
+/front_end_react/package-lock.json
+/front_end_react/README.md
