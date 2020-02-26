@@ -2,18 +2,16 @@
 
 // npm imports
 import React from "react";
-import {Jumbotron, Row, Col} from "react-bootstrap";
+import {Jumbotron, Row, Col, Glyphicon} from "react-bootstrap";
 
+// local imports
 import "../styles/styles.scss"
+import PageNavbar from "./PageNavbar";
 
 const Header = () => (
-    <>
-        <Jumbotron>
-            <Row>
-                <Col className={"d-flex justify-content-center"}><h1>Auto Buyer Ltd.</h1></Col>
-            </Row>
-        </Jumbotron>
-    </>
+    <div className={"header"}>
+        <PageNavbar className={"navbar"}/>
+    </div>
 );
 
 export default Header;
