@@ -2,7 +2,7 @@
 
 // npm imports
 import React from "react"
-import {Link} from "react-router-dom";
+import {NavLink, Link} from "react-router-dom";
 import {Navbar, Nav, NavDropdown, Badge} from "react-bootstrap";
 import "../styles/styles.scss";
 
@@ -13,11 +13,11 @@ const PageNavbar = () => (
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link as={Link} to={"/products"}>Products</Nav.Link>
+                    <Nav.Link as={NavLink} to={"/products"} activeClassName={"active"}>Products</Nav.Link>
                 </Nav>
                 <Nav>
-                    <Nav.Link href="#login">Login</Nav.Link>
-                    <Nav.Link href="#register">Register</Nav.Link>
+                    <Nav.Link as={NavLink} to={"/login"} activeClassName={"active"}>Login</Nav.Link>
+                    <Nav.Link as={NavLink} to={"/register"} activeClassName={"active"}>Register</Nav.Link>
                     <Navbar.Brand as={Link} to={"/cart"}>
                         <img
                             src="/images/shopping_cart.png"

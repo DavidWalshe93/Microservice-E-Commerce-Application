@@ -7,15 +7,17 @@ import {Card, Badge, Button} from "react-bootstrap";
 const ProductCard = ({data}) => (
     <>
         <Card className={"h-100 shadow-sm bg-white rounded"}>
+            <Card.Header className={"d-flex mb2-2 justify-content-around"}>{data.name}</Card.Header>
             <Card.Img variant={"top"} src={data.image}/>
+
             <Card.Body className={"d-flex flex-column"}/>
             <div className={"d-flex mb-2 justify-content-around"}>
-                <Card.Title className={"mb-0 font-weight-bold"}>{data.name}</Card.Title>
+                <Card.Title className={"mb-0 font-weight-bold"}>Quantity: {data.quantity}</Card.Title>
                 <Badge pill className={"mb-1"} variant={"warning"}>
                     €{data.price}
                 </Badge>
             </div>
-            <Card.Text className={"text-secondary"}>Quantity: {data.quantity}</Card.Text>
+            {/*<Card.Text className={"text-secondary"}></Card.Text>*/}
             <Button
                 onClick={() => console.log("Bought")}
                 className={"mt-auto font-weight-bold"}
