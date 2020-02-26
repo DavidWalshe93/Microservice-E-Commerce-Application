@@ -2,10 +2,17 @@
 
 // npm imports
 import React from "react";
+import {Jumbotron, Row, Col} from "react-bootstrap";
+
+import "../styles/styles.scss"
 
 const Header = () => (
     <>
-        <p>This is a header</p>
+        <Jumbotron>
+            <Row>
+                <Col className={"d-flex justify-content-center"}><h1>Auto Buyer Ltd.</h1></Col>
+            </Row>
+        </Jumbotron>
     </>
 );
 
