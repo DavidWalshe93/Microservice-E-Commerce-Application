@@ -10,11 +10,13 @@ import CartPage from "../components/CartPage"
 import LoginPage from "../components/LoginPage";
 import RegisterPage from "../components/RegisterPage";
 import NotFoundPage from "../components/NotFoundPage";
+import Header from "../components/Header";
 
 
 const AppRouter = () => (
     <Router>
         <>
+            <Header/>
             <Switch>
                 <Route path={["/", "/products"]} component={ProductPage} exact={true}/>
                 <Route path={"/cart"} component={CartPage}/>
