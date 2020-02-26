@@ -9,18 +9,15 @@ import cars from "../data"
 import ProductCard from "./ProductCard";
 
 const ProductPage = () => (
-    <>
-        <p>Hello Products</p>
-    </>
-    // <Container>
-    //     <Row>
-    //         {cars.map((car) => (
-    //             <Col xs={3} className={"mb-5"} key={car.id}>
-    //                 <ProductCard data={car}/>
-    //             </Col>
-    //         ))}
-    //     </Row>
-    // </Container>
+    <Container>
+        <Row>
+            {cars.map((car) => (
+                <Col xs={3} className={"mb-5"} key={car.id}>
+                    <ProductCard data={car}/>
+                </Col>
+            ))}
+        </Row>
+    </Container>
 );
 
 export default ProductPage;
