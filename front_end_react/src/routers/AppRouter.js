@@ -15,10 +15,11 @@ const AppRouter = () => (
     <Router>
         <>
             <Switch>
-                <Route path={["/", "/products"]} componet={ProductPage} exact={true}/>
+                <Route path={["/", "/products"]} componet={CartPage} exact={true}/>
                 <Route path={"/cart"} component={CartPage}/>
                 <Route path={"/login"} component={LoginPage}/>
                 <Route path={"/register"} component={RegisterPage}/>
+                <Route component={"NotFoundPage"}/>
             </Switch>
         </>
     </Router>
