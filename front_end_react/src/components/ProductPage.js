@@ -8,16 +8,19 @@ import {Container, Row, Col} from "react-bootstrap";
 import cars from "../data"
 import ProductCard from "./ProductCard";
 
-const ProductPage = () => (
-    <Container>
-        <Row>
-            {cars.map((car) => (
-                <Col xs={3} className={"mb-5"} key={car.id}>
-                    <ProductCard data={car}/>
-                </Col>
-            ))}
-        </Row>
-    </Container>
-);
+const ProductPage = () => {
+
+    return (
+        <Container>
+            <Row>
+                {cars.map((car) => (
+                    <Col xs={3} className={"mb-5"} key={car.id}>
+                        <ProductCard data={car}/>
+                    </Col>
+                ))}
+            </Row>
+        </Container>
+    )
+};
 
 export default ProductPage;
