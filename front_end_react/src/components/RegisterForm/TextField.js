@@ -4,7 +4,7 @@ import React from "react";
 import {Form} from "react-bootstrap";
 
 
-const TextField = ({label, name, formik}) => {
+const TextField = ({label, name, formik, type = "text"}) => {
 
     // Unpack variables
     const {onChange, onBlur, value} = {...formik.getFieldProps(name)};
@@ -15,7 +15,7 @@ const TextField = ({label, name, formik}) => {
         <>
             <Form.Label>{label}</Form.Label>
             <Form.Control
-                type={"text"}
+                type={type}
                 name={name}
                 value={value}
                 onChange={onChange}
@@ -23,7 +23,7 @@ const TextField = ({label, name, formik}) => {
                 isInvalid={touched && error}
                 isValid={touched && !error}
             />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback/>
             <Form.Control.Feedback type={"invalid"}>{error}</Form.Control.Feedback>
         </>
     )
