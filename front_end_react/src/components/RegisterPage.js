@@ -2,24 +2,25 @@
 
 // npm imports
 import React from "react";
-import {Form, Button, Col} from "react-bootstrap"
+import {Form, Button, Col, Container, Row} from "react-bootstrap"
 
 // Local imports
 import RegistrationValidator from "../validators/registrationValidator";
 import TextField from "./RegisterForm/TextField";
+import "../styles/styles.scss"
 import AdViewer from "./AdViewer";
 
 const RegisterPage = () => {
 
     const formik = RegistrationValidator();
 
-    const fieldWidth = 4;
+    const fieldWidth = 2;
     const fieldOffset = 1;
 
     return (
         <>
-            <AdViewer/>
             <Form noValidate onSubmit={formik.handleSubmit}>
+                <h5 className={"welcome-msg"}>To create an account we will just need a few details.</h5>
                 <Form.Row>
                     {/*First Name*/}
                     <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset}} controlId={"firstName"}>
@@ -56,7 +57,7 @@ const RegisterPage = () => {
                         <TextField name="address1" label="Street Name" formik={formik}/>
                     </Form.Group>
                     {/*/!*AddressfieldWidth*!/*/}
-                    <Form.Group as={Col} md={fieldWidth} controlId={"verifyPassword"}>
+                    <Form.Group as={Col} md={fieldWidth} controlId={"address2"}>
                         <TextField name="address2" label="Address Line 2" formik={formik}/>
                     </Form.Group>
                 </Form.Row>
@@ -81,11 +82,11 @@ const RegisterPage = () => {
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group as={Col} md={{span: 3, offset: fieldOffset + 7}} controlId={"submitRow"}>
+                    <Form.Group as={Col} md={{span: 4, offset: fieldOffset + 3}} controlId={"submitRow"}>
                         <Button type={"submit"}>Submit form</Button>
                     </Form.Group>
                 </Form.Row>
-            </Form>
+            </Form>S
         </>
     )
 };
