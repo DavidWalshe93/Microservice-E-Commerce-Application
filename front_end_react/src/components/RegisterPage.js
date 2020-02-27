@@ -16,8 +16,13 @@ const RegisterPage = () => {
         <>
             <Form noValidate onSubmit={formik.handleSubmit}>
                 <Form.Row>
+                    {/*First Name*/}
                     <Form.Group as={Col} md={{span: 3, offset: 3}} controlId={"firstName"}>
                         <TextField name="firstName" label="First Name" formik={formik}/>
+                    </Form.Group>
+                    {/*Last Name*/}
+                    <Form.Group as={Col} md={3} controlId={"lastName"}>
+                        <TextField name="lastName" label="Last Name" formik={formik}/>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
