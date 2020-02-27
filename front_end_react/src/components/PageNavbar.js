@@ -3,7 +3,7 @@
 // npm imports
 import React from "react"
 import {NavLink, Link} from "react-router-dom";
-import {Navbar, Nav, NavDropdown, Badge} from "react-bootstrap";
+import {Navbar, Nav, Badge} from "react-bootstrap";
 import "../styles/styles.scss";
 
 const PageNavbar = () => (

@@ -2,7 +2,6 @@
 
 // npm imports
 import React from "react";
-import {Jumbotron, Row, Col, Glyphicon} from "react-bootstrap";
 
 // local imports
 import "../styles/styles.scss"

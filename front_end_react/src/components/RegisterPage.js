@@ -2,32 +2,30 @@
 
 // npm imports
 import React from "react";
-import {useFormik} from "formik";
+import {Form, Button, Col} from "react-bootstrap"
+
+// Local imports
+import RegistrationValidator from "../validators/registrationValidator";
+import TextField from "./RegisterForm/TextField";
 
 const RegisterPage = () => {
 
-    const formik = useFormik({
-        initialValues: {
-            firstname: "",
-        },
-        onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
-        }
-    });
+    const formik = RegistrationValidator();
 
     return (
         <>
-            <form onSubmit={formik.handleSubmit}>
-                <label htmlFor={"firstname"}>First Name</label>
-                <input
-                    id={"firstname"}
-                    name={"firstname"}
-                    type={"firstname"}
-                    onChange={formik.handleChange}
-                    value={formik.values.firstname}
-                />
-                <button type={"submit"}>Submit</button>
-            </form>
+            <Form noValidate onSubmit={formik.handleSubmit}>
+                <Form.Row>
+                    <Form.Group as={Col} md={{span: 3, offset: 3}} controlId={"firstName"}>
+                        <TextField name="firstName" label="First Name" formik={formik}/>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} md={{span: 3, offset: 3}} controlId={"firstName"}>
+                        <Button type={"submit"}>Submit form</Button>
+                    </Form.Group>
+                </Form.Row>
+            </Form>
         </>
     )
 };
