@@ -10,17 +10,21 @@ const AdViewer = () => {
     console.log(cars);
 
     return (
-        <Container>
-            <Row>
-                <Col md={{span: 4, offset: 10}}>
-                    <Carousel indicators={false} controls={false}>
-                        {cars.map((car) => (
-                            <Ad key={car.id} car={car}/>
-                        ))}
-                    </Carousel>
-                </Col>
-            </Row>
-        </Container>
+        <Col md={{span: 2, offset: 0}}>
+            <Carousel indicators={false} controls={false}>
+                {cars.map((car) => (
+                    <Ad key={car.id} car={car}/>
+                ))}
+            </Carousel>
+        </Col>
+
+        // <Container>
+        //     <Row>
+        //         <Col md={{span: 4, offset: 10}}>
+        //
+        //         </Col>
+        //     </Row>
+        // </Container>
     )
 };
 

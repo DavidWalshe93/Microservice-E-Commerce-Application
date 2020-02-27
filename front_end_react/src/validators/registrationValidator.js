@@ -1,5 +1,6 @@
 // Created by David Walshe on 26/02/2020
 
+// npm imports
 import {useFormik} from "formik";
 import * as Yup from "yup";
 
@@ -12,6 +13,12 @@ const RegistrationValidator = () => {
             phone: "",
             password: "",
             verifyPassword: "",
+            address1: "",
+            address2: "",
+            city: "",
+            state: "",
+            country: "",
+            zip: ""
         },
         validationSchema: Yup.object({
             firstName: Yup.string()
@@ -33,6 +40,17 @@ const RegistrationValidator = () => {
             verifyPassword: Yup.string()
                 .oneOf([Yup.ref("password")], "Passwords are not the same")
                 .required('No password was provided'),
+            address1: Yup.string()
+                .required('Street name is required'),
+            address2: Yup.string(),
+            city: Yup.string()
+                .required('City name is required'),
+            state: Yup.string()
+                .required('State is required'),
+            country: Yup.string()
+                .required('Country is required'),
+            zip: Yup.string()
+                .required('Zip is required'),
         }),
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
