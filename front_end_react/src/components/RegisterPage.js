@@ -26,7 +26,13 @@ const RegisterPage = () => {
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group as={Col} md={{span: 3, offset: 3}} controlId={"firstName"}>
+                    {/*Email*/}
+                    <Form.Group as={Col} md={{span: 3, offset: 3}} controlId={"email"}>
+                        <TextField name="email" label="Email" formik={formik}/>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} md={{span: 3, offset: 3}} controlId={"submitRow"}>
                         <Button type={"submit"}>Submit form</Button>
                     </Form.Group>
                 </Form.Row>

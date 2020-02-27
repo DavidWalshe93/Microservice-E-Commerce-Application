@@ -17,9 +17,9 @@ const RegistrationValidator = () => {
             lastName: Yup.string()
                 .max(20, 'Must be 20 characters or less')
                 .required('Required'),
-            // email: Yup.string()
-            //     .email('Invalid email address')
-            //     .required('Required'),
+            email: Yup.string()
+                .email('Invalid email address')
+                .required('Required'),
         }),
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
