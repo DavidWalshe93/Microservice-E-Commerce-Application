@@ -4,7 +4,12 @@
 import React from "react"
 import {NavLink, Link} from "react-router-dom";
 import {Navbar, Nav, Badge} from "react-bootstrap";
+
+// Local imports
 import "../../styles/styles.scss";
+import LoggedOut from "./LoggedOut";
+import LoggedIn from "./LoggedIn";
+import Admin from "./Admin";
 
 const PageNavbar = () => (
     <>
@@ -15,20 +20,9 @@ const PageNavbar = () => (
                 <Nav className="mr-auto">
                     <Nav.Link as={NavLink} to={"/products"} activeClassName={"active"}>Products</Nav.Link>
                 </Nav>
-                <Nav>
-                    <Nav.Link as={NavLink} to={"/login"} activeClassName={"active"}>Login</Nav.Link>
-                    <Nav.Link as={NavLink} to={"/register"} activeClassName={"active"}>Register</Nav.Link>
-                    <Navbar.Brand as={Link} to={"/cart"}>
-                        <img
-                            src="/images/shopping_cart.png"
-                            width="40"
-                            height="40"
-                            className="d-inline-block align-top"
-                            alt="React Bootstrap logo"
-                        />
-                        <Badge pill className={"lblCartCount"} variant={"warning"}>0</Badge>
-                    </Navbar.Brand>
-                </Nav>
+                {/*<LoggedOut/>*/}
+                {/*<LoggedIn/>*/}
+                <Admin/>
             </Navbar.Collapse>
         </Navbar>
     </>
