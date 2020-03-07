@@ -19,17 +19,69 @@
           crossorigin="anonymous"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          rel="stylesheet"
-  />
-  <!--
-    Notice the use of %PUBLIC_URL% in the tags above.
-    It will be replaced with the URL of the `public` folder during the build.
-    Only files inside the `public` folder can be referenced from the HTML.
+  // Created by David Walshe on 25/02/2020
 
-    Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-    work correctly both with client-side routing and a non-root public URL.
-    Learn how to configure a non-root public URL by running `npm run build`.
-  -->
+  // npm imports
+  import React from "react";
+  import {Form, Button, Col} from "react-bootstrap"
+  import TextField from "./form_components/TextField";
+
+  // local imports
+  import LoginValidator from "../validators/loginValidator";
+  import "../styles/styles.scss"
+
+  const LoginPage = () => {
+
+  const formik = LoginValidator();
+
+  const fieldWidth = 3;
+  const fieldOffset = 4;
+
+  return (
+  <>
+  <Form noValidate onSubmit={formik.handleSubmit}>
+    <Form.Row>
+      <Form.Group + 3, as={Col} fieldOffset}} fieldWidth md={{span: offset:>
+        {/*Heading*/}
+        <h4 className={"login-msg"}>Welcome back</h4>
+      </Form.Group>
+    </Form.Row>
+    <Form.Row>
+      {/*Email*/}
+      <Form.Group as={Col} controlId={"email"} fieldOffset}} fieldWidth, md={{span: offset:>
+        <TextField formik={formik} label="Email" name="email" type={"email"}/>
+      </Form.Group>
+    </Form.Row>
+    <Form.Row>
+      {/*Password*/}
+      <Form.Group as={Col} controlId={"password"} fieldOffset}} fieldWidth, md={{span: offset:>
+        <TextField formik={formik} label="Password" name="password" type={"password"}/>
+      </Form.Group>
+    </Form.Row>
+    <Form.Row>
+      {/*Submit button*/}
+      <Form.Group as={Col} controlId={"submitRow2"} fieldOffset}} fieldWidth, md={{span: offset:>
+        <Button className={"login-button"} type={"submit"}>Login</Button>
+      </Form.Group>
+    </Form.Row>
+  </Form>
+</
+>
+)
+};
+
+export default LoginPage
+rel="stylesheet"
+/>
+<!--
+  Notice the use of %PUBLIC_URL% in the tags above.
+  It will be replaced with the URL of the `public` folder during the build.
+  Only files inside the `public` folder can be referenced from the HTML.
+
+  Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+  work correctly both with client-side routing and a non-root public URL.
+  Learn how to configure a non-root public URL by running `npm run build`.
+-->
   <title>React App</title>
 </head>
 <body>
