@@ -14,13 +14,20 @@ const RegisterPage = () => {
 
     const formik = RegistrationValidator();
 
-    const fieldWidth = 2;
-    const fieldOffset = 1;
+    const fieldWidth = 3;
+    const fieldOffset = 3;
 
     return (
         <>
             <Form noValidate onSubmit={formik.handleSubmit}>
-                <h5 className={"welcome-msg"}>To create an account we will just need a few details.</h5>
+                <Form.Row>
+                    <Form.Group as={Col} md={{span: fieldWidth + 3, offset: fieldOffset + 1}}>
+                        {/*Headings*/}
+                        <h4 className={"welcome-msg"}>Welcome to CIT Auto Buyers.</h4>
+                        <h5 className={"welcome-msg__details"}>To create your new account we will just need a few
+                            details.</h5>
+                    </Form.Group>
+                </Form.Row>
                 <Form.Row>
                     {/*First Name*/}
                     <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset}} controlId={"firstName"}>
@@ -82,8 +89,9 @@ const RegisterPage = () => {
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
-                    <Form.Group as={Col} md={{span: 4, offset: fieldOffset + 3}} controlId={"submitRow"}>
-                        <Button type={"submit"}>Submit form</Button>
+                    {/*Submit button*/}
+                    <Form.Group as={Col} md={{span: fieldWidth * 2, offset: fieldOffset}} controlId={"submitRow"}>
+                        <Button className={"create-account-button"} type={"submit"}>Create account</Button>
                     </Form.Group>
                 </Form.Row>
             </Form>S
