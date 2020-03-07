@@ -21,9 +21,14 @@ const RegisterPage = () => {
         <>
             <Form noValidate onSubmit={formik.handleSubmit}>
                 <Form.Row>
-                    <Form.Group as={Col} md={{span: fieldWidth + 3, offset: fieldOffset + 1}}>
-                        {/*Headings*/}
+                    <Form.Group as={Col} md={{span: fieldWidth + 2, offset: fieldOffset + 1}}>
+                        {/*Heading*/}
                         <h4 className={"welcome-msg"}>Welcome to CIT Auto Buyers.</h4>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} md={{span: fieldWidth + 3, offset: fieldOffset + 1}}>
+                        {/*Sub-Heading*/}
                         <h5 className={"welcome-msg__details"}>To create your new account we will just need a few
                             details.</h5>
                     </Form.Group>
@@ -94,7 +99,7 @@ const RegisterPage = () => {
                         <Button className={"create-account-button"} type={"submit"}>Create account</Button>
                     </Form.Group>
                 </Form.Row>
-            </Form>S
+            </Form>
         </>
     )
 };
