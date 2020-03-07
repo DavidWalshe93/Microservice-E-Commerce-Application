@@ -11,6 +11,9 @@ import LoginPage from "../components/LoginPage";
 import RegisterPage from "../components/RegisterPage";
 import NotFoundPage from "../components/NotFoundPage";
 import Header from "../components/header/Header";
+import NewProductPage from "../components/NewProductPage";
+import MyAccountPage from "../components/MyAccountPage";
+import LogoutPage from "../components/LogoutPage";
 
 
 const AppRouter = () => (
@@ -22,6 +25,9 @@ const AppRouter = () => (
                 <Route path={"/cart"} component={CartPage}/>
                 <Route path={"/login"} component={LoginPage}/>
                 <Route path={"/register"} component={RegisterPage}/>
+                <Route path={"/newProduct"} component={NewProductPage}/>
+                <Route path={"/myAccount"} component={MyAccountPage}/>
+                <Route path={"/logout"} component={LogoutPage}/>
                 <Route component={NotFoundPage}/>
             </Switch>
         </>
