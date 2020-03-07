@@ -4,7 +4,7 @@
 import {useFormik} from "formik";
 import * as Yup from "yup";
 
-const RegistrationValidator = () => {
+const LoginValidator = () => {
     return useFormik({
         initialValues: {
             email: "",
@@ -23,4 +23,4 @@ const RegistrationValidator = () => {
     });
 };
 
-export default RegistrationValidator;
+export default LoginValidator;
