@@ -3,7 +3,7 @@
 // npm imports
 import React from "react";
 import {Form, Button, Col} from "react-bootstrap"
-import TextField from "./RegisterForm/TextField";
+import TextField from "./form_components/TextField";
 
 // local imports
 import LoginValidator from "../validators/loginValidator";
@@ -18,7 +18,7 @@ const LoginPage = () => {
 
     return (
         <>
-            <Form noValidate onSumbit={formik.handleSubmit}>
+            <Form noValidate onSubmit={formik.handleSubmit}>
                 <Form.Row>
                     <Form.Group as={Col} md={{span: fieldWidth + 3, offset: fieldOffset}}>
                         {/*Heading*/}
@@ -39,7 +39,7 @@ const LoginPage = () => {
                 </Form.Row>
                 <Form.Row>
                     {/*Submit button*/}
-                    <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset}} controlId={"submitRow"}>
+                    <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset}} controlId={"submitRow2"}>
                         <Button className={"login-button"} type={"submit"}>Login</Button>
                     </Form.Group>
                 </Form.Row>

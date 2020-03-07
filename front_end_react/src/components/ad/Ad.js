@@ -2,7 +2,7 @@
 
 import React from "react";
 import {Button, Carousel} from "react-bootstrap";
-import "../styles/styles.scss"
+import "../../styles/styles.scss"
 
 const Ad = ({car, className}) => {
     return (

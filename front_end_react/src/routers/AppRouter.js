@@ -5,12 +5,12 @@ import React from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 // local imports
-import ProductPage from "../components/ProductPage";
+import ProductPage from "../components/products/ProductPage";
 import CartPage from "../components/CartPage"
 import LoginPage from "../components/LoginPage";
 import RegisterPage from "../components/RegisterPage";
 import NotFoundPage from "../components/NotFoundPage";
-import Header from "../components/Header";
+import Header from "../components/header/Header";
 
 
 const AppRouter = () => (

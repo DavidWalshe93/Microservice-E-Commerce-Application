@@ -2,13 +2,12 @@
 
 // npm imports
 import React from "react";
-import {Form, Button, Col, Container, Row} from "react-bootstrap"
+import {Form, Button, Col} from "react-bootstrap"
 
 // Local imports
 import RegistrationValidator from "../validators/registrationValidator";
-import TextField from "./RegisterForm/TextField";
+import TextField from "./form_components/TextField";
 import "../styles/styles.scss"
-import AdViewer from "./AdViewer";
 
 const RegisterPage = () => {
 

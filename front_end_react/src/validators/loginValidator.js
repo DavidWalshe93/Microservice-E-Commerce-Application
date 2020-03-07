@@ -8,12 +8,12 @@ const LoginValidator = () => {
     return useFormik({
         initialValues: {
             email: "",
-            password: "",
+            password: ""
         },
         validationSchema: Yup.object({
             email: Yup.string()
-                .email('Invalid email address')
-                .required('No email was provided'),
+                .required('No email was provided')
+                .email('Invalid email address'),
             password: Yup.string()
                 .required('No password was provided'),
         }),
