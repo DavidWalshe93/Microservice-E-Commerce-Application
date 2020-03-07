@@ -2,12 +2,24 @@
 
 // npm imports
 import React from "react";
+import {Form, Button, Col} from "react-bootstrap"
 
 
-const LoginPage = () => (
-    <>
-        <p>Login Page</p>
-    </>
-);
+const LoginPage = () => {
+
+    const formik = LoginValidator();
+
+    const fieldWidth = 3;
+    const fieldOffset = 3;
+
+
+    return (
+        <>
+            <Form noValidate onSumbit={formik.handleSubmit}>
+
+            </Form>
+        </>
+    )
+};
 
 export default LoginPage
