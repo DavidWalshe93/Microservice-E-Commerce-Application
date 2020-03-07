@@ -1,9 +1,12 @@
 // Created by David Walshe on 07/03/2020
 
+// npm imports
 import React from "react";
-import RegistrationValidator from "../validators/registrationValidator";
 import {Button, Col, Form} from "react-bootstrap";
+
+// local imports
 import TextField from "./form_components/TextField";
+import NewProductValidator from "../validators/newProductValidator";
 
 const NewProductPage = () => {
 
@@ -18,31 +21,35 @@ const NewProductPage = () => {
                 <Form.Row>
                     <Form.Group as={Col} md={{span: fieldWidth + 2, offset: fieldOffset + 1}}>
                         {/*Heading*/}
-                        <h4 className={"welcome-msg"}>Add a new product to the store inventory.</h4>
+                        <h4>Add a new product to the store inventory.</h4>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
                     {/*Product*/}
-                    <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset}} controlId={"productName"}>
-                        <TextField name="productName" label="Product Name" formik={formik}/>
+                    <Form.Group as={Col} md={{span: fieldWidth * 2, offset: fieldOffset}} controlId={"name"}>
+                        <TextField name="name" label="Product Name" formik={formik}/>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
                     {/*Price*/}
-                    <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset}} controlId={"productPrice"}>
-                        <TextField name="productPrice" label="Unit Price" formik={formik}/>
+                    <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset}} controlId={"price"}>
+                        <TextField name="price" label="Unit Price" formik={formik}/>
                     </Form.Group>
-                </Form.Row>
-                <Form.Row>
                     {/*Quantity*/}
-                    <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset}} controlId={"productQuantity"}>
-                        <TextField name="productQuantity" label="Quantity In-Stock" formik={formik}/>
+                    <Form.Group as={Col} md={{span: fieldWidth, offset: 0}} controlId={"quantity"}>
+                        <TextField name="quantity" label="Quantity In-Stock" formik={formik}/>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
                     {/*Image*/}
-                    <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset}} controlId={"productImage"}>
-                        <TextField name="productImage" label="Product Image" formik={formik}/>
+                    <Form.Group as={Col} md={{span: fieldWidth * 2, offset: fieldOffset}} controlId={"image"}>
+                        <TextField name="image" label="Product Image" formik={formik}/>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    {/*Submit button*/}
+                    <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset + 5}} controlId={"submitRow3"}>
+                        <Button type={"submit"}>Add Product</Button>
                     </Form.Group>
                 </Form.Row>
             </Form>
