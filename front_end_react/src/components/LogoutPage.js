@@ -4,18 +4,41 @@
 
 // npm imports
 import React from "react";
-
+import {Redirect} from "react-router-dom"
+import {connect} from "react-redux"
 // local imports
-import "../styles/styles.scss"
-import LoginPage from "./LoginPage";
+import logoutRequest from "../requests/logout";
+import {logoutCustomer} from "../actions/customers"
 
-const LogoutPage = () => {
+class LogoutPage extends React.Component {
 
-    return (
-        <>
-            <LoginPage/>
-        </>
-    )
+    state = {
+        token: this.props.token,
+        dispatch: this.props.dispatch
+    };
+
+    async componentDidMount() {
+        // const logout = async () => {
+        if (!!this.state.token) {
+            try {
+                this.state.dispatch(logoutCustomer(await logoutRequest(this.state.token)));
+            } catch (e) {
+                console.log("error", e)
+            }
+        }
+        // };
+        // await logout();
+    }
+
+    render() {
+        return <Redirect to={"/login"}/>;
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        token: state.customer.token
+    }
 };
 
-export default LogoutPage
+export default connect(mapStateToProps)(LogoutPage);

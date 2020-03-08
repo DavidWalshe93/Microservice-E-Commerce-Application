@@ -35,7 +35,7 @@ router.post(["/logout"], auth, async (req, res) => {
         // Save token removal.
         await req.customer.save();
 
-        return res.status(200).send();
+        return res.status(200).send({});
     } catch (e) {
         res.status(500).send()
     }

@@ -25,6 +25,7 @@ const PageNavbar = (props) => (
     </>
 );
 
+
 const pageSignInState = (token) => {
     if (!!token) {
         return <LoggedIn/>

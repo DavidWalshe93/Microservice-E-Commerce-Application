@@ -13,6 +13,10 @@ const customerReducer = (state = userReducerDefaultState, action) => {
                 ...action.customer,
                 token: action.token
             };
+        case "LOGOUT":
+            return {
+                ...userReducerDefaultState
+            };
         default:
             return state;
     }

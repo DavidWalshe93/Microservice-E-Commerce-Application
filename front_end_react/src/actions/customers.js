@@ -5,3 +5,7 @@ export const loginCustomer = (response) => ({
     customer: response.customer,
     token: response.token,
 });
+
+export const logoutCustomer = () => ({
+    type: "LOGOUT"
+});
