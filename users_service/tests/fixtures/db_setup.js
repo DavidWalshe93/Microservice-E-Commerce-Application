@@ -25,15 +25,16 @@ const mock_customer_generator = (size = 3) => {
     return mock_customer_details;
 };
 
+let customers = [];
 const setupCustomerTable = async () => {
     await Customer.sync();
     await Customer.destroy({
         truncate: true
     });
-    const mocks = mock_customer_generator();
+    customers = mock_customer_generator();
     for (let i = 0; i < mocks.length; i++) {
         await Customer.create(mocks[i])
     }
 };
 
-module.exports = setupCustomerTable;
+module.exports = {setupCustomerTable, customers};

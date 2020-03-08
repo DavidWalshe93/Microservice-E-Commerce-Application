@@ -6,7 +6,7 @@ const request = require("supertest");
 const app = require("../src/app");
 const Customer = require("../src/model/customer");
 
-const setupCustomerTable = require("./fixtures/db_setup");
+const {setupCustomerTable, customers} = require("./fixtures/db_setup");
 
 
 beforeAll(() => {
@@ -24,6 +24,13 @@ test("Should log a user in", async () => {
         .expect(200);
 });
 
+test("Should logout a user currently logged in", async () => {
+    await request(app)
+        .post("/logout")
+        .set("Authorization", `Bearer ${JSON.parse(customers[0].tokens)[0]}`)
+        .send()
+        .expect(200);
+});
 
 test("Should create a new Customer", async () => {
 
