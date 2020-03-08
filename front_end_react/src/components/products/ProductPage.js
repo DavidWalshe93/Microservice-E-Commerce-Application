@@ -9,33 +9,40 @@ import BuyConfirmation from "../BuyConfirmation";
 
 const ProductPage = () => {
 
+    // State
     const [show, setShow] = useState(0);
     const [data, setData] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(undefined);
 
+    // Hooks
     useEffect(() => {
-        if (!isLoaded && !error) {
-            fetch("http://localhost:3002/getProducts", {
-                method: "GET"
-            })
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        result.map((item) => {
-                            return item.image = `/images/${item.image}`
-                        });
-                        setIsLoaded(true);
-                        setProducts(result);
-                    },
-                    (error) => {
-                        setError(error);
-                    }
-                )
-        }
+
+        fetchCatalogData();
     });
 
+    // Request Data from catalog service
+    const fetchCatalogData = async () => {
+        if (!isLoaded && !error) {
+            const response = await fetch("http://localhost:3002/getProducts", {
+                method: "GET"
+            });
+            try {
+                let products = await response.json();
+
+                products.map((item) => {
+                    return item.image = `/images/${item.image}`
+                });
+                setIsLoaded(true);
+                setProducts(products);
+            } catch (e) {
+                setError(e);
+            }
+        }
+    };
+
+    // Show toast notification.
     const displayConfirmation = (data) => {
         setShow(true);
         setData(data);
