@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 import {Nav, Navbar} from "react-bootstrap";
 // Local imports
 import "../../styles/styles.scss";
-import LoggedIn from "./LoggedIn";
+import LoggedOut from "./LoggedOut";
 
 const PageNavbar = () => (
     <>
@@ -17,8 +17,8 @@ const PageNavbar = () => (
                 <Nav className="mr-auto">
                     <Nav.Link as={NavLink} to={"/products"} activeClassName={"active"}>Products</Nav.Link>
                 </Nav>
-                {/*<LoggedOut/>*/}
-                <LoggedIn/>
+                <LoggedOut/>
+                {/*<LoggedIn/>*/}
                 {/*<Admin/>*/}
             </Navbar.Collapse>
         </Navbar>
