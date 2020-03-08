@@ -4,6 +4,7 @@
 const express = require("express");
 // Local imports
 const Customer = require("../model/customer");
+const auth = require("../middleware/auth");
 
 // Init express endpoint router
 const router = new express.Router();
@@ -23,7 +24,23 @@ router.get(["/getCustomers"], async (req, res) => {
     }
 });
 
-// Get a single customer based on ID.
+// Logout the current session.
+router.post(["/logout"], auth, async (req, res) => {
+    try {
+        // Remove the current session token.
+        req.customer.tokens = req.customer.tokens.filter((token) => {
+            return token.token !== req.token;
+        });
+        // Save token removal.
+        await req.customer.save();
+
+        return res.status(200).send();
+    } catch (e) {
+        res.status(500).send()
+    }
+});
+
+// Login a previously registered user.
 router.post(["/login"], async (req, res) => {
     console.log(req.body);
     // Get the id requested by the user in the request
