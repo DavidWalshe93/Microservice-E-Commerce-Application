@@ -1,7 +1,7 @@
 // Created by David Walshe on 26/02/2020
 
 // npm import
-import React, {useState} from "react";
+import React from "react";
 import {Toast} from "react-bootstrap";
 import "../styles/styles.scss";
 

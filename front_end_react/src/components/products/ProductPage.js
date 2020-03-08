@@ -24,12 +24,10 @@ const ProductPage = () => {
                 .then(
                     (result) => {
                         result.map((item) => {
-                            item.image = `/images/${item.image}`
+                            return item.image = `/images/${item.image}`
                         });
                         setIsLoaded(true);
                         setProducts(result);
-                        console.log(isLoaded);
-                        console.log(result);
                     },
                     (error) => {
                         setError(error);
@@ -53,7 +51,7 @@ const ProductPage = () => {
                 {<BuyConfirmation data={data} show={show} setShow={setShow}/>}
                 <Row>
                     {products.map((product) => (
-                        <Col xs={4} className={"mb-5"} key={product.id}>
+                        <Col xs={4} className={"mb-5"} key={product.productID}>
                             <ProductCard data={product} displayConfirmation={displayConfirmation}/>
                         </Col>
                     ))}

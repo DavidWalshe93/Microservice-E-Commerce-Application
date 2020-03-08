@@ -46,7 +46,7 @@ const ProductCard = ({data, displayConfirmation}) => {
                                     type={"number"}
                                     min={1}
                                     max={data.quantity}
-                                    name={`qty${data.id}`}
+                                    name={`qty${data.productID}`}
                                     value={buyQuantity}
                                     onChange={(e) => updatePrice(e)} //setBuyQuantity(e.target.value >= 1 && !isNaN(e.target.value) ? e.target.value : "")}
                                 />
@@ -59,7 +59,7 @@ const ProductCard = ({data, displayConfirmation}) => {
                                     className={"input-price"}
                                     type={"text"}
                                     disabled={true}
-                                    name={`price${data.id}`}
+                                    name={`price${data.productID}`}
                                     value={(buyQuantity * data.price).toFixed(2)}
                                     onChange={updatePrice}
                                 />
