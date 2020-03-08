@@ -2,8 +2,10 @@
 
 // NPM imports
 const {DataTypes} = require("sequelize");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 // Local imports
-const {sequelize, testConnection} = require("../database/sequelize");
+const {sequelize, testConnection, syncDatabase} = require("../database/sequelize");
 
 // Test connection to db.
 testConnection("Customer Model");
@@ -58,10 +60,32 @@ const Customer = sequelize.define("customer", {
     country: {
         type: DataTypes.STRING(40),
         allowNull: false
+    },
+    tokens: {
+        type: DataTypes.STRING(),
     }
 }, {
     timestamps: false
 });
+
+
+// Model Methods
+Customer.prototype.generateAuthToken = async function () {
+    const customer = this;
+    const token = `Bearer ${await jwt.sign({id: customer.customerID}, process.env.JWT_SECRET)}`;
+
+    await Customer.update({
+        tokens: JSON.stringify(customer.tokens ? customer.tokens.concat(token) : {token})
+    }, {
+        where: {
+            customerID: customer.customerID
+        }
+    });
+
+    return token;
+};
+
+syncDatabase();
 
 // Export Model
 module.exports = Customer;

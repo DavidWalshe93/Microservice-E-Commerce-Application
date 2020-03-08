@@ -24,15 +24,15 @@ router.get(["/getCustomers"], async (req, res) => {
 });
 
 // Get a single customer based on ID.
-router.get(["/getCustomer/:id"], async (req, res) => {
+router.post(["/login"], async (req, res) => {
+    console.log(req.body);
     // Get the id requested by the user in the request
-    const customerID = req.params.id;
-
     try {
         // Look for the customer in the db.
         const customer = await Customer.findOne({
             where: {
-                customerID
+                username: req.body.username,
+                password: req.body.password
             }
         });
 
@@ -42,20 +42,24 @@ router.get(["/getCustomer/:id"], async (req, res) => {
         }
 
         // Return requested ID if all went well.
-        return res.status(200).send(customer)
+        const token = await customer.generateAuthToken();
+        return res.status(200).send({customer, token})
     } catch (e) {
         // Return 500 and error if something went wrong on the server side.
+        console.log(e);
         return res.status(500).send(e)
     }
 });
 
 // Adds a new customer to the database.
-router.post(["/newCustomer"], async (req, res) => {
+router.post(["/register"], async (req, res) => {
     try {
         const customer = await Customer.create(req.body);
-        res.status(201).send(customer);
+        const token = await customer.generateAuthToken();
+        res.status(201).send({customer, token});
     } catch (e) {
-        res.status(400).send()
+        console.log(e);
+        res.status(400).send(e)
     }
 });
 

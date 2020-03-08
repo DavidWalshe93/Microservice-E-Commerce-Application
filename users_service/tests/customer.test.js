@@ -34,7 +34,7 @@ test("Should create a new Customer", async () => {
 
     // Check if endpoint returns expected response.
     const response = await request(app)
-        .post("/newCustomer")
+        .post("/register")
         .send({
             fname: "John",
             lname: "Murphy",
