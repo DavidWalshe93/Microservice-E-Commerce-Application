@@ -2,14 +2,11 @@
 
 // npm imports
 import React from "react"
-import {NavLink, Link} from "react-router-dom";
-import {Navbar, Nav, Badge} from "react-bootstrap";
-
+import {NavLink} from "react-router-dom";
+import {Nav, Navbar} from "react-bootstrap";
 // Local imports
 import "../../styles/styles.scss";
-import LoggedOut from "./LoggedOut";
 import LoggedIn from "./LoggedIn";
-import Admin from "./Admin";
 
 const PageNavbar = () => (
     <>
@@ -21,8 +18,8 @@ const PageNavbar = () => (
                     <Nav.Link as={NavLink} to={"/products"} activeClassName={"active"}>Products</Nav.Link>
                 </Nav>
                 {/*<LoggedOut/>*/}
-                {/*<LoggedIn/>*/}
-                <Admin/>
+                <LoggedIn/>
+                {/*<Admin/>*/}
             </Navbar.Collapse>
         </Navbar>
     </>
