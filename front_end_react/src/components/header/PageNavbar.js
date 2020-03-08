@@ -4,25 +4,39 @@
 import React from "react"
 import {NavLink} from "react-router-dom";
 import {Nav, Navbar} from "react-bootstrap";
+import {connect} from "react-redux"
 // Local imports
 import "../../styles/styles.scss";
 import LoggedOut from "./LoggedOut";
+import LoggedIn from "./LoggedIn";
 
-const PageNavbar = () => (
+const PageNavbar = (props) => (
     <>
         <Navbar fixed={"top"} expand={"lg"} bg={"dark"} variant={"dark"}>
-            <Navbar.Brand href="#home">CIT Auto Buyers</Navbar.Brand>
+            <Navbar.Brand as={NavLink} to={"/products"}>CIT Auto Buyers</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link as={NavLink} to={"/products"} activeClassName={"active"}>Products</Nav.Link>
                 </Nav>
-                <LoggedOut/>
-                {/*<LoggedIn/>*/}
-                {/*<Admin/>*/}
+                {pageSignInState(props.token)}
             </Navbar.Collapse>
         </Navbar>
     </>
 );
 
-export default PageNavbar;
+const pageSignInState = (token) => {
+    if (!!token) {
+        return <LoggedIn/>
+    } else {
+        return <LoggedOut/>
+    }
+};
+
+const mapStateToProps = (state) => {
+    return {
+        token: state.customer.token
+    }
+};
+
+export default connect(mapStateToProps)(PageNavbar);

@@ -2,19 +2,25 @@
 
 // npm imports
 import React from "react";
-import {Form, Button, Col} from "react-bootstrap"
-import TextField from "./form_components/TextField";
-
+import {connect} from "react-redux"
+import {Button, Col, Form} from "react-bootstrap"
+import {Redirect} from "react-router-dom";
 // local imports
+import TextField from "./form_components/TextField";
 import LoginValidator from "../validators/loginValidator";
+import loginRequest from "../requests/login"
 import "../styles/styles.scss"
 
-const LoginPage = () => {
+const LoginPage = (props) => {
 
-    const formik = LoginValidator();
+    const formik = LoginValidator(loginRequest, props.dispatch);
 
     const fieldWidth = 3;
     const fieldOffset = 4;
+
+    if (props.customer.token) {
+        return <Redirect to={"/"}/>;
+    }
 
     return (
         <>
@@ -48,4 +54,12 @@ const LoginPage = () => {
     )
 };
 
-export default LoginPage
+
+const mapStateToProps = (state) => {
+    return {
+        customer: state.customer
+    }
+};
+
+
+export default connect(mapStateToProps)(LoginPage);

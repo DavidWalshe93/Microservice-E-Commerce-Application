@@ -4,12 +4,13 @@
 
 import {useFormik} from "formik";
 import * as Yup from "yup";
+import {loginCustomer} from "../actions/customers";
 
-const LoginValidator = (loginRequest) => {
+const LoginValidator = (loginRequest, dispatch) => {
     return useFormik({
         initialValues: {
-            email: "",
-            password: ""
+            email: "mytest@example.com",
+            password: "myPass"
         },
         validationSchema: Yup.object({
             email: Yup.string()
@@ -19,7 +20,12 @@ const LoginValidator = (loginRequest) => {
                 .required('No password was provided'),
         }),
         onSubmit: async (values) => {
-            await loginRequest(values.email, values.password);
+            try {
+                await dispatch(loginCustomer(await loginRequest(values.email, values.password)));
+            } catch (e) {
+                console.log(e)
+            }
+
         },
     });
 };

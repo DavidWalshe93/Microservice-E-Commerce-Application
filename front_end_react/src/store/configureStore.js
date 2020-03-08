@@ -3,13 +3,13 @@
 // npm imports
 import {combineReducers, createStore} from "redux";
 // local imports
-import productsReducer from "../reducers/users"
+import customerReducer from "../reducers/customers"
 
 // Create Redux store for handling React app state.
 export default () => {
     return createStore(
         combineReducers({
-            products: productsReducer
+            customer: customerReducer
         })
     );
 }

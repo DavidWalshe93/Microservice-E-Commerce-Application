@@ -14,4 +14,8 @@ const jsxRoot = (
     </Provider>
 );
 
+const unsubscribe = store.subscribe(() => {
+    console.log(store.getState())
+});
+
 ReactDOM.render(jsxRoot, document.getElementById('root'));
