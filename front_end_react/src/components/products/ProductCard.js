@@ -19,6 +19,15 @@ const ProductCard = ({data, displayConfirmation}) => {
         setBuyQuantity(v)
     };
 
+    // const addToCart = (e) => {
+    //     fetch("http://localhost/:3002/add", {
+    //         method: "POST",
+    //         body: {
+    //             quantity:
+    //         }
+    //     })
+    // };
+
     return (
         <>
             <Card className={"h-100 shadow-sm bg-white rounded"}>
