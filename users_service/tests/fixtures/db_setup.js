@@ -13,7 +13,7 @@ const mock_customer_generator = (size = 3) => {
             lname: "Murphy",
             username: "testme",
             email: `jm${i}@example.com`,
-            password: "16-02-2020",
+            password: "myPass123",
             phone: "0121234567",
             zipcode: "A00A000",
             streetname: "testStreet",

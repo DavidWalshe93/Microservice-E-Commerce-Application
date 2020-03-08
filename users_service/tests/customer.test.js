@@ -14,20 +14,15 @@ beforeAll(() => {
 });
 
 
-// test("Should return all customers", async () => {
-//     await request(app)
-//         .get("/getCustomers")
-//         .send()
-//         .expect(200)
-// });
-//
-//
-// test("Should return a specified customer based on its customerID", async () => {
-//     await request(app)
-//         .get("/getCustomer/2")
-//         .send()
-//         .expect(200);
-// });
+test("Should log a user in", async () => {
+    await request(app)
+        .post("/login")
+        .send({
+            email: "jm1@example.com",
+            password: "myPass123"
+        })
+        .expect(200);
+});
 
 
 test("Should create a new Customer", async () => {
