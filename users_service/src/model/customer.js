@@ -75,7 +75,7 @@ const Customer = sequelize.define("customer", {
 // Generates a JWT authentication token.
 Customer.prototype.generateAuthToken = async function () {
     const customer = this;
-    const token = `Bearer ${await jwt.sign({id: customer.customerID}, process.env.JWT_SECRET)}`;
+    const token = await jwt.sign({id: customer.customerID}, process.env.JWT_SECRET);
 
     await Customer.update({
         tokens: JSON.stringify(customer.tokens ? JSON.parse(customer.tokens).concat(token) : [token])
@@ -108,12 +108,15 @@ Customer.findByCredentials = async function (email, password) {
         },
     });
 
+    // Verify customer exists.
     if (!customer) {
         throw new Error("Unable to login");
     }
 
+    // Verify if the password matches the stored hash.
     const isMatch = await bcrypt.compare(password, customer.password);
 
+    // If the password didnt match, raise error.
     if (!isMatch) {
         throw new Error("Unable to login");
     }

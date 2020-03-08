@@ -10,9 +10,11 @@ const auth = async (req, res, next) => {
     try {
         const token = req.header("Authorization").replace("Bearer ", "");
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        // Get the user matching the decoded id.
         const customer = await Customer.findOne({
             where: {
-                customerID: decoded.customerID
+                customerID: decoded.id
             }
         });
 
@@ -21,9 +23,12 @@ const auth = async (req, res, next) => {
             throw new Error("Profile does not exist")
         }
 
+        let validToken = JSON.parse(customer.tokens).some(item => {
+            return item === token
+        });
         // Verify customer has a valid token.
         if (!JSON.parse(customer.tokens).some(item => item === token)) {
-            throw new Error("Supplied token is invalid")
+            throw new Error("You are not logged in")
         }
 
         req.token = token;
@@ -31,7 +36,7 @@ const auth = async (req, res, next) => {
         next();
     } catch (e) {
         console.log(e);
-        res.status(401).send({error: "Please authenticate"})
+        res.status(401).send({error: `Please authenticate - ${e}`})
     }
 };
 

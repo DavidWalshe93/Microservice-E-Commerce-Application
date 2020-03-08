@@ -28,9 +28,10 @@ router.get(["/getCustomers"], async (req, res) => {
 router.post(["/logout"], auth, async (req, res) => {
     try {
         // Remove the current session token.
-        req.customer.tokens = req.customer.tokens.filter((token) => {
-            return token.token !== req.token;
-        });
+        req.customer.tokens = JSON.stringify(JSON.parse(req.customer.tokens).filter((token) => {
+            return token !== req.token;
+        }));
+
         // Save token removal.
         await req.customer.save();
 
@@ -42,7 +43,6 @@ router.post(["/logout"], auth, async (req, res) => {
 
 // Login a previously registered user.
 router.post(["/login"], async (req, res) => {
-    console.log(req.body);
     // Get the id requested by the user in the request
     try {
         // Look for the customer in the db.
@@ -75,7 +75,6 @@ router.post(["/register"], async (req, res) => {
         if (e.name === "SequelizeUniqueConstraintError") {
             return res.status(400).send({msg: "That email is already in use"})
         }
-        console.log(e);
         res.status(400).send(e)
     }
 });
