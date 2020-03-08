@@ -12,7 +12,7 @@ const mock_customer_generator = (size = 3) => {
             fname: "John",
             lname: "Murphy",
             username: "testme",
-            email: "jm@example.com",
+            email: `jm${i}@example.com`,
             password: "16-02-2020",
             phone: "0121234567",
             zipcode: "A00A000",

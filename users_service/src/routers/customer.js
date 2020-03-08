@@ -54,6 +54,7 @@ router.post(["/register"], async (req, res) => {
 
         return res.status(201).send({customer, token});
     } catch (e) {
+        console.log(e);
         if (e.name === "SequelizeUniqueConstraintError") {
             return res.status(400).send({msg: "That email is already in use"})
         }
