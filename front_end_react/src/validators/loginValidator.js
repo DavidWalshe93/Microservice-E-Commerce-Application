@@ -1,10 +1,11 @@
 // Created by David Walshe on 07/03/2020
 
 // npm imports
+
 import {useFormik} from "formik";
 import * as Yup from "yup";
 
-const LoginValidator = () => {
+const LoginValidator = (loginRequest) => {
     return useFormik({
         initialValues: {
             email: "",
@@ -17,8 +18,8 @@ const LoginValidator = () => {
             password: Yup.string()
                 .required('No password was provided'),
         }),
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+        onSubmit: async (values) => {
+            await loginRequest(values.email, values.password);
         },
     });
 };
