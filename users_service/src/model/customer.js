@@ -32,7 +32,8 @@ const Customer = sequelize.define("customer", {
     },
     email: {
         type: DataTypes.STRING(100),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     password: {
         type: DataTypes.STRING(40),
@@ -69,13 +70,15 @@ const Customer = sequelize.define("customer", {
 });
 
 
-// Model Methods
+// Model Instance Methods
+
+// Generates a JWT authentication token.
 Customer.prototype.generateAuthToken = async function () {
     const customer = this;
     const token = `Bearer ${await jwt.sign({id: customer.customerID}, process.env.JWT_SECRET)}`;
 
     await Customer.update({
-        tokens: JSON.stringify(customer.tokens ? customer.tokens.concat(token) : {token})
+        tokens: JSON.stringify(customer.tokens ? JSON.parse(customer.tokens).concat(token) : [token])
     }, {
         where: {
             customerID: customer.customerID
@@ -85,8 +88,41 @@ Customer.prototype.generateAuthToken = async function () {
     return token;
 };
 
+Customer.prototype.toJSON = function () {
+    const customer = this;
+    const customerObject = customer.get({plain: true});
+
+    // Remove sensitive data from response.
+    delete customerObject.password;
+    delete customerObject.tokens;
+
+    return customerObject;
+};
+
+// Model Class Methods
+// Verify username and password are correct for login.
+Customer.findByCredentials = async function (email, password) {
+    const customer = await this.findOne({
+        where: {
+            email
+        },
+    });
+
+    if (!customer) {
+        throw new Error("Unable to login");
+    }
+
+    const isMatch = await bcrypt.compare(password, customer.password);
+
+    if (!isMatch) {
+        throw new Error("Unable to login");
+    }
+
+    return customer;
+};
 
 // Model Hooks
+// Hash password.
 Customer.beforeCreate(async (customer, options) => {
     customer.password = await bcrypt.hash(customer.password, 8)
 });

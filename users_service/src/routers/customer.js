@@ -29,12 +29,7 @@ router.post(["/login"], async (req, res) => {
     // Get the id requested by the user in the request
     try {
         // Look for the customer in the db.
-        const customer = await Customer.findOne({
-            where: {
-                username: req.body.username,
-                password: req.body.password
-            }
-        });
+        const customer = await Customer.findByCredentials(req.body.email, req.body.password);
 
         // If the customer does not exist return 400
         if (customer === null) {
@@ -56,8 +51,12 @@ router.post(["/register"], async (req, res) => {
     try {
         const customer = await Customer.create(req.body);
         const token = await customer.generateAuthToken();
-        res.status(201).send({customer, token});
+
+        return res.status(201).send({customer, token});
     } catch (e) {
+        if (e.name === "SequelizeUniqueConstraintError") {
+            return res.status(400).send({msg: "That email is already in use"})
+        }
         console.log(e);
         res.status(400).send(e)
     }
