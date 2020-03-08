@@ -85,6 +85,12 @@ Customer.prototype.generateAuthToken = async function () {
     return token;
 };
 
+
+// Model Hooks
+Customer.beforeCreate(async (customer, options) => {
+    customer.password = await bcrypt.hash(customer.password, 8)
+});
+
 syncDatabase();
 
 // Export Model
