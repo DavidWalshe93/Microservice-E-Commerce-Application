@@ -6,6 +6,7 @@ import {persistReducer, persistStore} from "redux-persist";
 import storage from "redux-persist/lib/storage"
 // local imports
 import customerReducer from "../reducers/customers"
+import cartReducer from "../reducers/cart"
 
 // Set up persistence config for state
 const persistConfig = {
@@ -13,13 +14,15 @@ const persistConfig = {
     storage
 };
 
-// Wrap custom reducer in persistence Reducer
+// Wrap custom reducers in persistence Reducer
 const persistedCustomerReducer = persistReducer(persistConfig, customerReducer);
+const persistedCartReducer = persistReducer(persistConfig, cartReducer);
 
 // Create Redux store for handling React app state.
 export default () => {
     let store = createStore(combineReducers({
-            customer: persistedCustomerReducer
+            customer: persistedCustomerReducer,
+            cart: persistedCartReducer
         }
     ));
     let persistor = persistStore(store);
