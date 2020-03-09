@@ -16,8 +16,6 @@ const logoutRequest = async (token) => {
         referrerPolicy: 'no-referrer'
     });
 
-    console.log("res", response);
-
     return response.json();
 };
 

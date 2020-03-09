@@ -1,5 +1,6 @@
 // Created by David Walshe on 08/03/2020
 
+// Default initial state of Reducer on startup
 const userReducerDefaultState = {
     customerID: null,
     token: undefined

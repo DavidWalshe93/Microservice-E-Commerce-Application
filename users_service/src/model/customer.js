@@ -62,6 +62,10 @@ const Customer = sequelize.define("customer", {
         type: DataTypes.STRING(40),
         allowNull: false
     },
+    isAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    },
     tokens: {
         type: DataTypes.STRING(),
     }

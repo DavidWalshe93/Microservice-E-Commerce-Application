@@ -18,7 +18,7 @@ class LogoutPage extends React.Component {
     };
 
     async componentDidMount() {
-        // const logout = async () => {
+
         if (!!this.state.token) {
             try {
                 this.state.dispatch(logoutCustomer(await logoutRequest(this.state.token)));
@@ -26,8 +26,6 @@ class LogoutPage extends React.Component {
                 console.log("error", e)
             }
         }
-        // };
-        // await logout();
     }
 
     render() {
