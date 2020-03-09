@@ -18,9 +18,8 @@ const ProductPage = () => {
 
     // Hooks
     useEffect(() => {
-
         fetchCatalogData();
-    });
+    }, []);
 
     // Request Data from catalog service
     const fetchCatalogData = async () => {
