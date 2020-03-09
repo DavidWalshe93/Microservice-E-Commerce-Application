@@ -6,40 +6,20 @@ import {Col, Container, Row} from "react-bootstrap";
 // local imports
 import ProductCard from "./ProductCard";
 import BuyConfirmation from "../BuyConfirmation";
+import getProductData from "../../requests/getProductData";
 
 const ProductPage = () => {
 
     // State
     const [show, setShow] = useState(0);
     const [data, setData] = useState({});
-    const [isLoaded, setIsLoaded] = useState(false);
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(undefined);
 
     // Hooks
     useEffect(() => {
-        fetchCatalogData();
+        getProductData(setProducts, error, setError);
     }, []);
-
-    // Request Data from catalog service
-    const fetchCatalogData = async () => {
-        if (!isLoaded && !error) {
-            const response = await fetch("http://localhost:3002/getProducts", {
-                method: "GET"
-            });
-            try {
-                let products = await response.json();
-
-                products.map((item) => {
-                    return item.image = `/images/${item.image}`
-                });
-                setIsLoaded(true);
-                setProducts(products);
-            } catch (e) {
-                setError(e);
-            }
-        }
-    };
 
     // Show toast notification.
     const displayConfirmation = (data) => {
@@ -49,8 +29,6 @@ const ProductPage = () => {
 
     if (error) {
         return <div>Error: {error.message}</div>
-    } else if (!isLoaded) {
-        return <div>Loading...</div>
     } else {
         return (
             <Container>
