@@ -5,8 +5,12 @@ import React, {useState} from "react";
 import {Badge, Button, Card, Form} from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import "../../styles/styles.scss"
+import {connect} from "react-redux";
+import {addItem} from "../../actions/actions";
 
-const ProductCard = ({data, displayConfirmation}) => {
+const ProductCard = (props) => {
+
+    const {data, displayConfirmation} = {...props};
 
     const [buyQuantity, setBuyQuantity] = useState(1);
 
@@ -19,14 +23,11 @@ const ProductCard = ({data, displayConfirmation}) => {
         setBuyQuantity(v)
     };
 
-    // const addToCart = (e) => {
-    //     fetch("http://localhost/:3002/add", {
-    //         method: "POST",
-    //         body: {
-    //             quantity:
-    //         }
-    //     })
-    // };
+    const addToCart = (e) => {
+        console.log("data", data);
+        props.dispatch(addItem(data, buyQuantity));
+        displayConfirmation(data)
+    };
 
     return (
         <>
@@ -78,7 +79,8 @@ const ProductCard = ({data, displayConfirmation}) => {
                 </div>
 
                 <Button
-                    onClick={() => displayConfirmation(data)}
+                    // onClick={() => displayConfirmation(data)}
+                    onClick={addToCart}
                     className={"mt-auto font-weight-bold"}
                     variant={"success"}
                     block
@@ -88,4 +90,10 @@ const ProductCard = ({data, displayConfirmation}) => {
     )
 };
 
-export default ProductCard;
+const mapStateToProps = (state) => {
+    return {
+        customer: state.customer
+    }
+};
+
+export default connect(mapStateToProps)(ProductCard);
