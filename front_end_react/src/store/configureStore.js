@@ -9,14 +9,19 @@ import customerReducer from "../reducers/customers"
 import cartReducer from "../reducers/cart"
 
 // Set up persistence config for state
-const persistConfig = {
-    key: "root",
+const customerPersistConfig = {
+    key: "customer",
+    storage
+};
+
+const cartPersistConfig = {
+    key: "cart",
     storage
 };
 
 // Wrap custom reducers in persistence Reducer
-const persistedCustomerReducer = persistReducer(persistConfig, customerReducer);
-const persistedCartReducer = persistReducer(persistConfig, cartReducer);
+const persistedCustomerReducer = persistReducer(customerPersistConfig, customerReducer);
+const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
 
 // Create Redux store for handling React app state.
 export default () => {
