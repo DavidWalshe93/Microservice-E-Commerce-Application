@@ -13,6 +13,7 @@ const ProductPage = () => {
     // State
     const [show, setShow] = useState(0);
     const [data, setData] = useState({});
+    const [quantity, setQuantity] = useState(0);
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(undefined);
 
@@ -23,11 +24,10 @@ const ProductPage = () => {
     }, []);
 
     // Show toast notification.
-    const displayConfirmation = (data) => {
-        console.log("Pre Products", products);
+    const displayConfirmation = (data, buyQuantity) => {
+        setQuantity(buyQuantity);
         setShow(true);
         setData(data);
-        console.log("Post Products", products);
     };
 
     if (error) {
@@ -35,7 +35,7 @@ const ProductPage = () => {
     } else {
         return (
             <Container>
-                {<BuyConfirmation data={data} show={show} setShow={setShow}/>}
+                {<BuyConfirmation data={data} quantity={quantity} show={show} setShow={setShow}/>}
                 <Row>
                     {products.map((product) => (
                         <Col xs={4} className={"mb-5"} key={product.productID}>

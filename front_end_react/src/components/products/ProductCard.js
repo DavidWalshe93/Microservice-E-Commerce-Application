@@ -1,5 +1,4 @@
 // Created by David Walshe on 25/02/2020
-
 // npm imports
 import React, {useState} from "react";
 import {Badge, Button, Card, Form} from "react-bootstrap";
@@ -25,9 +24,8 @@ const ProductCard = (props) => {
 
 
     const addToCart = (e) => {
-        console.log("data", data);
         props.dispatch(addItem(data, buyQuantity));
-        displayConfirmation(data)
+        displayConfirmation(data, buyQuantity)
     };
 
     return (

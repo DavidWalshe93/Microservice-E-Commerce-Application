@@ -13,22 +13,22 @@ const CartIcon = (props) => {
 
     // Update quantity on props.cart change
     useEffect(() => {
-        const {qty, price} = getCartInfo();
-        setQuantity(qty);
-        setPrice(price.toFixed(2))
+        setItems(props.cart.items);
     }, [props.cart]);
 
-    // Get the overall quantity of items in the cart.
-    const getCartInfo = () => {
+    // Get the overall quantity and price of items in the cart after
+    // item us updated in the above useEffect.
+    useEffect(() => {
         let qty = 0;
         let price = 0;
+
         items.forEach((item) => {
             qty += item.quantity;
             price += (item.quantity * item.price);
         });
-
-        return {qty, price};
-    };
+        setQuantity(qty);
+        setPrice(price.toFixed(2));
+    }, [items]);
 
 
     return (

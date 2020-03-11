@@ -21,6 +21,7 @@ const cartReducer = (state = cartReducerDefaultState, action) => {
                     })]
                 };
             } else {
+                action.item.quantity = action.buyQuantity;
                 return {
                     items: [...state.items, action.item]
                 }
