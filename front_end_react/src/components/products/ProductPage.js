@@ -19,12 +19,15 @@ const ProductPage = () => {
     // Hooks
     useEffect(() => {
         getProductData(setProducts, error, setError);
+        console.log("Init Product", products)
     }, []);
 
     // Show toast notification.
     const displayConfirmation = (data) => {
+        console.log("Pre Products", products);
         setShow(true);
         setData(data);
+        console.log("Post Products", products);
     };
 
     if (error) {

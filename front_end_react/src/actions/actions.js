@@ -2,6 +2,6 @@
 
 export const addItem = (item, buyQuantity) => ({
     type: "ADD",
-    item,
+    item: Object.create(item),
     buyQuantity
 });

@@ -23,6 +23,7 @@ const ProductCard = (props) => {
         setBuyQuantity(v)
     };
 
+
     const addToCart = (e) => {
         console.log("data", data);
         props.dispatch(addItem(data, buyQuantity));
