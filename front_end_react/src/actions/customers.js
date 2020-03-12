@@ -9,3 +9,9 @@ export const loginCustomer = (response) => ({
 export const logoutCustomer = () => ({
     type: "LOGOUT"
 });
+
+export const registerCustomer = (response) => ({
+    type: "REGISTER",
+    customer: response.customer,
+    token: response.token
+});

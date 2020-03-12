@@ -5,7 +5,7 @@ import {Badge, Button, Card, Form} from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import "../../styles/styles.scss"
 import {connect} from "react-redux";
-import {addItem} from "../../actions/actions";
+import {addItem} from "../../actions/cart";
 
 const ProductCard = (props) => {
 

@@ -18,15 +18,11 @@ const Customer = sequelize.define("customer", {
         primaryKey: true,
         autoIncrement: true
     },
-    fname: {
+    firstName: {
         type: DataTypes.STRING(40),
         allowNull: false
     },
-    lname: {
-        type: DataTypes.STRING(40),
-        allowNull: false
-    },
-    username: {
+    lastName: {
         type: DataTypes.STRING(40),
         allowNull: false
     },
@@ -43,10 +39,14 @@ const Customer = sequelize.define("customer", {
         type: DataTypes.STRING(40),
         allowNull: false
     },
-    zipcode: {
+    eircode: {
         type: DataTypes.STRING(40),
     },
-    streetname: {
+    address1: {
+        type: DataTypes.STRING(40),
+        allowNull: false
+    },
+    address2: {
         type: DataTypes.STRING(40),
         allowNull: false
     },
@@ -54,7 +54,7 @@ const Customer = sequelize.define("customer", {
         type: DataTypes.STRING(40),
         allowNull: false
     },
-    county: {
+    state: {
         type: DataTypes.STRING(40),
         allowNull: false
     },

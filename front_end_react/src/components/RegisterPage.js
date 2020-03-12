@@ -8,13 +8,19 @@ import RegistrationValidator from "../validators/registrationValidator";
 import TextField from "./form_components/TextField";
 import "../styles/styles.scss"
 import CheckBoxField from "./form_components/CheckboxField";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
-const RegisterPage = () => {
+const RegisterPage = (props) => {
 
-    const formik = RegistrationValidator();
+    const formik = RegistrationValidator(props.dispatch);
 
     const fieldWidth = 3;
     const fieldOffset = 3;
+
+    if (props.customer.token) {
+        return <Redirect to={"/"}/>;
+    }
 
     return (
         <>
@@ -67,7 +73,7 @@ const RegisterPage = () => {
                     <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset}} controlId={"address1"}>
                         <TextField name="address1" label="Street Name" formik={formik}/>
                     </Form.Group>
-                    {/*/!*AddressfieldWidth*!/*/}
+                    {/*/!*Address2*!/*/}
                     <Form.Group as={Col} md={fieldWidth} controlId={"address2"}>
                         <TextField name="address2" label="Address Line 2" formik={formik}/>
                     </Form.Group>
@@ -77,9 +83,9 @@ const RegisterPage = () => {
                     <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset}} controlId={"city"}>
                         <TextField name="city" label="City" formik={formik}/>
                     </Form.Group>
-                    {/*/!*State*!/*/}
+                    {/*/!*County*!/*/}
                     <Form.Group as={Col} md={fieldWidth} controlId={"state"}>
-                        <TextField name="state" label="State" formik={formik}/>
+                        <TextField name="state" label="County" formik={formik}/>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
@@ -88,8 +94,8 @@ const RegisterPage = () => {
                         <TextField name="country" label="Country" formik={formik}/>
                     </Form.Group>
                     {/*ZIP*/}
-                    <Form.Group as={Col} md={fieldWidth} controlId={"zip"}>
-                        <TextField name="zip" label="ZIP" formik={formik}/>
+                    <Form.Group as={Col} md={fieldWidth} controlId={"eircode"}>
+                        <TextField name="eircode" label="Eircode" formik={formik}/>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
@@ -107,4 +113,12 @@ const RegisterPage = () => {
     )
 };
 
-export default RegisterPage;
+
+const mapStateToProps = (state) => {
+    return {
+        customer: state.customer
+    }
+};
+
+
+export default connect(mapStateToProps)(RegisterPage);

@@ -8,12 +8,12 @@ import {Redirect} from "react-router-dom";
 // local imports
 import TextField from "./form_components/TextField";
 import LoginValidator from "../validators/loginValidator";
-import loginRequest from "../requests/login"
+
 import "../styles/styles.scss"
 
 const LoginPage = (props) => {
 
-    const formik = LoginValidator(loginRequest, props.dispatch);
+    const formik = LoginValidator(props.dispatch);
 
     const fieldWidth = 3;
     const fieldOffset = 4;

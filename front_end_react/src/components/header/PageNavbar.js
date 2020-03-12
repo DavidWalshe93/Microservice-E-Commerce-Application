@@ -14,6 +14,7 @@ import Admin from "./Admin";
 const PageNavbar = (props) => {
 
     const [pageLoginState, setPageLoginState] = useState(<LoggedOut/>);
+    const [accountName, setAccountName] = useState(`${props.firstName} ${props.lastName}`);
 
     useEffect(() => {
         if (!!props.token) {
@@ -22,6 +23,14 @@ const PageNavbar = (props) => {
             setPageLoginState(<LoggedOut/>)
         }
     }, [props.token, props.isAdmin]);
+
+    useEffect(() => {
+        if (!!props.firstName) {
+            setAccountName(`${props.firstName} ${props.lastName}`)
+        } else {
+            setAccountName(null);
+        }
+    }, [props.firstName, props.lastName]);
 
     return (
         <>
@@ -32,6 +41,10 @@ const PageNavbar = (props) => {
                     <Nav className="mr-auto">
                         <Nav.Link as={NavLink} to={"/products"} activeClassName={"active"}>Products</Nav.Link>
                     </Nav>
+                    <Nav className="mr-auto">
+                        {!!accountName ? <Nav.Link as={NavLink} to={"/myAccount"}
+                                                   activeClassName={"active"}>{accountName}</Nav.Link> : null}
+                    </Nav>
                     {pageLoginState}
                 </Navbar.Collapse>
             </Navbar>
@@ -41,6 +54,8 @@ const PageNavbar = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        firstName: state.customer.firstName,
+        lastName: state.customer.lastName,
         token: state.customer.token,
         isAdmin: state.customer.isAdmin
     }

@@ -3,8 +3,10 @@
 // npm imports
 import {useFormik} from "formik";
 import * as Yup from "yup";
+import registerRequest from "../requests/register";
+import {registerCustomer} from "../actions/customers";
 
-const RegistrationValidator = () => {
+const RegistrationValidator = (dispatch) => {
     return useFormik({
         initialValues: {
             firstName: "",
@@ -18,7 +20,7 @@ const RegistrationValidator = () => {
             city: "",
             state: "",
             country: "",
-            zip: "",
+            eircode: "",
             isAdmin: false
         },
         validationSchema: Yup.object({
@@ -50,13 +52,18 @@ const RegistrationValidator = () => {
                 .required('State is required'),
             country: Yup.string()
                 .required('Country is required'),
-            zip: Yup.string()
+            eircode: Yup.string()
                 .required('Zip is required'),
         }),
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-        },
-    });
+        onSubmit: async (values) => {
+            console.log(values);
+            try {
+                await dispatch(registerCustomer(await registerRequest(values)));
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    })
 };
 
 export default RegistrationValidator;

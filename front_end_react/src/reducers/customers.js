@@ -18,6 +18,12 @@ const customerReducer = (state = userReducerDefaultState, action) => {
             return {
                 ...userReducerDefaultState
             };
+        case "REGISTER":
+            return {
+                ...state,
+                ...action.customer,
+                token: action.token
+            };
         default:
             return state;
     }

@@ -1,12 +1,13 @@
 // Created by David Walshe on 07/03/2020
 
 // npm imports
-
 import {useFormik} from "formik";
 import * as Yup from "yup";
+// Local imports
 import {loginCustomer} from "../actions/customers";
+import loginRequest from "../requests/login"
 
-const LoginValidator = (loginRequest, dispatch) => {
+const LoginValidator = (dispatch) => {
     return useFormik({
         initialValues: {
             email: "mytest@example.com",
@@ -25,7 +26,6 @@ const LoginValidator = (loginRequest, dispatch) => {
             } catch (e) {
                 console.log(e)
             }
-
         },
     });
 };
