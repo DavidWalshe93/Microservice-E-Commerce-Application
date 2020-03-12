@@ -2,12 +2,12 @@
 
 // npm imports
 import React from "react";
-import {Form, Button, Col} from "react-bootstrap"
-
+import {Button, Col, Form} from "react-bootstrap"
 // Local imports
 import RegistrationValidator from "../validators/registrationValidator";
 import TextField from "./form_components/TextField";
 import "../styles/styles.scss"
+import CheckBoxField from "./form_components/CheckboxField";
 
 const RegisterPage = () => {
 
@@ -93,8 +93,12 @@ const RegisterPage = () => {
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
+                    {/*Admin Flag*/}
+                    <Form.Group as={Col} md={{span: fieldWidth, offset: fieldOffset}} controlId={"isAdmin"}>
+                        <CheckBoxField name={"isAdmin"} label={"Is this an admin account?"} formik={formik}/>
+                    </Form.Group>
                     {/*Submit button*/}
-                    <Form.Group as={Col} md={{span: fieldWidth * 2, offset: fieldOffset}} controlId={"submitRow"}>
+                    <Form.Group as={Col} md={{span: fieldWidth * 2, offset: fieldOffset}} controlId={"submit"}>
                         <Button className={"create-account-button"} type={"submit"}>Create account</Button>
                     </Form.Group>
                 </Form.Row>

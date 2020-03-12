@@ -21,7 +21,7 @@ const PageNavbar = (props) => {
         } else {
             setPageLoginState(<LoggedOut/>)
         }
-    }, [props.token]);
+    }, [props.token, props.isAdmin]);
 
     return (
         <>

@@ -18,7 +18,8 @@ const RegistrationValidator = () => {
             city: "",
             state: "",
             country: "",
-            zip: ""
+            zip: "",
+            isAdmin: false
         },
         validationSchema: Yup.object({
             firstName: Yup.string()

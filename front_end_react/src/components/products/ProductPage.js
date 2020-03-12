@@ -19,8 +19,8 @@ const ProductPage = () => {
 
     // Hooks
     useEffect(() => {
-        getProductData(setProducts, error, setError);
-        console.log("Init Product", products)
+        getProductData(setProducts, error, setError).then();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Show toast notification.
