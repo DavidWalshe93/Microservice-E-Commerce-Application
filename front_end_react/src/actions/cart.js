@@ -5,3 +5,8 @@ export const addItem = (item, buyQuantity) => ({
     item: Object.assign({}, item),
     buyQuantity
 });
+
+export const removeItem = (item) => ({
+    type: "REMOVE",
+    item: item
+});

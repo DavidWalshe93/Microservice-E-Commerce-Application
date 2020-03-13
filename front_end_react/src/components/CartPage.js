@@ -1,22 +1,21 @@
 // Created by David Walshe on 25/02/2020
 
 // npm import
-import React from "react";
-import {Button, Col, Container, Image, Table} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Col, Container, Table} from "react-bootstrap";
 // Local imports
 import "../styles/styles.scss"
+import CartEntry from "./CartEntry";
+import {connect} from "react-redux";
 
-const CartPage = () => {
 
-    const getTdProps = () => ({
-        style: {
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-        }
-    });
+const CartPage = (props) => {
 
-    console.log(getTdProps());
+    const [items, setItems] = useState(props.cart.items);
+
+    useEffect(() => {
+        setItems(props.cart.items);
+    }, [props.cart.items]);
 
     return (
         <>
@@ -35,15 +34,9 @@ const CartPage = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td className={"table-item"}>1</td>
-                            <td width={"50px"}><Image src={"/images/car1.jpeg"}/></td>
-                            <td className={"table-item"}>Car 1</td>
-                            <td className={"table-item"}>€10.45</td>
-                            <td className={"table-item"}>10</td>
-                            <td className={"table-item"}>€100.45</td>
-                            <td width={"30px"} className={"table-item"}><Button variant={"danger"}>Remove</Button></td>
-                        </tr>
+                        {items.map((item, index) => (
+                            <CartEntry key={index} item={item} index={index}/>
+                        ))}
                         </tbody>
                     </Table>
                 </Col>
@@ -53,4 +46,10 @@ const CartPage = () => {
     )
 };
 
-export default CartPage;
+const mapStateToProps = (state) => {
+    return {
+        cart: state.cart
+    }
+};
+
+export default connect(mapStateToProps)(CartPage);

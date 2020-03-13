@@ -5,7 +5,7 @@
 }
 
 .toast.show {
-  min-width: 300px; /* Set a default minimum width */
+  min-width: 350px; /* Set a default minimum width */
   margin-left: -150px; /* Divide value of min-width by 2 */
   background-color: $dark-grey; /* Black background color */
   color: #ffffff; /* White text color */

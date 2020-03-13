@@ -26,6 +26,14 @@ const cartReducer = (state = cartReducerDefaultState, action) => {
                     items: [...state.items, action.item]
                 }
             }
+        case "REMOVE":
+            return {
+                items: [...state.items.filter((item) => {
+                    if (item.productID !== action.item.productID) {
+                        return item;
+                    }
+                })]
+            };
         default:
             return state;
     }
