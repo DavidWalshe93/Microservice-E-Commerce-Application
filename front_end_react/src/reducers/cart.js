@@ -6,7 +6,6 @@ const cartReducerDefaultState = {
 };
 
 const cartReducer = (state = cartReducerDefaultState, action) => {
-    console.log(action.item);
     switch (action.type) {
         case "ADD":
             const itemExists = state.items.some((item) => item.productID === action.item.productID);

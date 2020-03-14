@@ -23,6 +23,7 @@ const LoginValidator = (dispatch) => {
         onSubmit: async (values) => {
             try {
                 await dispatch(loginCustomer(await loginRequest(values.email, values.password)));
+
             } catch (e) {
                 console.log(e)
             }

@@ -1,13 +1,21 @@
 // Created by David Walshe on 09/03/2020
 
 // Request Data from catalog service
+import serviceRequest from "../baseRequest";
+
 const getProductData = async (setProducts, error, setError) => {
     if (!error) {
-        const response = await fetch("http://localhost:3002/getProducts", {
-            method: "GET"
+
+        const response = await serviceRequest({
+            service: "catalog",
+            endpoint: "getProducts",
+            method: "GET",
+            body: null
         });
+
         try {
-            let products = await response.json();
+            let products = response;
+            console.log(products);
 
             // Prepend images folder to image path.
             products.map((item) => {

@@ -1,22 +1,19 @@
 // Created by David Walshe on 08/03/2020
 
+import serviceRequest from "../baseRequest";
+
 // Handles logout requests to the customer service
 const logoutRequest = async (token) => {
-    const response = await fetch("http://localhost:3001/logout", {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
+
+    return serviceRequest({
+        service: "customer",
+        endpoint: "logout",
+        method: "POST",
         headers: {
-            "Accept": "application/json",
-            'Content-Type': 'application/json;charset=UTF-8',
             "Authorization": `Bearer ${token}`
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer'
+        }
     });
 
-    return response.json();
 };
 
 export default logoutRequest;

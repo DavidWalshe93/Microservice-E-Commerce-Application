@@ -15,7 +15,6 @@ const CartEntry = (props) => {
         /**
          *  Callback to delete a single item from cart.
          */
-
         if (!props.customerID) {                                // User logged in.
             await updateLocalState(props.item.productID)
         } else {                                                // User not logged in.
