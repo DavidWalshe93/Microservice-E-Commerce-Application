@@ -10,11 +10,16 @@ import addToServiceCart from "../../requests/addToCart";
 
 const ProductCard = (props) => {
 
+    // Deconstruct params
     const {data, displayConfirmation} = {...props};
 
+    // Setup component state
     const [buyQuantity, setBuyQuantity] = useState(1);
 
     const updatePrice = (e) => {
+        /**
+         * Callback to update shown price of item when selected quantity changes.
+         */
         let {max, min, value} = e.target;
         max = parseInt(max);
         min = parseInt(min);
@@ -24,6 +29,9 @@ const ProductCard = (props) => {
     };
 
     const addToCart = async (e) => {
+        /**
+         * Callback method when buy button is clicked.
+         */
         const item = getItem();
 
         displayConfirmation(data, buyQuantity);
@@ -36,6 +44,9 @@ const ProductCard = (props) => {
     };
 
     const getItem = () => {
+        /**
+         * Helper method to return item data to add to cart.
+         */
         return {
             ...data,
             quantity: parseInt(buyQuantity)
