@@ -24,10 +24,31 @@ const ProductCard = (props) => {
 
 
     const addToCart = (e) => {
+        displayConfirmation(data, buyQuantity);
+        if (!props.customer.customerID) {
+            updateLocalState()
+        } else {
+            updateServiceState()
+        }
+    };
+
+    const updateLocalState = () => {
+        /**
+         * Updates the local state if a user is not logged in.
+         */
+        console.log("Not Logged In");
         props.dispatch(addItem(data, parseInt(buyQuantity)));
         displayConfirmation(data, buyQuantity);
-        setBuyQuantity(1)
+        setBuyQuantity(1);
     };
+
+    const updateServiceState = () => {
+        /**
+         * Updates the service database if the user is logged in.
+         */
+        console.log("Logged In")
+    };
+
 
     return (
         <>
