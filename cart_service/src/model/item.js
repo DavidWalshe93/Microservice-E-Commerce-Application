@@ -39,11 +39,6 @@ const Item = sequelize.define("cart", {
         allowNull: false,
         defaultValue: 99999.99
     },
-    totalPrice: {
-        type: DataTypes.DECIMAL(7, 2),
-        allowNull: false,
-        defaultValue: 0
-    },
     image: {
         type: DataTypes.STRING,
         allowNull: false,

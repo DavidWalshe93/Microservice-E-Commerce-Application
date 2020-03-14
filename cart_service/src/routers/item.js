@@ -29,12 +29,10 @@ router.post("/add", async (req, res) => {
         } else {
             // Else get the matching row and update it.
             existingItem.quantity += item.quantity;
-            existingItem.totalPrice = existingItem.price * existingItem.quantity;
 
             // Commit the row updates.
             await Item.update({
                 quantity: existingItem.quantity,
-                totalPrice: existingItem.price * existingItem.quantity
             }, {
                 where: {itemID: existingItem.itemID}
             });

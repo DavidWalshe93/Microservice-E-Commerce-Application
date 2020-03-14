@@ -6,6 +6,7 @@ const cartReducerDefaultState = {
 };
 
 const cartReducer = (state = cartReducerDefaultState, action) => {
+    console.log(action.item);
     switch (action.type) {
         case "ADD":
             const itemExists = state.items.some((item) => item.productID === action.item.productID);
@@ -13,7 +14,7 @@ const cartReducer = (state = cartReducerDefaultState, action) => {
                 return {
                     items: [...state.items.map((item) => {
                         if (item.productID === action.item.productID) {
-                            item.quantity += parseInt(action.buyQuantity);
+                            item.quantity += action.item.quantity;
                             return item;
                         } else {
                             return item;
@@ -21,7 +22,6 @@ const cartReducer = (state = cartReducerDefaultState, action) => {
                     })]
                 };
             } else {
-                action.item.quantity = action.buyQuantity;
                 return {
                     items: [...state.items, action.item]
                 }

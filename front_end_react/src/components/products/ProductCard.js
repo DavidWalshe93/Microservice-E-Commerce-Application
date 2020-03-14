@@ -6,6 +6,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import "../../styles/styles.scss"
 import {connect} from "react-redux";
 import {addItem} from "../../actions/cart";
+import addToServiceCart from "../../requests/addToCart";
 
 const ProductCard = (props) => {
 
@@ -22,31 +23,48 @@ const ProductCard = (props) => {
         setBuyQuantity(v)
     };
 
+    const addToCart = async (e) => {
+        const item = getItem();
 
-    const addToCart = (e) => {
         displayConfirmation(data, buyQuantity);
+        setBuyQuantity(1);
         if (!props.customer.customerID) {
-            updateLocalState()
+            await updateLocalState(item)
         } else {
-            updateServiceState()
+            await updateServiceState(item)
         }
     };
 
-    const updateLocalState = () => {
+    const getItem = () => {
+        return {
+            ...data,
+            quantity: parseInt(buyQuantity)
+        }
+    };
+
+    const updateLocalState = (item) => {
         /**
          * Updates the local state if a user is not logged in.
          */
-        console.log("Not Logged In");
-        props.dispatch(addItem(data, parseInt(buyQuantity)));
-        displayConfirmation(data, buyQuantity);
-        setBuyQuantity(1);
+        props.dispatch(addItem(item));
     };
 
-    const updateServiceState = () => {
+    const updateServiceState = async (item) => {
         /**
          * Updates the service database if the user is logged in.
          */
-        console.log("Logged In")
+        try {
+            const response = await addToServiceCart(props.customer.customerID, item);
+            updateLocalState({
+                productID: response.productID,
+                name: response.name,
+                price: response.price,
+                quantity: response.quantity,
+                image: response.image,
+            });
+        } catch (e) {
+            console.log(e)
+        }
     };
 
 
@@ -101,7 +119,9 @@ const ProductCard = (props) => {
 
                 <Button
                     // onClick={() => displayConfirmation(data)}
-                    onClick={addToCart}
+                    onClick={async (e) => {
+                        await addToCart(e);
+                    }}
                     className={"mt-auto font-weight-bold"}
                     variant={"success"}
                     block
