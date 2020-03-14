@@ -24,8 +24,9 @@ const ProductCard = (props) => {
 
 
     const addToCart = (e) => {
-        props.dispatch(addItem(data, buyQuantity));
-        displayConfirmation(data, buyQuantity)
+        props.dispatch(addItem(data, parseInt(buyQuantity)));
+        displayConfirmation(data, buyQuantity);
+        setBuyQuantity(1)
     };
 
     return (

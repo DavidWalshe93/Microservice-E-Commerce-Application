@@ -23,9 +23,8 @@ const CartIcon = (props) => {
         let price = 0;
 
         items.forEach((item) => {
-            console.log(parseInt(item.quantity));
-            qty += parseInt(item.quantity);
-            price += (parseInt(item.quantity) * item.price);
+            qty += item.quantity;
+            price += (item.quantity * item.price);
         });
         setQuantity(qty);
         setPrice(price.toFixed(2));
