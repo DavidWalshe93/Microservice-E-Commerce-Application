@@ -21,7 +21,7 @@ const Item = sequelize.define("cart", {
         allowNull: false
     },
     productID: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     name: {

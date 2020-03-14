@@ -61,7 +61,7 @@ router.delete("/cart/:custId/items/:id", async (req, res) => {
             }
         });
 
-        res.status(200).send();
+        res.status(200).send({productID});
     } catch (e) {
         console.log(e);
         res.status(400).send()

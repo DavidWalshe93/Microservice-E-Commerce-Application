@@ -55,14 +55,14 @@ const ProductCard = (props) => {
 
     const updateLocalState = (item) => {
         /**
-         * Updates the local state if a user is not logged in.
+         * Updates the local state of React if a item is added to the cart.
          */
         props.dispatch(addItem(item));
     };
 
     const updateServiceState = async (item) => {
         /**
-         * Updates the service database if the user is logged in.
+         * Updates the service database if an item is added to the cart and a user is logged in.
          */
         try {
             const response = await addToServiceCart(props.customer.customerID, item);
@@ -70,7 +70,7 @@ const ProductCard = (props) => {
                 productID: response.productID,
                 name: response.name,
                 price: response.price,
-                quantity: response.quantity,
+                quantity: item.quantity,        // Server has absolute quantity, we only want to add the relative increase in quantity to the current state.
                 image: response.image,
             });
         } catch (e) {

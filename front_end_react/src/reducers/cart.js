@@ -29,7 +29,7 @@ const cartReducer = (state = cartReducerDefaultState, action) => {
         case "REMOVE":
             return {
                 items: [...state.items.filter((item) => {
-                    if (item.productID !== action.item.productID) {
+                    if (item.productID !== action.productID) {
                         return item;
                     }
                 })]

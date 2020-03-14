@@ -5,7 +5,7 @@ export const addItem = (item) => ({
     item: Object.assign({}, item),
 });
 
-export const removeItem = (item) => ({
+export const removeItem = (productID) => ({
     type: "REMOVE",
-    item: item
+    productID
 });

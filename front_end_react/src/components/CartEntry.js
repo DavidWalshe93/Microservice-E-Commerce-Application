@@ -6,27 +6,36 @@ import React from "react";
 import {connect} from "react-redux";
 // Local imports
 import {removeItem} from "../actions/cart";
+import removeFromServiceCart from "../requests/cart/removeFromCart";
 
 
 const CartEntry = (props) => {
 
-    // Callback to delete item from cart
-    const removeFromCart = (e) => {
+    const removeFromCart = async () => {
+        /**
+         *  Callback to delete a single item from cart.
+         */
 
-        if (!props.customer.customerID) {
-            updateLocalState(props.item)
-        } else {
-            updateServiceState(props.item)
+        if (!props.customerID) {                                // User logged in.
+            await updateLocalState(props.item.productID)
+        } else {                                                // User not logged in.
+            await updateServiceState(props.item.productID, props.customerID)
         }
-
     };
 
-    const updateLocalState = (item) => {
-        props.dispatch(removeItem(item))
+    const updateLocalState = async (productID) => {
+        /**
+         * Updates the local state of React for when a item is deleted.
+         */
+        props.dispatch(removeItem(productID))
     };
 
-    const updateServiceState = (item) => {
-
+    const updateServiceState = async (productID, customerID) => {
+        /**
+         * Updates the service database when an item is deleted and a user is logged in.
+         */
+        const response = await removeFromServiceCart(customerID, productID);
+        await updateLocalState(parseInt(response.productID))
     };
 
     return (
@@ -39,7 +48,9 @@ const CartEntry = (props) => {
             <td className={"table-item"}>€{(props.item.price * props.item.quantity).toFixed(2)}</td>
             <td width={"30px"} className={"table-item"}>
                 <Button
-                    onClick={removeFromCart}
+                    onClick={async (e) => {
+                        await removeFromCart()
+                    }}
                     variant={"danger"}
                 >Remove
                 </Button>
@@ -51,8 +62,7 @@ const CartEntry = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        customer: state.customer,
-        cart: state.cart
+        customerID: state.customer.customerID,
     }
 };
 
