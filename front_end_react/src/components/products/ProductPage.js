@@ -6,7 +6,7 @@ import {Col, Container, Row} from "react-bootstrap";
 // local imports
 import ProductCard from "./ProductCard";
 import BuyConfirmation from "../BuyConfirmation";
-import getProductData from "../../requests/getProductData";
+import getProductData from "../../requests/product/getProductData";
 
 const ProductPage = () => {
 

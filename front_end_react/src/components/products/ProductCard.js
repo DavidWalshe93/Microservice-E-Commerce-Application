@@ -6,7 +6,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import "../../styles/styles.scss"
 import {connect} from "react-redux";
 import {addItem} from "../../actions/cart";
-import addToServiceCart from "../../requests/addToCart";
+import addToServiceCart from "../../requests/cart/addToCart";
 
 const ProductCard = (props) => {
 

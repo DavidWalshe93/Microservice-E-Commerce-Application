@@ -5,7 +5,7 @@ import {useFormik} from "formik";
 import * as Yup from "yup";
 // Local imports
 import {loginCustomer} from "../actions/customers";
-import loginRequest from "../requests/login"
+import loginRequest from "../requests/customer/login"
 
 const LoginValidator = (dispatch) => {
     return useFormik({

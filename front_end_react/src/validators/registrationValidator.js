@@ -3,7 +3,7 @@
 // npm imports
 import {useFormik} from "formik";
 import * as Yup from "yup";
-import registerRequest from "../requests/register";
+import registerRequest from "../requests/customer/register";
 import {registerCustomer} from "../actions/customers";
 
 const RegistrationValidator = (dispatch) => {

@@ -12,7 +12,21 @@ const CartEntry = (props) => {
 
     // Callback to delete item from cart
     const removeFromCart = (e) => {
-        props.dispatch(removeItem(props.item))
+
+        if (!props.customer.customerID) {
+            updateLocalState(props.item)
+        } else {
+            updateServiceState(props.item)
+        }
+
+    };
+
+    const updateLocalState = (item) => {
+        props.dispatch(removeItem(item))
+    };
+
+    const updateServiceState = (item) => {
+
     };
 
     return (
@@ -37,6 +51,7 @@ const CartEntry = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        customer: state.customer,
         cart: state.cart
     }
 };

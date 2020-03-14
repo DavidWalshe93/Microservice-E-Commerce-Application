@@ -7,7 +7,7 @@ import React from "react";
 import {Redirect} from "react-router-dom"
 import {connect} from "react-redux"
 // local imports
-import logoutRequest from "../requests/logout";
+import logoutRequest from "../requests/customer/logout";
 import {logoutCustomer} from "../actions/customers"
 
 class LogoutPage extends React.Component {
