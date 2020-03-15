@@ -23,6 +23,10 @@ const Order = sequelize.define("order", {
     saledate: {
         type: DataTypes.STRING(40),
         allowNull: false
+    },
+    orderDetails: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     timestamps: false

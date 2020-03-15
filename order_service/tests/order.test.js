@@ -9,23 +9,20 @@ const Order = require("../src/model/order");
 const {setupOrderTable} = require("./fixtures/db_setup");
 
 beforeAll(() => {
-    return setupOrderTable("order")
+    return setupOrderTable("order");
 });
 
-
-test("Should return all orders", async () => {
-    await request(app)
-        .get("/getOrders")
-        .send()
-        .expect(200)
-});
-
-
-test("Should return a specified order based on its orderID", async () => {
-    await request(app)
-        .get("/getOrder/1")
+test("Should return a specified order based on the customerID", async () => {
+    const response = await request(app)
+        .get("/getOrders/1")
         .send()
         .expect(200);
+
+    expect(response.body.length).toBe(3);
+
+    response.body.forEach((order) => {
+        expect(order.orderDetails.length).toBe(2)
+    });
 });
 
 test("Should create a new Order", async () => {
@@ -34,8 +31,24 @@ test("Should create a new Order", async () => {
     const response = await request(app)
         .post("/newOrder")
         .send({
-            customerID: 100,
-            saledate: "16-02-2020"
+            customerID: 1,
+            saledate: "16-02-2020",
+            orderDetails: [
+                {
+                    productID: 1,
+                    name: "car1",
+                    quantity: 100,
+                    price: 2,
+                    image: "fake.jpeg"
+                },
+                {
+                    productID: 2,
+                    name: "car2",
+                    quantity: 200,
+                    price: 20,
+                    image: "fake2.jpeg"
+                }
+            ]
         })
         .expect(201);
 
@@ -49,10 +62,28 @@ test("Should create a new Order", async () => {
     // Test the object exists in the database
     expect(order).not.toBeNull();
 
+    order.orderDetails = JSON.parse(order.orderDetails);
+
     // Test the correct information was saved about the order.
     expect(order).toMatchObject({
-        customerID: 100,
-        saledate: "16-02-2020"
+        customerID: 1,
+        saledate: "16-02-2020",
+        orderDetails: [
+            {
+                productID: 1,
+                name: "car1",
+                quantity: 100,
+                price: 2,
+                image: "fake.jpeg"
+            },
+            {
+                productID: 2,
+                name: "car2",
+                quantity: 200,
+                price: 20,
+                image: "fake2.jpeg"
+            }
+        ]
     });
 
 });

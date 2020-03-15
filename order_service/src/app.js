@@ -5,7 +5,6 @@ const express = require("express");
 
 // Import Routers for express
 const Order = require("./routers/order");
-const OrderDetails = require("./routers/orderDetails");
 
 // Create express instance
 const app = express();
@@ -15,7 +14,6 @@ app.use(express.json());
 
 // Add routers to express
 app.use(Order);
-app.use(OrderDetails);
 
 // Export for use by index.js and tests via jest
 module.exports = app;
