@@ -42,8 +42,9 @@ const PageNavbar = (props) => {
                         <Nav.Link as={NavLink} to={"/products"} activeClassName={"active"}>Products</Nav.Link>
                     </Nav>
                     <Nav className="mr-auto">
-                        {!!accountName ? <Nav.Link as={NavLink} to={"/myAccount"}
-                                                   activeClassName={"active"}>{accountName}</Nav.Link> : null}
+                        {!!accountName ? <Nav.Link as={NavLink} to={"/orders"}
+                                                   activeClassName={"active"}>Logged in
+                            as {accountName}</Nav.Link> : null}
                     </Nav>
                     {pageLoginState}
                 </Navbar.Collapse>

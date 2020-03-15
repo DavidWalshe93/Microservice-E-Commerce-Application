@@ -2,6 +2,7 @@
 
 //NPM modules
 const express = require("express");
+const cors = require("cors");
 
 // Import Routers for express
 const Order = require("./routers/order");
@@ -11,6 +12,7 @@ const app = express();
 
 // Adds json "body" field to the "request" parameter via middleware.
 app.use(express.json());
+app.use(cors());
 
 // Add routers to express
 app.use(Order);

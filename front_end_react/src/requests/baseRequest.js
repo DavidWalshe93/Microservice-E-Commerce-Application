@@ -29,6 +29,8 @@ const serviceRequest = async (options) => {
     // Deconstruct options
     let {service, endpoint, method, headers, body} = {...options};
 
+    console.log(options);
+
     // Pre-processing
     service = service.toLowerCase();
     method = method.toUpperCase();

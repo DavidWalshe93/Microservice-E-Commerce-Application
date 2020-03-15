@@ -1,35 +1,105 @@
 // Created by David Walshe on 15/03/2020
 
-import {Table} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
+import getOrderData from "../../requests/order/getOrderData";
+import {connect} from "react-redux";
+import {MDBBtn, MDBDataTable} from 'mdbreact';
 
 const OrderTable = (props) => {
 
-    const [orders, setOrders] = useState([]);
+    const customerID = props.customerID;
+
+    const [orders, setOrders] = useState({});
+    const [tableData, setTableData] = useState({});
     const [error, setError] = useState(undefined);
 
+    // Fetch order data on page load.
     useEffect(() => {
-        getOrderData(setOrders, error, setError)
+        getOrderData(setOrders, customerID, error, setError)
     }, []);
 
+    // Column setup for Table
+    const columns = [
+        {
+            label: 'Order No.',
+            field: 'orderNo',
+            sort: 'asc',
+            width: 100
+        },
+        {
+            label: 'Sale Date',
+            field: 'saleDate',
+            sort: 'asc',
+            width: 220
+        },
+        {
+            label: "Order Size",
+            field: "orderSize",
+            sort: "asc",
+            width: 220
+        },
+        {
+            label: 'Order Total',
+            field: 'orderTotal',
+            sort: 'asc',
+            // width: 400,
+        },
+        {
+            label: '',
+            field: 'button',
+            sort: 'asc',
+            width: 135,
+            align: "center"
+        },
+    ];
+
+    useEffect(() => {
+        console.log("ORDERS", orders);
+        if (Object.keys(orders).length > 0) {
+            // Create the table rows.
+            const rows = orders.map((order) => {
+                let orderTotal = 0;
+                let orderSize = 0;
+                order.orderDetails.forEach((item) => {
+                    orderSize += item.quantity;
+                    orderTotal += (item.quantity * item.price);
+                });
+                return {
+                    orderNo: `${order.orderID}`,
+                    saleDate: `${order.saledate}`,
+                    orderSize: `${orderSize}`,
+                    orderTotal: `${orderTotal}`,
+                    button: <MDBBtn color="light-blue" size="sm" onClick={(e) => console.log(order)}>Order
+                        Info</MDBBtn>,
+                }
+            });
+
+            // Create the table data object
+            setTableData({
+                columns: columns,
+                rows: rows
+            });
+        }
+    }, [orders]);
+
+
     return (
-        <Table striped bordered hover size={"sm"} variant="dark">
-            <thead>
-            <tr>
-                <th className={"table-header"}>#</th>
-                <th className={"table-header"}>Purchase Date</th>
-                <th className={"table-header"}>Total</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            {orders.map((order, index) => (
-                console.log(order)
-                // <CartEntry key={index} item={item} index={index}/>
-            ))}
-            </tbody>
-        </Table>
+        <>
+            <MDBDataTable
+                striped
+                bordered
+                small
+                scrollY
+                maxHeight={600}
+                data={tableData}/>
+        </>
     )
 };
 
-export default OrderTable;
+const mapStateToProps = (state) => {
+    return {
+        customerID: state.customer.customerID
+    }
+};
+
+export default connect(mapStateToProps)(OrderTable);

@@ -9,7 +9,6 @@ const Admin = () => {
     return (
         <Nav>
             <Nav.Link as={NavLink} to={"/newProduct"} activeClassName={"active"}>Register Product</Nav.Link>
-            <Nav.Link as={NavLink} to={"/myAccount"} activeClassName={"active"}>My Account</Nav.Link>
             <Nav.Link as={NavLink} to={"/logout"} activeClassName={"active"}>Logout</Nav.Link>
         </Nav>
     )

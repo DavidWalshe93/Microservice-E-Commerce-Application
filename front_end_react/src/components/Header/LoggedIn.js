@@ -12,7 +12,7 @@ const LoggedIn = () => {
             <Navbar.Brand as={Link} to={"/cart"}>
                 <CartIcon/>
             </Navbar.Brand>
-            <Nav.Link as={NavLink} to={"/myAccount"} activeClassName={"active"}>My Account</Nav.Link>
+            <Nav.Link as={NavLink} to={"/orders"} activeClassName={"active"}>My Orders</Nav.Link>
             <Nav.Link as={NavLink} to={"/logout"} activeClassName={"active"}>Logout</Nav.Link>
         </Nav>
     )

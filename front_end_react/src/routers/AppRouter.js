@@ -11,7 +11,6 @@ import RegisterPage from "../components/RegisterPage";
 import NotFoundPage from "../components/NotFoundPage";
 import Header from "../components/Header/Header";
 import NewProductPage from "../components/NewProductPage";
-import MyAccountPage from "../components/MyAccountPage";
 import LogoutPage from "../components/LogoutPage";
 import OrderPage from "../components/OrderPage/OrderPage";
 
@@ -26,7 +25,6 @@ const AppRouter = () => (
                 <Route path={"/login"} component={LoginPage}/>
                 <Route path={"/register"} component={RegisterPage}/>
                 <Route path={"/newProduct"} component={NewProductPage}/>
-                <Route path={"/myAccount"} component={MyAccountPage}/>
                 <Route path={"/orders"} component={OrderPage}/>
                 <Route path={"/logout"} component={LogoutPage}/>
                 <Route component={NotFoundPage}/>

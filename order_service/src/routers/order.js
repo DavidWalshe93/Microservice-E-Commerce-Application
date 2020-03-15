@@ -10,6 +10,7 @@ const router = new express.Router();
 
 // Get all order items
 router.get(["/getOrders/:id"], async (req, res) => {
+    console.log("/getOrders", new Date().getTime());
     const customerID = req.params.id;
     try {
         const orders = await Order.findAll({
