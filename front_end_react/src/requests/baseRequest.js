@@ -50,7 +50,7 @@ const serviceRequest = async (options) => {
     const response = await fetch(`http://localhost:${services[service]}/${endpoint}`, requestContent);
 
     // Return JSON response
-    return response.json();
+    return await response.json();
 };
 
 export default serviceRequest;

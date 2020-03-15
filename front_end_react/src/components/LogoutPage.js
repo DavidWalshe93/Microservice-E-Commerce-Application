@@ -9,19 +9,30 @@ import {connect} from "react-redux"
 // local imports
 import logoutRequest from "../requests/customer/logout";
 import {logoutCustomer} from "../actions/customers"
+import {removeAll} from "../actions/cart";
 
 class LogoutPage extends React.Component {
 
     state = {
         token: this.props.token,
-        dispatch: this.props.dispatch
+        dispatch: this.props.dispatch,
+        content: <></>
     };
 
     async componentDidMount() {
 
+        // When logging out, wait until the customer data is cleared before returning to the
+        // login page.
         if (!!this.state.token) {
             try {
-                this.state.dispatch(logoutCustomer(await logoutRequest(this.state.token)));
+                this.state.dispatch(removeAll());
+                this.state.dispatch(
+                    logoutCustomer(
+                        await logoutRequest(this.state.token).then(() => {
+                            this.state.content = <Redirect to={"/login"}/>
+                        })
+                    )
+                );
             } catch (e) {
                 console.log("error", e)
             }
@@ -29,13 +40,14 @@ class LogoutPage extends React.Component {
     }
 
     render() {
-        return <Redirect to={"/login"}/>;
+        return this.state.content;
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        token: state.customer.token
+        token: state.customer.token,
+        cart: state.cart
     }
 };
 

@@ -21,7 +21,7 @@ const CartIcon = (props) => {
     useEffect(() => {
         let qty = 0;
         let price = 0;
-
+        // console.log("ITEMS", items);
         items.forEach((item) => {
             qty += item.quantity;
             price += (item.quantity * item.price);

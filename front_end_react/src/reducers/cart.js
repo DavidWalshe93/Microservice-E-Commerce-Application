@@ -25,6 +25,10 @@ const cartReducer = (state = cartReducerDefaultState, action) => {
                     items: [...state.items, action.item]
                 }
             }
+        case "SYNC":
+            return {
+                items: action.items,
+            };
         case "REMOVE":
             return {
                 items: [...state.items.filter((item) => {
@@ -32,6 +36,10 @@ const cartReducer = (state = cartReducerDefaultState, action) => {
                         return item;
                     }
                 })]
+            };
+        case "REMOVE_ALL":
+            return {
+                items: []
             };
         default:
             return state;

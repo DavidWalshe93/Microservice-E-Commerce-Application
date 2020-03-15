@@ -1,7 +1,7 @@
 // Created by David Walshe on 25/02/2020
 
 // npm imports
-import React from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux"
 import {Button, Col, Form} from "react-bootstrap"
 import {Redirect} from "react-router-dom";
@@ -10,6 +10,8 @@ import TextField from "./form_components/TextField";
 import LoginValidator from "../validators/loginValidator";
 
 import "../styles/styles.scss"
+import {syncCart} from "../actions/cart";
+import syncLocalCartToService from "../requests/cart/syncLocalCartToService";
 
 const LoginPage = (props) => {
 
@@ -17,6 +19,28 @@ const LoginPage = (props) => {
 
     const fieldWidth = 3;
     const fieldOffset = 4;
+
+    useEffect(() => {
+        if (!!props.customer.token) {
+            console.log("token", props.customer.token);
+            const items = props.cart.items.map((item) => {
+                return {
+                    ...item,
+                    customerID: props.customer.customerID
+                }
+            });
+
+            console.log("BODY", items);
+            syncLocalCartToService(syncLocalCart, items, props.customer.customerID);
+
+
+            console.log("I am synced and logged in");
+        }
+    }, [props.customer]);
+
+    const syncLocalCart = (data) => {
+        props.dispatch(syncCart(data));
+    };
 
     if (props.customer.token) {
         return <Redirect to={"/"}/>;
@@ -57,7 +81,8 @@ const LoginPage = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        customer: state.customer
+        customer: state.customer,
+        cart: state.cart
     }
 };
 

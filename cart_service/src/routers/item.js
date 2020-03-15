@@ -118,24 +118,30 @@ router.get("/cart/:custId/items", async (req, res) => {
 
 // Adds numerous items to the database in one transaction.
 router.post("/bulkAdd", async (req, res) => {
-    const items = req.body;
+
+    console.log(req.body);
+    const customerID = req.body.customerID;
+    const items = req.body.items;
+    const keys = Object.keys(items);
 
     // Update the database for each item.
-    for (let i = 0; i < items.length; i++) {
+    for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        console.log(items[key]);
         try {
             // Check if the item exists in the database already
             const existingItem = await Item.findOne({
                 where: {
-                    productID: items[i].productID,
-                    customerID: items[i].customerID
+                    productID: items[key].productID,
+                    customerID: items[key].customerID
                 }
             });
             if (!existingItem) {
                 // Create a new item if it does not already exist.
-                await Item.create(items[i]);
+                await Item.create(items[key]);
             } else {
                 // Else get the matching row and update it.
-                existingItem.quantity += items[i].quantity;
+                existingItem.quantity += items[key].quantity;
 
                 // Commit the row updates.
                 await Item.update({
@@ -149,7 +155,6 @@ router.post("/bulkAdd", async (req, res) => {
             res.status(400).send(e);
         }
     }
-    let customerID = items[0].customerID;
 
     res.status(200).send(await getAllItems(customerID))
 });
