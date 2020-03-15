@@ -5,8 +5,8 @@ import {Button, Image} from "react-bootstrap";
 import React from "react";
 import {connect} from "react-redux";
 // Local imports
-import {removeItem} from "../actions/cart";
-import removeFromServiceCart from "../requests/cart/removeFromCart";
+import {removeItem} from "../../actions/cart";
+import removeFromServiceCart from "../../requests/cart/removeFromCart";
 
 
 const CartEntry = (props) => {

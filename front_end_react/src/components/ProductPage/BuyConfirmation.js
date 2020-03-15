@@ -3,7 +3,7 @@
 // npm import
 import React from "react";
 import {Toast} from "react-bootstrap";
-import "../styles/styles.scss";
+import "../../styles/styles.scss";
 
 const BuyConfirmation = ({data, quantity, show, setShow}) => {
 

@@ -14,6 +14,8 @@ import syncLocalCartToService from "../requests/cart/syncLocalCartToService";
 
 const LoginPage = (props) => {
 
+    const returnPath = !!props.location.state ? props.location.state.returnPath : "/";
+
     const formik = LoginValidator(props.dispatch);
 
     const fieldWidth = 3;
@@ -41,7 +43,7 @@ const LoginPage = (props) => {
     };
 
     if (props.customer.token) {
-        return <Redirect to={"/"}/>;
+        return <Redirect to={returnPath}/>;
     }
 
     return (

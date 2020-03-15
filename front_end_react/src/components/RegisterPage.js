@@ -13,13 +13,15 @@ import {Redirect} from "react-router-dom";
 
 const RegisterPage = (props) => {
 
+    const returnPath = !!props.location.state ? props.location.state.returnPath : "/";
+
     const formik = RegistrationValidator(props.dispatch);
 
     const fieldWidth = 3;
     const fieldOffset = 3;
 
     if (props.customer.token) {
-        return <Redirect to={"/"}/>;
+        return <Redirect to={returnPath}/>;
     }
 
     return (

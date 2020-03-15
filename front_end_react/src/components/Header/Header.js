@@ -2,7 +2,6 @@
 
 // npm imports
 import React from "react";
-
 // local imports
 import "../../styles/styles.scss"
 import PageNavbar from "./PageNavbar";
