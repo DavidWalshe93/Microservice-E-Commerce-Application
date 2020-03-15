@@ -6,7 +6,7 @@ const request = require("supertest");
 const app = require("../src/app");
 const Item = require("../src/model/item");
 
-const setupItemsTable = require("./fixtures/db_setup");
+const {setupItemsTable, items} = require("./fixtures/db_setup");
 
 
 beforeEach(() => {
@@ -23,7 +23,6 @@ test("Should add a new item to the cart", async () => {
             name: "name" + 4,
             quantity: 4 * 10,
             price: 4 * 1.5,
-            totalPrice: 10 * 4,
             image: "myTestImage.jpg"
         })
         .expect(201);
@@ -55,4 +54,12 @@ test("Should get all cart entries for a specific customer", async () => {
         .expect(200);
 
     expect(response.body.length).toBe(11);
+});
+
+test("Should add numerous items for a specific customer", async () => {
+
+    let response = await request(app)
+        .post("/bulkAdd")
+        .send(items)
+        .expect(200);
 });

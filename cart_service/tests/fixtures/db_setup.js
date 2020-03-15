@@ -35,4 +35,31 @@ const setupItemsTable = async () => {
     }
 };
 
-module.exports = setupItemsTable;
+const items = [
+    {
+        customerID: 2,
+        productID: 1,
+        name: "name" + 1,
+        quantity: 4,
+        price: 10.00,
+        image: "myTestImage1.jpg"
+    },
+    {
+        customerID: 2,
+        productID: 4,
+        name: "name" + 4,
+        quantity: 10,
+        price: 4.00,
+        image: "myTestImage2.jpg"
+    },
+    {
+        customerID: 2,
+        productID: 2,
+        name: "name" + 2,
+        quantity: 2,
+        price: 2.00,
+        image: "myTestImage3.jpg"
+    }
+];
+
+module.exports = {setupItemsTable, items};

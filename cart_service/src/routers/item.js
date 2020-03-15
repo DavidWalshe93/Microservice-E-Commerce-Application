@@ -8,7 +8,6 @@ const Item = require("./../model/item");
 // Create a Express router
 const router = express.Router();
 
-
 // Adds an item to the database, or if it exists already, updates it.
 router.post("/add", async (req, res) => {
     const item = req.body;
@@ -69,24 +68,69 @@ router.delete("/cart/:custId/items/:id", async (req, res) => {
 });
 
 
+// Helper method for retrieving all items for a specific customer from the database.
+const getAllItems = async (customerID) => {
+    return await Item.findAll({
+        where: {
+            customerID
+        }
+    }).map(o => o.get({
+        plain: true
+    }));
+};
+
+
 // Returns all items for a designated customer.
 router.get("/cart/:custId/items", async (req, res) => {
     const customerID = req.params.custId;
 
     try {
         // Find all the items with the corresponding customerID
-        const customerItems = await Item.findAll({
-            where: {
-                customerID
-            }
-        }).map(o => o.get({
-            plain: true
-        }));
+        const customerItems = await getAllItems(customerID);
 
         return res.status(200).send(customerItems);
     } catch (e) {
         res.status(500).send(e);
     }
+});
+
+
+// Adds numerous items to the database in one transaction.
+router.post("/bulkAdd", async (req, res) => {
+    const items = req.body;
+
+    // Update the database for each item.
+    for (let i = 0; i < items.length; i++) {
+        try {
+            // Check if the item exists in the database already
+            const existingItem = await Item.findOne({
+                where: {
+                    productID: items[i].productID,
+                    customerID: items[i].customerID
+                }
+            });
+            if (!existingItem) {
+                // Create a new item if it does not already exist.
+                await Item.create(items[i]);
+            } else {
+                // Else get the matching row and update it.
+                existingItem.quantity += items[i].quantity;
+
+                // Commit the row updates.
+                await Item.update({
+                    quantity: existingItem.quantity,
+                }, {
+                    where: {itemID: existingItem.itemID}
+                });
+            }
+        } catch (e) {
+            console.log(e);
+            res.status(400).send(e);
+        }
+    }
+    let customerID = items[0].customerID;
+
+    res.status(200).send(await getAllItems(customerID))
 });
 
 // Export router for external usage.
