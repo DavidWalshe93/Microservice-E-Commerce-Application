@@ -8,7 +8,6 @@ import {Redirect} from "react-router-dom";
 // local imports
 import TextField from "./form_components/TextField";
 import LoginValidator from "../validators/loginValidator";
-
 import "../styles/styles.scss"
 import {syncCart} from "../actions/cart";
 import syncLocalCartToService from "../requests/cart/syncLocalCartToService";
@@ -21,8 +20,9 @@ const LoginPage = (props) => {
     const fieldOffset = 4;
 
     useEffect(() => {
+        // If logged in.
         if (!!props.customer.token) {
-            console.log("token", props.customer.token);
+            // Map items with additional field of customerID for service usage.
             const items = props.cart.items.map((item) => {
                 return {
                     ...item,
@@ -30,14 +30,12 @@ const LoginPage = (props) => {
                 }
             });
 
-            console.log("BODY", items);
+            // Synchronises local cart state with service cart.
             syncLocalCartToService(syncLocalCart, items, props.customer.customerID);
-
-
-            console.log("I am synced and logged in");
         }
     }, [props.customer]);
 
+    // Callback for updating local state.
     const syncLocalCart = (data) => {
         props.dispatch(syncCart(data));
     };

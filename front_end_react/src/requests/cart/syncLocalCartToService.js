@@ -5,7 +5,7 @@ import serviceRequest from "../baseRequest";
 const syncLocalCartToService = async (callback, items, customerID) => {
     /**
      * Helper method to push local items in the cart to be persistent in the Service database
-     * on a login. Returns the full list of items for the logged in customer.
+     * on a login. Synchronises local state when service response is returned.
      */
     await serviceRequest({
         service: "cart",
@@ -16,7 +16,6 @@ const syncLocalCartToService = async (callback, items, customerID) => {
             items: {...items}
         }
     }).then((data) => {
-        console.log("DATA", data);
         callback(data);
     });
 };

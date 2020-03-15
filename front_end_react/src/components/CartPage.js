@@ -2,7 +2,7 @@
 
 // npm import
 import React, {useEffect, useState} from "react";
-import {Col, Container, Table} from "react-bootstrap";
+import {Button, Col, Container, Table} from "react-bootstrap";
 // Local imports
 import "../styles/styles.scss"
 import CartEntry from "./CartEntry";
@@ -21,6 +21,12 @@ const CartPage = (props) => {
         <>
             <Container fluid={true}>
                 <Col xs={{span: 10, offset: 1}}>
+                    <Button className={"cart-button"} variant={"success"}>
+                        <p className={"button-text"}>Place Order</p>
+                    </Button>
+                    <Button className={"cart-button"} variant={"danger"}>
+                        <p className={"button-text"}>Empty Cart</p>
+                    </Button>
                     <Table striped bordered hover size={"sm"} variant="dark">
                         <thead>
                         <tr>

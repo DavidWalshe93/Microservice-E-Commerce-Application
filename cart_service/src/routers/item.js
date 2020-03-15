@@ -119,15 +119,17 @@ router.get("/cart/:custId/items", async (req, res) => {
 // Adds numerous items to the database in one transaction.
 router.post("/bulkAdd", async (req, res) => {
 
-    console.log(req.body);
-    const customerID = req.body.customerID;
-    const items = req.body.items;
+    // Deconstruct request body
+    const {customerID, items} = {...req.body};
+
+    // Get the keys of the items objects for iteration.
     const keys = Object.keys(items);
 
     // Update the database for each item.
     for (let i = 0; i < keys.length; i++) {
+        // Get current iteration key
         const key = keys[i];
-        console.log(items[key]);
+
         try {
             // Check if the item exists in the database already
             const existingItem = await Item.findOne({

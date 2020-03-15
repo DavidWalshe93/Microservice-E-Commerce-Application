@@ -15,7 +15,6 @@ const getProductData = async (setProducts, error, setError) => {
 
         try {
             let products = response;
-            console.log(products);
 
             // Prepend images folder to image path.
             products.map((item) => {

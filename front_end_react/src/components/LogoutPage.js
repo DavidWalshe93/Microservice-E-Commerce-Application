@@ -25,9 +25,12 @@ class LogoutPage extends React.Component {
         // login page.
         if (!!this.state.token) {
             try {
+                // Empty the cart on logout.
                 this.state.dispatch(removeAll());
+                // Update th customer state to null on logout.
                 this.state.dispatch(
                     logoutCustomer(
+                        // Request to logout and on success, render login page.
                         await logoutRequest(this.state.token).then(() => {
                             this.state.content = <Redirect to={"/login"}/>
                         })
