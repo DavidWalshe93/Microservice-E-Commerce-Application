@@ -9,12 +9,16 @@ const Order = require("./../model/order");
 const router = new express.Router();
 
 // Get all order items
-router.get(["/getOrders"], async (req, res) => {
+router.get(["/getOrders/:id"], async (req, res) => {
+    const customerID = req.params.id;
     try {
-        const orders = await Order.findAll()
-            .map(o => o.get({
-                plain: true
-            }));
+        const orders = await Order.findAll({
+            where: {
+                customerID
+            }
+        }).map(o => o.get({
+            plain: true
+        }));
 
         return res.status(200).send(orders)
     } catch (e) {
@@ -53,6 +57,7 @@ router.post(["/newOrder"], async (req, res) => {
         const order = await Order.create(req.body);
         res.status(201).send(order);
     } catch (e) {
+        console.log(e);
         res.status(400).send()
     }
 });

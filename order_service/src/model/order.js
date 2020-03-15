@@ -3,7 +3,7 @@
 // NPM imports
 const {DataTypes} = require("sequelize");
 // Local imports
-const {sequelize, testConnection} = require("./../database/sequelize");
+const {sequelize, testConnection, syncDatabase} = require("./../database/sequelize");
 
 // Test connection to db.
 testConnection("Order Model");
@@ -27,5 +27,7 @@ const Order = sequelize.define("order", {
 }, {
     timestamps: false
 });
+
+syncDatabase();
 
 module.exports = Order;

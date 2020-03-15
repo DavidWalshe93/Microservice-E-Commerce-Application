@@ -9,7 +9,7 @@ import CartPage from "../components/CartPage/CartPage"
 import LoginPage from "../components/LoginPage";
 import RegisterPage from "../components/RegisterPage";
 import NotFoundPage from "../components/NotFoundPage";
-import Header from "../components/header/Header";
+import Header from "../components/Header/Header";
 import NewProductPage from "../components/NewProductPage";
 import MyAccountPage from "../components/MyAccountPage";
 import LogoutPage from "../components/LogoutPage";

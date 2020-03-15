@@ -7,6 +7,8 @@
     "test": "tests"
   },
   "scripts": {
+    "start": "node src/app.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js",
     "test": "env-cmd -f config/test.env jest --watch --runInBand"
   },
   "repository": {
