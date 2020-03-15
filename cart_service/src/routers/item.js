@@ -68,6 +68,27 @@ router.delete("/cart/:custId/items/:id", async (req, res) => {
 });
 
 
+// Deletes all items from the cart for a specific user.
+router.delete("/cart/:custId/items", async (req, res) => {
+    // Get request parameters
+    const customerID = req.params.custId;
+
+    // Try and delete the row specified in the request
+    try {
+        await Item.destroy({
+            where: {
+                customerID
+            }
+        });
+
+        res.status(200).send();
+    } catch (e) {
+        console.log(e);
+        res.status(400).send()
+    }
+});
+
+
 // Helper method for retrieving all items for a specific customer from the database.
 const getAllItems = async (customerID) => {
     return await Item.findAll({

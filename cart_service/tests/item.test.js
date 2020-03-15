@@ -63,3 +63,20 @@ test("Should add numerous items for a specific customer", async () => {
         .send(items)
         .expect(200);
 });
+
+test("Should delete all items for a specific customer in the cart", async () => {
+
+    await request(app)
+        .delete("/cart/2/items")
+        .send()
+        .expect(200);
+
+    const items = await Item.findAll({
+        where: {
+            customerID: 2,
+        }
+    });
+
+    expect(items.length).toBe(0)
+
+});
