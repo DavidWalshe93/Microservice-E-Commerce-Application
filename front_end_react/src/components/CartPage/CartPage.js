@@ -60,7 +60,7 @@ const CartPage = (props) => {
             <CartModal show={show} setShow={setShow} messageType={messageType}/>
             <Container fluid={true}>
                 <Col xs={{span: 10, offset: 1}}>
-                    <Button className={"cart-button"}
+                    <Button className={"cart-button mx-5"}
                             variant={"success"}
                             onClick={placeOrder}
                             disabled={itemsInCart}

@@ -4,10 +4,11 @@ import React, {useEffect, useState} from "react";
 import getOrderData from "../../requests/order/getOrderData";
 import {connect} from "react-redux";
 import {MDBBtn, MDBDataTable} from 'mdbreact';
+import "../../styles/styles.scss"
 
 const OrderTable = (props) => {
 
-    const customerID = props.customerID;
+    const {setShow, customerID, setModalData} = {...props};
 
     const [orders, setOrders] = useState({});
     const [tableData, setTableData] = useState({});
@@ -69,7 +70,16 @@ const OrderTable = (props) => {
                     saleDate: `${order.saledate}`,
                     orderSize: `${orderSize}`,
                     orderTotal: `${orderTotal}`,
-                    button: <MDBBtn color="light-blue" size="sm" onClick={(e) => console.log(order)}>Order
+                    button: <MDBBtn color="light-blue" size="sm" onClick={(e) => {
+                        console.log(order);
+                        order = {
+                            ...order,
+                            orderSize,
+                            orderTotal
+                        };
+                        setModalData(order);
+                        setShow(true);
+                    }}>Order
                         Info</MDBBtn>,
                 }
             });
@@ -82,18 +92,22 @@ const OrderTable = (props) => {
         }
     }, [orders]);
 
+    try {
+        return (
+            <>
+                <MDBDataTable
+                    striped
+                    bordered
+                    small
+                    // className={""}
+                    // maxHeight={600}
+                    data={tableData}/>
+            </>
+        )
+    } catch (e) {
+        console.log(e);
+    }
 
-    return (
-        <>
-            <MDBDataTable
-                striped
-                bordered
-                small
-                scrollY
-                maxHeight={600}
-                data={tableData}/>
-        </>
-    )
 };
 
 const mapStateToProps = (state) => {

@@ -8,6 +8,7 @@ import AppRouter from "./routers/AppRouter";
 import "mdbreact/dist/css/mdb.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./styles/styles.scss"
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
 // local imports
