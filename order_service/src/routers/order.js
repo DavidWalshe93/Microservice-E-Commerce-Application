@@ -10,7 +10,7 @@ const router = new express.Router();
 
 // Get all order items
 router.get(["/getOrders/:id"], async (req, res) => {
-    console.log("/getOrders", new Date().getTime());
+    console.log("/getOrders");
     const customerID = req.params.id;
     try {
         const orders = await Order.findAll({
@@ -34,6 +34,7 @@ router.get(["/getOrders/:id"], async (req, res) => {
 });
 
 router.post(["/newOrder"], async (req, res) => {
+    console.log("/newOrder", req.body);
     try {
         req.body.orderDetails = JSON.stringify(req.body.orderDetails);
         const order = await Order.create(req.body);

@@ -9,12 +9,14 @@ import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import CartModal from "./CartModal";
 import CartTable from "./CartTable";
+import newOrderRequest from "../../requests/order/addNewOrder";
 
 
 const CartPage = (props) => {
 
-    const [goToOrders, setGoToOrders] = useState(false);
+    const {customer} = {...props};
 
+    const [goToOrders, setGoToOrders] = useState(false);
     const [items, setItems] = useState(props.cart.items);
     const [itemsInCart, setItemsInCart] = useState(false);
     const [show, setShow] = useState(false);
@@ -43,6 +45,7 @@ const CartPage = (props) => {
          * Redirects to the orders page if "Place Order" is successful, otherwise open info modal.
          */
         if (props.customer.token) {
+            newOrderRequest(customer.customerID, items, null, null);
             setGoToOrders(true);
         } else {
             setMessageType("LOGIN");
@@ -55,24 +58,28 @@ const CartPage = (props) => {
         return <Redirect to={"/orders"}/>
     }
 
+    const btn_inline_style = "mx-5 p-2";
+
     return (
         <>
             <CartModal show={show} setShow={setShow} messageType={messageType}/>
             <Container fluid={true}>
                 <Col xs={{span: 10, offset: 1}}>
-                    <Button className={"cart-button mx-5"}
-                            variant={"success"}
-                            onClick={placeOrder}
-                            disabled={itemsInCart}
-                    >
-                        <p className={"button-text"}>Place Order</p>
-                    </Button>
-                    <Button className={"cart-button"}
-                            variant={"danger"}
-                            disabled={itemsInCart}
-                    >
-                        <p className={"button-text"}>Empty Cart</p>
-                    </Button>
+                    <div className={"d-flex justify-content-around"}>
+                        <Button className={`cart-button ${btn_inline_style}`}
+                                variant={"success"}
+                                onClick={placeOrder}
+                                disabled={itemsInCart}
+                        >
+                            <p className={"button-text"}>Place Order</p>
+                        </Button>
+                        <Button className={`cart-button ${btn_inline_style}`}
+                                variant={"danger"}
+                                disabled={itemsInCart}
+                        >
+                            <p className={"button-text"}>Empty Cart</p>
+                        </Button>
+                    </div>
                     <CartTable items={items}/>
                 </Col>
             </Container>

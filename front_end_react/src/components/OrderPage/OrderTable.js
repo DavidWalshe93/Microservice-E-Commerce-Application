@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import getOrderData from "../../requests/order/getOrderData";
 import {connect} from "react-redux";
 import {MDBBtn, MDBDataTable} from 'mdbreact';
-import "../../styles/styles.scss"
+import "../../styles/styles.scss";
 
 const OrderTable = (props) => {
 
@@ -54,34 +54,50 @@ const OrderTable = (props) => {
         },
     ];
 
+    const createTableRow = (order) => {
+        let orderTotal = 0;
+        let orderSize = 0;
+        order.orderDetails.forEach((item) => {
+            orderSize += item.quantity;
+            orderTotal += (item.quantity * item.price);
+        });
+        const saleDate = convertMillisToDataTime(order.saledate);
+        return {
+            orderNo: `${order.orderID}`,
+            saleDate,
+            orderSize: `${orderSize}`,
+            orderTotal: `${orderTotal}`,
+            button: <MDBBtn color="light-blue" size="sm" onClick={(e) => {
+                console.log(order);
+                order = {
+                    ...order,
+                    orderSize,
+                    orderTotal
+                };
+                setModalData(order);
+                setShow(true);
+            }}>Order
+                Info</MDBBtn>,
+        }
+    };
+
+    const convertMillisToDataTime = (saleDateInMs) => {
+        const datetime = new Date(0);
+        datetime.setTime(saleDateInMs);
+
+        let date = `${datetime.getDate()}`.padStart(2, 0);
+        let month = `${datetime.getMonth() + 1}`.padStart(2, 0);
+        let year = datetime.getFullYear();
+
+        return `${year}/${month}/${date}`;
+    };
+
     useEffect(() => {
         console.log("ORDERS", orders);
         if (Object.keys(orders).length > 0) {
             // Create the table rows.
             const rows = orders.map((order) => {
-                let orderTotal = 0;
-                let orderSize = 0;
-                order.orderDetails.forEach((item) => {
-                    orderSize += item.quantity;
-                    orderTotal += (item.quantity * item.price);
-                });
-                return {
-                    orderNo: `${order.orderID}`,
-                    saleDate: `${order.saledate}`,
-                    orderSize: `${orderSize}`,
-                    orderTotal: `${orderTotal}`,
-                    button: <MDBBtn color="light-blue" size="sm" onClick={(e) => {
-                        console.log(order);
-                        order = {
-                            ...order,
-                            orderSize,
-                            orderTotal
-                        };
-                        setModalData(order);
-                        setShow(true);
-                    }}>Order
-                        Info</MDBBtn>,
-                }
+                return createTableRow(order);
             });
 
             // Create the table data object
@@ -99,8 +115,7 @@ const OrderTable = (props) => {
                     striped
                     bordered
                     small
-                    // className={""}
-                    // maxHeight={600}
+                    order={['saleDate', 'desc']}
                     data={tableData}/>
             </>
         )
