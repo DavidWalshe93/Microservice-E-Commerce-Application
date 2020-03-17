@@ -8,10 +8,13 @@ const Product = require("./../model/product");
 // Init express endpoint router
 const router = new express.Router();
 
+const logger = (method, endpoint) => {
+    console.log(`${new Date().toLocaleString()} - Cart - ${method.toUpperCase()} - ${endpoint}`)
+};
 
 // Get all product items.
 router.get(["/getProducts"], async (req, res) => {
-    console.log("/getProducts called");
+    logger("GET", "/getProducts");
     try {
         // Use Sequelize Model to find all products
         const products = await Product.findAll()
@@ -29,6 +32,7 @@ router.get(["/getProducts"], async (req, res) => {
 // Get a specific product item by its ID.
 router.get(["/getProduct/:id"], async (req, res) => {
     const productId = req.params.id;
+    logger("GET", `/getProduct/${productId}`);
 
     try {
         const product = await Product.findOne({
@@ -56,6 +60,7 @@ router.get(["/getProduct/:id"], async (req, res) => {
 
 // Create a new product item.
 router.post(["/newProduct"], async (req, res) => {
+    logger("POST", `/newProduct`);
     try {
         console.log(req);
         const product = await Product.create(req.body);

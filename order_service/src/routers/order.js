@@ -8,10 +8,14 @@ const Order = require("./../model/order");
 // Init express endpoint router
 const router = new express.Router();
 
+const logger = (method, endpoint) => {
+    console.log(`${new Date().toLocaleString()} - Cart - ${method.toUpperCase()} - ${endpoint}`)
+};
+
 // Get all order items
 router.get(["/getOrders/:id"], async (req, res) => {
-    console.log("/getOrders");
     const customerID = req.params.id;
+    logger("GET", `/getOrders/${customerID}`);
     try {
         const orders = await Order.findAll({
             where: {
@@ -34,7 +38,7 @@ router.get(["/getOrders/:id"], async (req, res) => {
 });
 
 router.post(["/newOrder"], async (req, res) => {
-    console.log("/newOrder", req.body);
+    logger("POST", `/newOrder`);
     try {
         req.body.orderDetails = JSON.stringify(req.body.orderDetails);
         const order = await Order.create(req.body);

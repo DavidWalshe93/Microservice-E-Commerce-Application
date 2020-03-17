@@ -9,8 +9,13 @@ const auth = require("../middleware/auth");
 // Init express endpoint router
 const router = new express.Router();
 
+const logger = (method, endpoint) => {
+    console.log(`${new Date().toLocaleString()} - Cart - ${method.toUpperCase()} - ${endpoint}`)
+};
+
 // Get all customer items
 router.get(["/getCustomers"], async (req, res) => {
+    logger("GET", "/getCustomers");
     try {
         const customers = await Customer.findAll()
             .map(o => o.get({
@@ -26,6 +31,7 @@ router.get(["/getCustomers"], async (req, res) => {
 
 // Logout the current session.
 router.post(["/logout"], auth, async (req, res) => {
+    logger("POST", "/logout");
     try {
         // Remove the current session token.
         req.customer.tokens = JSON.stringify(JSON.parse(req.customer.tokens).filter((token) => {
@@ -43,6 +49,7 @@ router.post(["/logout"], auth, async (req, res) => {
 
 // Login a previously registered user.
 router.post(["/login"], async (req, res) => {
+    logger("POST", "/login");
     // Get the id requested by the user in the request
     try {
         // Look for the customer in the db.
@@ -65,6 +72,7 @@ router.post(["/login"], async (req, res) => {
 
 // Adds a new customer to the database.
 router.post(["/register"], async (req, res) => {
+    logger("POST", "/register");
     try {
         const customer = await Customer.create(req.body);
         const token = await customer.generateAuthToken();

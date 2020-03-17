@@ -8,8 +8,13 @@ const Item = require("./../model/item");
 // Create a Express router
 const router = express.Router();
 
+const logger = (method, endpoint) => {
+    console.log(`${new Date().toLocaleString()} - Cart - ${method.toUpperCase()} - ${endpoint}`)
+};
+
 // Adds an item to the database, or if it exists already, updates it.
 router.post("/add", async (req, res) => {
+    logger("POST", "/add");
     const item = req.body;
     try {
         // Check if the item exists in the database already
@@ -50,7 +55,7 @@ router.delete("/cart/:custId/items/:id", async (req, res) => {
     // Get request parameters
     const customerID = req.params.custId;
     const productID = req.params.id;
-
+    logger("DELETE", `/cart/${customerID}/items/${productID}`);
     // Try and delete the row specified in the request
     try {
         await Item.destroy({
@@ -72,7 +77,7 @@ router.delete("/cart/:custId/items/:id", async (req, res) => {
 router.delete("/cart/:custId/items", async (req, res) => {
     // Get request parameters
     const customerID = req.params.custId;
-
+    logger("DELETE", `/cart/${customerID}/items`);
     // Try and delete the row specified in the request
     try {
         await Item.destroy({
@@ -104,7 +109,7 @@ const getAllItems = async (customerID) => {
 // Returns all items for a designated customer.
 router.get("/cart/:custId/items", async (req, res) => {
     const customerID = req.params.custId;
-
+    logger("GET", `/cart/${customerID}/items`);
     try {
         // Find all the items with the corresponding customerID
         const customerItems = await getAllItems(customerID);
@@ -118,7 +123,7 @@ router.get("/cart/:custId/items", async (req, res) => {
 
 // Adds numerous items to the database in one transaction.
 router.post("/bulkAdd", async (req, res) => {
-
+    logger("POST", `/bulkAdd`);
     // Deconstruct request body
     const {customerID, items} = {...req.body};
 
