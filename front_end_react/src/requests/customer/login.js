@@ -3,7 +3,7 @@
 import serviceRequest from "../baseRequest";
 
 // Handles login requests to the customer service
-const loginRequest = async (email, password) => {
+const loginRequest = async (email, password, setShowToast) => {
 
     return serviceRequest({
         service: "customer",
@@ -12,6 +12,12 @@ const loginRequest = async (email, password) => {
         body: {
             email,
             password
+        }
+    }).then((res) => {
+        if (res.error === "DOES_NOT_EXIST") {
+            setShowToast(true);
+        } else {
+            return res;
         }
     });
 };

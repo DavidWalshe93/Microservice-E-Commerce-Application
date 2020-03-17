@@ -6,21 +6,21 @@ import * as Yup from "yup";
 import registerRequest from "../requests/customer/register";
 import {registerCustomer} from "../actions/customers";
 
-const RegistrationValidator = (dispatch) => {
+const RegistrationValidator = (dispatch, setShowToast) => {
     return useFormik({
         initialValues: {
-            firstName: "",
-            lastName: "",
-            email: "",
-            phone: "",
-            password: "",
-            verifyPassword: "",
-            address1: "",
-            address2: "",
-            city: "",
-            state: "",
-            country: "",
-            eircode: "",
+            firstName: "Fake",
+            lastName: "Account",
+            email: "test2@example.com",
+            phone: "0871234567",
+            password: "12345678",
+            verifyPassword: "12345678",
+            address1: "Apartment A",
+            address2: "False Rd.",
+            city: "Cork City",
+            state: "Cork",
+            country: "Ireland",
+            eircode: "A00B012",
             isAdmin: false
         },
         validationSchema: Yup.object({
@@ -58,7 +58,7 @@ const RegistrationValidator = (dispatch) => {
         onSubmit: async (values) => {
             console.log(values);
             try {
-                await dispatch(registerCustomer(await registerRequest(values)));
+                await dispatch(registerCustomer(await registerRequest(values, setShowToast)));
             } catch (e) {
                 console.log(e)
             }

@@ -7,7 +7,12 @@ import * as Yup from "yup";
 import {loginCustomer} from "../actions/customers";
 import loginRequest from "../requests/customer/login"
 
-const LoginValidator = (dispatch) => {
+const LoginValidator = (props) => {
+
+    console.log(props);
+
+    const {dispatch, setShowToast} = {...props};
+
     return useFormik({
         initialValues: {
             email: "mytest@example.com",
@@ -21,12 +26,17 @@ const LoginValidator = (dispatch) => {
                 .required('No password was provided'),
         }),
         onSubmit: async (values) => {
+            let response = null;
             try {
                 // Update customer session.
-                await dispatch(loginCustomer(await loginRequest(values.email, values.password)));
+                response = await loginRequest(values.email, values.password, setShowToast)
             } catch (e) {
+
+                console.log(typeof setShowToast);
+                setShowToast(true);
                 console.log(e)
             }
+            dispatch(loginCustomer(response));
         },
     });
 };

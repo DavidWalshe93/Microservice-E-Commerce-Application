@@ -2,6 +2,7 @@
 
 import {useFormik} from "formik";
 import * as Yup from "yup";
+import newProductRequest from "../requests/product/newProduct";
 
 const NewProductValidator = () => {
     return useFormik({
@@ -27,7 +28,7 @@ const NewProductValidator = () => {
                 .matches(/.*\.(png|jpeg|jpg)$/, {message: "Selected image must have a .png/.jpeg/.jpg file extension"})
         }),
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            newProductRequest(values);
         },
     });
 };

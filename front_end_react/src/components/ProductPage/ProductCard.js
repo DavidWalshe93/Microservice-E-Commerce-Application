@@ -84,6 +84,7 @@ const ProductCard = (props) => {
             <Card className={"h-100 shadow-sm bg-white rounded"}>
                 <Card.Header className={"d-flex mb2-2 justify-content-around"}>{data.name}</Card.Header>
                 <Card.Img variant={"top"} src={data.image}/>
+                {console.log(data.image)}
 
                 <Card.Body className={"d-flex flex-column"}/>
                 <div className={"d-flex mb-2 justify-content-around"}>

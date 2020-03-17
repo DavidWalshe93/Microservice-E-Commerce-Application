@@ -11,7 +11,7 @@ import CartTable from "./CartTable";
 import newOrderRequest from "../../requests/order/addNewOrder";
 import removeAllFromServiceCart from "../../requests/cart/emptyCart";
 import {removeAll} from "../../actions/cart";
-import PurchaseConfirmation from "./PurchaseConfirmation";
+import CartToast from "./CartToast";
 
 
 const CartPage = (props) => {
@@ -19,6 +19,7 @@ const CartPage = (props) => {
     const {customer} = {...props};
 
     const [showToast, setShowToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState(undefined);
     const [items, setItems] = useState(props.cart.items);
     const [itemsInCart, setItemsInCart] = useState(false);
     const [show, setShow] = useState(false);
@@ -44,13 +45,14 @@ const CartPage = (props) => {
 
     const placeOrder = (e) => {
         /**
-         * Redirects to the orders page if "Place Order" is successful, otherwise open info modal.
+         * Places an order with the orderservice and clears the state of the cart service and redux
+         * state of the current user..
          */
         if (props.customer.token) {
-            if (newOrderRequest(customer.customerID, items, null, null)) {
-                removeAllFromServiceCart(connect.customerID);
+            if (newOrderRequest(customer.customerID, items)) {
+                removeAllFromServiceCart(customer.customerID);
                 props.dispatch(removeAll());
-                setShowToast(true);
+                setToastMessage("Your order has been placed");
             }
             // setGoToOrders(true);
         } else {
@@ -59,12 +61,32 @@ const CartPage = (props) => {
         }
     };
 
+    const emptyCart = () => {
+        if (props.customer.token) {
+            removeAllFromServiceCart(customer.customerID);
+        }
+        props.dispatch(removeAll());
+        setToastMessage("Your basket has been emptied");
+    };
+
+    useEffect(() => {
+        if (toastMessage) {
+            setShowToast(true);
+        }
+    }, [toastMessage]);
+
+    useEffect(() => {
+        if (!showToast) {
+            setToastMessage(undefined);
+        }
+    }, [showToast]);
+
     const btn_inline_style = "mx-5 p-2";
 
     return (
         <>
             <CartModal show={show} setShow={setShow} messageType={messageType}/>
-            {<PurchaseConfirmation show={showToast} setShow={setShowToast}/>}
+            {showToast && <CartToast show={showToast} setShow={setShowToast} message={toastMessage}/>}
             <Container fluid={true}>
                 <Col xs={{span: 10, offset: 1}}>
                     <div className={"d-flex justify-content-around"}>
@@ -77,6 +99,7 @@ const CartPage = (props) => {
                         </Button>
                         <Button className={`cart-button ${btn_inline_style}`}
                                 variant={"danger"}
+                                onClick={emptyCart}
                                 disabled={itemsInCart}
                         >
                             <p className={"button-text"}>Empty Cart</p>

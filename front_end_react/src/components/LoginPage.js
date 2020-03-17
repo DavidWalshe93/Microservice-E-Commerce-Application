@@ -1,22 +1,28 @@
 // Created by David Walshe on 25/02/2020
 
 // npm imports
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {connect} from "react-redux"
 import {Button, Col, Form} from "react-bootstrap"
 import {Redirect} from "react-router-dom";
 // local imports
-import TextField from "./form_components/TextField";
+import TextField from "./FormHelpers/TextField";
 import LoginValidator from "../validators/loginValidator";
 import "../styles/styles.scss"
 import {syncCart} from "../actions/cart";
 import syncLocalCartToService from "../requests/cart/syncLocalCartToService";
+import AccountToast from "./AccountToast";
 
 const LoginPage = (props) => {
 
+    const [showToast, setShowToast] = useState(false);
+
     const returnPath = !!props.location.state ? props.location.state.returnPath : "/";
 
-    const formik = LoginValidator(props.dispatch);
+    const formik = LoginValidator({
+        dispatch: props.dispatch,
+        setShowToast
+    });
 
     const fieldWidth = 3;
     const fieldOffset = 4;
@@ -48,6 +54,7 @@ const LoginPage = (props) => {
 
     return (
         <>
+            <AccountToast show={showToast} setShow={setShowToast} message={"Incorrect account details"}/>
             <Form noValidate onSubmit={formik.handleSubmit}>
                 <Form.Row>
                     <Form.Group as={Col} md={{span: fieldWidth + 3, offset: fieldOffset}}>

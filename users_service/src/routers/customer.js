@@ -57,7 +57,9 @@ router.post(["/login"], async (req, res) => {
 
         // If the customer does not exist return 400
         if (customer === null) {
-            return res.status(400).send()
+            return res.status(400).send({
+                error: "DOES_NOT_EXIST"
+            })
         }
 
         // Return requested ID if all went well.
@@ -65,8 +67,9 @@ router.post(["/login"], async (req, res) => {
         return res.status(200).send({customer, token})
     } catch (e) {
         // Return 500 and error if something went wrong on the server side.
-        console.log(e);
-        return res.status(500).send(e)
+        return res.status(500).send({
+            error: "DOES_NOT_EXIST"
+        })
     }
 });
 
@@ -81,7 +84,9 @@ router.post(["/register"], async (req, res) => {
     } catch (e) {
         console.log(e);
         if (e.name === "SequelizeUniqueConstraintError") {
-            return res.status(400).send({msg: "That email is already in use"})
+            return res.status(400).send({
+                error: "EMAIL_IN_USE"
+            })
         }
         res.status(400).send(e)
     }

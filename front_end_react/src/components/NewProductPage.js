@@ -3,9 +3,8 @@
 // npm imports
 import React from "react";
 import {Button, Col, Form} from "react-bootstrap";
-
 // local imports
-import TextField from "./form_components/TextField";
+import TextField from "./FormHelpers/TextField";
 import NewProductValidator from "../validators/newProductValidator";
 
 const NewProductPage = () => {

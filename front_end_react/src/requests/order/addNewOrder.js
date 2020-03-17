@@ -3,7 +3,7 @@
 // Request Data from catalog service
 import serviceRequest from "../baseRequest";
 
-const newOrderRequest = async (customerID, items, error, setError) => {
+const newOrderRequest = async (customerID, items) => {
     // if (!error) {
 
     try {
@@ -21,7 +21,6 @@ const newOrderRequest = async (customerID, items, error, setError) => {
         });
     } catch (e) {
         console.log(e);
-        // setError(e);
     }
     // }
 };

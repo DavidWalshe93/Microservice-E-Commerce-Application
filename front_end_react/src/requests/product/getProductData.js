@@ -5,24 +5,17 @@ import serviceRequest from "../baseRequest";
 
 const getProductData = async (setProducts, error, setError) => {
     if (!error) {
-
-        const response = await serviceRequest({
-            service: "catalog",
-            endpoint: "getProducts",
-            method: "GET",
-            body: null
-        });
-
         try {
-            let products = response;
-
-            // Prepend images folder to image path.
-            products.map((item) => {
-                return item.image = `/images/${item.image}`
+            const response = await serviceRequest({
+                service: "catalog",
+                endpoint: "getProducts",
+                method: "GET",
+                body: null
             });
 
+
             // Update state
-            setProducts(products);
+            setProducts(response);
         } catch (e) {
             setError(e);
         }

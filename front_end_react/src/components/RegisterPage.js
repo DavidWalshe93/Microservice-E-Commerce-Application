@@ -1,21 +1,24 @@
 // Created by David Walshe on 25/02/2020
 
 // npm imports
-import React from "react";
+import React, {useState} from "react";
 import {Button, Col, Form} from "react-bootstrap"
 // Local imports
 import RegistrationValidator from "../validators/registrationValidator";
-import TextField from "./form_components/TextField";
+import TextField from "./FormHelpers/TextField";
 import "../styles/styles.scss"
-import CheckBoxField from "./form_components/CheckboxField";
+import CheckBoxField from "./FormHelpers/CheckboxField";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
+import AccountToast from "./AccountToast";
 
 const RegisterPage = (props) => {
 
+    const [showToast, setShowToast] = useState(false);
+
     const returnPath = !!props.location.state ? props.location.state.returnPath : "/";
 
-    const formik = RegistrationValidator(props.dispatch);
+    const formik = RegistrationValidator(props.dispatch, setShowToast);
 
     const fieldWidth = 3;
     const fieldOffset = 3;
@@ -26,6 +29,7 @@ const RegisterPage = (props) => {
 
     return (
         <>
+            <AccountToast show={showToast} setShow={setShowToast} message={"That email is already in use."}/>
             <Form noValidate onSubmit={formik.handleSubmit}>
                 <Form.Row>
                     <Form.Group as={Col} md={{span: fieldWidth + 2, offset: fieldOffset + 1}}>
