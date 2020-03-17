@@ -19,10 +19,6 @@ const newOrderRequest = async (customerID, items, error, setError) => {
                 ]
             }
         });
-
-        console.log(response);
-        // Update state
-        // setProducts(products);
     } catch (e) {
         console.log(e);
         // setError(e);

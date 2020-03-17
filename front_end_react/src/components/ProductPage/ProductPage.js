@@ -5,7 +5,7 @@ import React, {useEffect, useState} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 // local imports
 import ProductCard from "./ProductCard";
-import BuyConfirmation from "./BuyConfirmation";
+import AddConfirmation from "./AddConfirmation";
 import getProductData from "../../requests/product/getProductData";
 
 const ProductPage = () => {
@@ -35,7 +35,7 @@ const ProductPage = () => {
     } else {
         return (
             <Container>
-                {<BuyConfirmation data={data} quantity={quantity} show={show} setShow={setShow}/>}
+                {<AddConfirmation data={data} quantity={quantity} show={show} setShow={setShow}/>}
                 <Row>
                     {products.map((product) => (
                         <Col xs={4} className={"mb-5"} key={product.productID}>

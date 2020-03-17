@@ -2,16 +2,21 @@
 
 import serviceRequest from "../baseRequest";
 
-const removeFromServiceCart = async (customerID) => {
+const removeAllFromServiceCart = async (customerID) => {
     /**
      * Helper function to send a request to the cart service to remove all items from the database.
      */
-    return serviceRequest({
-        service: "cart",
-        endpoint: `cart/${customerID}/items`,
-        method: "DELETE",
-        body: null
-    });
+    try {
+        await serviceRequest({
+            service: "cart",
+            endpoint: `cart/${customerID}/items`,
+            method: "DELETE",
+            body: null
+        });
+    } catch (e) {
+        console.log(e);
+    }
+
 };
 
-export default removeFromServiceCart;
+export default removeAllFromServiceCart;

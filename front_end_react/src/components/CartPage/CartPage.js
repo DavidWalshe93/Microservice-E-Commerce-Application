@@ -6,17 +6,19 @@ import {Button, Col, Container} from "react-bootstrap";
 // Local imports
 import "../../styles/styles.scss"
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
 import CartModal from "./CartModal";
 import CartTable from "./CartTable";
 import newOrderRequest from "../../requests/order/addNewOrder";
+import removeAllFromServiceCart from "../../requests/cart/emptyCart";
+import {removeAll} from "../../actions/cart";
+import PurchaseConfirmation from "./PurchaseConfirmation";
 
 
 const CartPage = (props) => {
 
     const {customer} = {...props};
 
-    const [goToOrders, setGoToOrders] = useState(false);
+    const [showToast, setShowToast] = useState(false);
     const [items, setItems] = useState(props.cart.items);
     const [itemsInCart, setItemsInCart] = useState(false);
     const [show, setShow] = useState(false);
@@ -45,24 +47,24 @@ const CartPage = (props) => {
          * Redirects to the orders page if "Place Order" is successful, otherwise open info modal.
          */
         if (props.customer.token) {
-            newOrderRequest(customer.customerID, items, null, null);
-            setGoToOrders(true);
+            if (newOrderRequest(customer.customerID, items, null, null)) {
+                removeAllFromServiceCart(connect.customerID);
+                props.dispatch(removeAll());
+                setShowToast(true);
+            }
+            // setGoToOrders(true);
         } else {
             setMessageType("LOGIN");
             setShow(true)
         }
     };
 
-    // Relocated to orders page.
-    if (goToOrders) {
-        return <Redirect to={"/orders"}/>
-    }
-
     const btn_inline_style = "mx-5 p-2";
 
     return (
         <>
             <CartModal show={show} setShow={setShow} messageType={messageType}/>
+            {<PurchaseConfirmation show={showToast} setShow={setShowToast}/>}
             <Container fluid={true}>
                 <Col xs={{span: 10, offset: 1}}>
                     <div className={"d-flex justify-content-around"}>
