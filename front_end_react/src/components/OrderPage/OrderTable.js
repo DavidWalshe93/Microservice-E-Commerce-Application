@@ -43,7 +43,6 @@ const OrderTable = (props) => {
             label: 'Order Total',
             field: 'orderTotal',
             sort: 'asc',
-            // width: 400,
         },
         {
             label: '',
@@ -61,14 +60,15 @@ const OrderTable = (props) => {
             orderSize += item.quantity;
             orderTotal += (item.quantity * item.price);
         });
-        const saleDate = convertMillisToDataTime(order.saledate);
+        orderTotal = orderTotal.toFixed(2);
+        order.saledate = convertMillisToDataTime(order.saledate);
+
         return {
             orderNo: `${order.orderID}`,
-            saleDate,
+            saleDate: order.saledate,
             orderSize: `${orderSize}`,
             orderTotal: `${orderTotal}`,
             button: <MDBBtn color="light-blue" size="sm" onClick={(e) => {
-                console.log(order);
                 order = {
                     ...order,
                     orderSize,
