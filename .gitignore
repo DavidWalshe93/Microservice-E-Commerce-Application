@@ -6,19 +6,13 @@
 /catalogue/node_modules/
 /cart/node_modules/
 /front-end/node_modules/
-/catalogue/config/
 /users service/node_modules/
 /users service/.idea/
-/front-end service/node_modules/
-/front-end service/.idea/
-/front-end service/config/
-/cart service/config/
+/front_end_service/node_modules/
+/front_end_service/.idea/
 /cart service/persistence/database.sqlite
 /cart service/persistence/database_test.sqlite
-/users service/config/
-/order_service/config/
 /front_end_react/yarn.lock
 /front_end_react/package-lock.json
 /front_end_react/README.md
-/users_service/config/
 /front_end_react/build/
