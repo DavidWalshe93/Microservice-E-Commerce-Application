@@ -1,0 +1,16 @@
+# Author: David
+# Date: 13/05/2020
+
+# Docker compose configuration to bring up all microservices
+
+version: "3"
+
+services:
+  cart_service:
+    image: cart_service
+    build:
+      context: ./cart_service
+      args:
+        port: 3001
+    volumes:
+      - cart-db:/cart-service/persistence
