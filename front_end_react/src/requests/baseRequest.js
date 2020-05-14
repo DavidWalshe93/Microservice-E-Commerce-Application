@@ -1,10 +1,17 @@
 // Created by David Walshe on 14/03/2020
 
 const services = {
-    customer: 3001,
-    catalog: 3002,
-    cart: 3003,
-    order: 3004
+    customer: process.env.USER_SERVICE_DEST || "http://localhost",
+    catalog: process.env.CATALOG_SERVICE_DEST || "http://localhost",
+    cart: process.env.CART_SERVICE_DEST || "http://localhost",
+    order: process.env.ORDER_SERVICE_DEST || "http://localhost"
+};
+
+const ports = {
+    customer: process.env.USER_SERVICE_PORT || 3001,
+    catalog: process.env.CATALOG_SERVICE_PORT || 3002,
+    cart: process.env.CART_SERVICE_PORT || 3003,
+    order: process.env.ORDER_SERVICE_PORT || 3004
 };
 
 const getRequestContent = (method, headers) => {
@@ -49,7 +56,7 @@ const serviceRequest = async (options) => {
     }
 
     // Request template
-    const response = await fetch(`http://localhost:${services[service]}/${endpoint}`, requestContent);
+    const response = await fetch(`${services[service]}:${ports[service]}/${endpoint}`, requestContent);
 
     // Return JSON response
     return await response.json();

@@ -19,6 +19,7 @@ services:
     volumes:
       - user-db:/user-service/persistence
 
+
   mysql:
     image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
@@ -27,7 +28,8 @@ services:
       MYSQL_ROOT_PASSWORD: mypass
     volumes:
       - mysql-db:/var/lib/mysql
-  
+
+
   catalog-service:
     image: catalog-service
     build:
@@ -40,14 +42,6 @@ services:
         sql_database: shop
         sql_logger: "false"
 
-  frontend-service:
-    image: frontend-service
-    build:
-      context: ./cart_service
-      args:
-        port: 8079
-    ports:
-      - "8079:8079"
 
   cart-service:
     image: cart-service
@@ -59,7 +53,8 @@ services:
         sql_logger: "false"
     volumes:
       - cart-db:/cart-service/persistence
-  
+
+
   order-service:
     image: order-service
     build:
@@ -72,6 +67,22 @@ services:
       - order-db:/order-service/persistence
 
 
+  frontend-service:
+    image: frontend-service
+    build:
+      context: ./front_end_service
+      args:
+        port: 8079
+        user_service_dest: user-service
+        user_service_port: 3001
+        catalog_service_dest: catalog-service
+        catalog_service_port: 3002
+        cart_service_dest: cart-service
+        cart_service_port: 3003
+        order_service_dest: order-service
+        order_service_port: 3004
+    ports:
+      - "8079:8079"
 
 volumes: 
   cart-db:
