@@ -14,7 +14,7 @@ services:
       args:
         port: 3001
         sqlite_db_path: "persistence/database.sqlite"
-        sql_logger: False
+        sql_logger: "false"
         jwt_secret: secret
     volumes:
       - user-db:/user-service/persistence
@@ -38,7 +38,7 @@ services:
         sql_username: root
         sql_password: mypass
         sql_database: shop
-        sql_logger: False
+        sql_logger: "false"
 
   frontend-service:
     image: frontend-service
@@ -56,7 +56,7 @@ services:
       args:
         port: 3003
         sqlite_db_path: "persistence/database.sqlite"
-        sql_logger: False
+        sql_logger: "false"
     volumes:
       - cart-db:/cart-service/persistence
   
@@ -67,7 +67,7 @@ services:
       args:
         port: 3004
         sqlite_db_path: "persistence/database.sqlite"
-        sql_logger: False
+        sql_logger: "false"
     volumes:
       - order-db:/order-service/persistence
 
