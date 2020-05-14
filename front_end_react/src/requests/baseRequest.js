@@ -56,7 +56,9 @@ const serviceRequest = async (options) => {
     }
 
     // Request template
-    const response = await fetch(`${services[service]}:${ports[service]}/${endpoint}`, requestContent);
+    const request = `${services[service]}:${ports[service]}/${endpoint}`
+    console.log("REQ", request)
+    const response = await fetch(request, requestContent);
 
     // Return JSON response
     return await response.json();
