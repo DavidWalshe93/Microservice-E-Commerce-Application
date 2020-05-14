@@ -1,17 +1,17 @@
 // Created by David Walshe on 14/03/2020
 
 const services = {
-    customer: process.env.USER_SERVICE_DEST || "http://localhost",
-    catalog: process.env.CATALOG_SERVICE_DEST || "http://localhost",
-    cart: process.env.CART_SERVICE_DEST || "http://localhost",
-    order: process.env.ORDER_SERVICE_DEST || "http://localhost"
+    customer: process.env.REACT_APP_USER_SERVICE_DEST,
+    catalog: process.env.REACT_APP_CATALOG_SERVICE_DEST,
+    cart: process.env.REACT_APP_CART_SERVICE_DEST,
+    order: process.env.REACT_APP_ORDER_SERVICE_DEST
 };
 
 const ports = {
-    customer: process.env.USER_SERVICE_PORT || 3001,
-    catalog: process.env.CATALOG_SERVICE_PORT || 3002,
-    cart: process.env.CART_SERVICE_PORT || 3003,
-    order: process.env.ORDER_SERVICE_PORT || 3004
+    customer: process.env.REACT_APP_USER_SERVICE_PORT || 3001,
+    catalog: process.env.REACT_APP_CATALOG_SERVICE_PORT || 3002,
+    cart: process.env.REACT_APP_CART_SERVICE_PORT || 3003,
+    order: process.env.REACT_APP_ORDER_SERVICE_PORT || 3004
 };
 
 const getRequestContent = (method, headers) => {
@@ -56,7 +56,11 @@ const serviceRequest = async (options) => {
     }
 
     // Request template
-    const request = `${services[service]}:${ports[service]}/${endpoint}`
+    let uri = services[service]
+    console.log("URI BEFORE", uri)
+    uri = uri || "http://localhost"
+    console.log("URI AFTER", uri)
+    const request = `${uri}:${ports[service]}/${endpoint}`
     console.log("REQ", request)
     const response = await fetch(request, requestContent);
 
