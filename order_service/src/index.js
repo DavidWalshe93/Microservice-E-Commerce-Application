@@ -3,7 +3,7 @@
 // Import express application setup.
 const app = require("./app");
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3004;
 
 // Run application.
 app.listen(port, () => {

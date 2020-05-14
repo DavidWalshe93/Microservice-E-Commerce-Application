@@ -61,6 +61,7 @@ services:
       context: ./users_service
       args:
         port: 3004
+        jwt_secret: secret
     volumes:
       - user-db:/user-service/persistence
 
