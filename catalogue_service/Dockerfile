@@ -5,11 +5,12 @@
 FROM node:12.16
 
 # Setup Dockerfile Build Arguments
-ARG port=3002
-ARG sql_username=root
-ARG spl_password=mypass
-ARG sql_database=shop
-ARG sql_logger=false
+ARG port
+ARG sql_host
+ARG sql_username
+ARG spl_password
+ARG sql_database
+ARG sql_logger
 
 # Port available to other containers inside Docker Private Network, NOT HOST.
 EXPOSE ${port}
@@ -28,6 +29,7 @@ COPY . .
 
 # Setup Environment Variables for Application
 ENV PORT=${port}
+ENV SQL_HOST=${sql_host}
 ENV SQL_USERNAME=${sql_username}
 ENV SQL_PASSWORD=${sql_password}
 ENV SQL_DATABASE=${sql_database}
