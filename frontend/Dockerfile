@@ -30,8 +30,25 @@ ENV REACT_APP_ORDER_SERVICE_PORT=${order_service_port}
 EXPOSE ${port}
 
 #-----------------------------------------------------------------------------------------------------------------------
+# FRONT-END
+#-----------------------------------------------------------------------------------------------------------------------
+
+# App run directory
+WORKDIR /usr/src/app
+
+# Copy over dependencies
+COPY ./service/package.json package.json
+
+# Run npm install to build application dependencies
+RUN npm install && npm cache clean --force
+
+# Copy application code to Container
+COPY ./service .
+
+#-----------------------------------------------------------------------------------------------------------------------
 # REACT
 #-----------------------------------------------------------------------------------------------------------------------
+# React is done second as changes here are more common and require more rebuilds.
 
 # Make the react app the current work directory
 WORKDIR /usr/src/react
@@ -48,24 +65,16 @@ COPY ./react/ .
 # Run the react app's build command to create production app from src.
 RUN npm run build
 
+# Copy the react app source code for the Front-end to render.
+RUN mv ./build ./../app/public
+
+
 #-----------------------------------------------------------------------------------------------------------------------
-# FRONT-END
+# RUN APP
 #-----------------------------------------------------------------------------------------------------------------------
 
 # App run directory
 WORKDIR /usr/src/app
-
-# Copy over dependencies
-COPY ./service/package.json package.json
-
-# Run npm install to build application dependencies
-RUN npm install && npm cache clean --force
-
-# Copy application code to Container
-COPY ./service .
-
-# Copy the react app source code for the Front-end to render.
-RUN mv ./../react/build ./public
 
 # Run command for container on start-up
 CMD ["npm", "run", "start"]
