@@ -12,10 +12,10 @@ services:
     build:
       context: ./users_service
       args:
-        port: 3001
-        sqlite_db_path: "persistence/database.sqlite"
-        sql_logger: "false"
-        jwt_secret: secret
+        port: ${USER_SERVICE_PORT}
+        sqlite_db_path: ${DEFAULT_SQLITE_DB_PATH}
+        sql_logger: ${SQL_LOGGER}
+        jwt_secret: ${JWT_SECRET}
     volumes:
       - user-db:/user-service/persistence
 
@@ -25,7 +25,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: mypass
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - mysql-db:/var/lib/mysql
 
@@ -35,12 +35,14 @@ services:
     build:
       context: ./catalogue_service
       args:
-        port: 3002
+        port: ${CATALOG_SERVICE_PORT}
         sql_host: mysql
         sql_username: root
-        sql_password: mypass
+        sql_password: ${MYSQL_ROOT_PASSWORD}
         sql_database: shop
-        sql_logger: "false"
+        sql_logger: ${SQL_LOGGER}
+    depends_on:
+      - mysql
 
 
   cart-service:
@@ -48,9 +50,9 @@ services:
     build:
       context: ./cart_service
       args:
-        port: 3003
-        sqlite_db_path: "persistence/database.sqlite"
-        sql_logger: "false"
+        port: ${CART_SERVICE_PORT}
+        sqlite_db_path: ${DEFAULT_SQLITE_DB_PATH}
+        sql_logger: ${SQL_LOGGER}
     volumes:
       - cart-db:/cart-service/persistence
 
@@ -60,9 +62,9 @@ services:
     build:
       context: ./order_service
       args:
-        port: 3004
-        sqlite_db_path: "persistence/database.sqlite"
-        sql_logger: "false"
+        port: ${ORDER_SERVICE_PORT}
+        sqlite_db_path: ${DEFAULT_SQLITE_DB_PATH}
+        sql_logger: ${SQL_LOGGER}
     volumes:
       - order-db:/order-service/persistence
 
@@ -70,23 +72,27 @@ services:
   frontend-service:
     image: frontend-service
     build:
-      context: ./front_end_service
+      context: ./frontend
       args:
-        port: 8079
+        port: ${FRONT_END_SERVICE_PORT}
         user_service_dest: user-service
-        user_service_port: 3001
+        user_service_port: ${USER_SERVICE_PORT}
         catalog_service_dest: catalog-service
-        catalog_service_port: 3002
+        catalog_service_port: ${CATALOG_SERVICE_PORT}
         cart_service_dest: cart-service
-        cart_service_port: 3003
+        cart_service_port: ${CART_SERVICE_PORT}
         order_service_dest: order-service
-        order_service_port: 3004
+        order_service_port: ${ORDER_SERVICE_PORT}
     ports:
-      - "8079:8079"
+      - "${FRONT_END_SERVICE_PORT}:${FRONT_END_SERVICE_PORT}"
+    depends_on:
+      - user-service
+      - catalog-service
+      - cart-service
+      - order-service
 
 volumes: 
   cart-db:
   mysql-db:
   order-db:
   user-db:
-  

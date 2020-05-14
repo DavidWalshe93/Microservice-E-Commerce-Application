@@ -8,7 +8,7 @@ FROM node:12.16
 ARG port
 ARG sql_host
 ARG sql_username
-ARG spl_password
+ARG sql_password
 ARG sql_database
 ARG sql_logger
 
