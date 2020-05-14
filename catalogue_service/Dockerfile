@@ -34,4 +34,4 @@ ENV SQL_DATABASE=${sql_database}
 ENV SQL_LOGGER=${sql_logger}
 
 # Run command for container on start-up
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]

@@ -26,4 +26,4 @@ COPY . .
 ENV PORT=${port}
 
 # Run command for container on start-up
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]
