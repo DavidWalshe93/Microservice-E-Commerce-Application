@@ -29,6 +29,7 @@ COPY . .
 
 # Setup Environment Variables for Application
 ENV PORT=${port}
+ENV SQL_HOST=${sql_host}
 ENV SQL_USERNAME=${sql_username}
 ENV SQL_PASSWORD=${sql_password}
 ENV SQL_DATABASE=${sql_database}

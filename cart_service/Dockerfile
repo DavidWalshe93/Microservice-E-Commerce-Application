@@ -5,7 +5,9 @@
 FROM node:12.16
 
 # Setup Dockerfile Build Arguments
-ARG port=3003
+ARG port
+ARG sqlite_db_path
+ARG sql_logger
 
 # Port available to other containers inside Docker Private Network, NOT HOST.
 EXPOSE ${port}
@@ -24,6 +26,8 @@ COPY . .
 
 # Setup Environment Variables for Application
 ENV PORT=${port}
+ENV SQLITE_DB_PATH=${sqlite_db_path}
+ENV SQL_LOGGER=${sql_logger}
 
 # Run command for container on start-up
 CMD ["npm", "run", "start"]

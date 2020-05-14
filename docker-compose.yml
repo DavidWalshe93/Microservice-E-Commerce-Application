@@ -13,8 +13,11 @@ services:
       context: ./users_service
       args:
         port: 3001
+        sqlite_db_path: "persistence/database.sqlite"
+        sql_logger: false
+        jwt_secret: secret
     volumes:
-      - user-db:/user-service/persistence  
+      - user-db:/user-service/persistence
 
   mysql:
     image: mysql:5.7
@@ -35,41 +38,40 @@ services:
         sql_username: root
         sql_password: mypass
         sql_database: shop
-        sql_logger: "false"
-    depends_on:
-      - mysql
-  
+        sql_logger: false
+
+  frontend-service:
+    image: frontend-service
+    build:
+      context: ./cart_service
+      args:
+        port: 8079
+    ports:
+      - "8079:8079"
+
   cart-service:
     image: cart-service
     build:
       context: ./cart_service
       args:
         port: 3003
+        sqlite_db_path: "persistence/database.sqlite"
+        sql_logger: false
     volumes:
       - cart-db:/cart-service/persistence
-
+  
   order-service:
     image: order-service
     build:
       context: ./order_service
       args:
         port: 3004
+        sqlite_db_path: "persistence/database.sqlite"
+        sql_logger: false
     volumes:
       - order-db:/order-service/persistence
 
-  frontend-service:
-    image: frontend-service
-    build:
-      context: ./front_end_service
-      args:
-        port: 8079
-    ports:
-      - "8079:8079" 
-    depends_on:
-      - order-service
-      - user-service
-      - cart-service
-      - catalog-service
+
 
 volumes: 
   cart-db:
