@@ -7,14 +7,14 @@ version: "3"
 
 services:
 
-  cart-service:
-    image: cart-service
+  user-service:
+    image: user-service
     build:
-      context: ./cart_service
+      context: ./users_service
       args:
         port: 3001
     volumes:
-      - cart-db:/cart-service/persistence
+      - user-db:/user-service/persistence  
 
   mysql:
     image: mysql:5.7
@@ -31,11 +31,31 @@ services:
       context: ./catalogue_service
       args:
         port: 3002
+        sql_host: mysql
         sql_username: root
         sql_password: mypass
         sql_database: shop
         sql_logger: "false"
+    depends_on:
+      - mysql
   
+  cart-service:
+    image: cart-service
+    build:
+      context: ./cart_service
+      args:
+        port: 3003
+    volumes:
+      - cart-db:/cart-service/persistence
+
+  order-service:
+    image: order-service
+    build:
+      context: ./order_service
+      args:
+        port: 3004
+    volumes:
+      - order-db:/order-service/persistence
 
   frontend-service:
     image: frontend-service
@@ -44,25 +64,12 @@ services:
       args:
         port: 8079
     ports:
-      - "8079:8079"
-  
-  order-service:
-    image: order-service
-    build:
-      context: ./order_service
-      args:
-        port: 3003
-    volumes:
-      - order-db:/order-service/persistence
-
-  user-service:
-    image: user-service
-    build:
-      context: ./users_service
-      args:
-        port: 3004
-    volumes:
-      - user-db:/user-service/persistence
+      - "8079:8079" 
+    depends_on:
+      - order-service
+      - user-service
+      - cart-service
+      - catalog-service
 
 volumes: 
   cart-db:
