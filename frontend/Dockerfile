@@ -65,7 +65,7 @@ RUN npm install && npm cache clean --force
 COPY . .
 
 # Copy the react app source code for the Front-end to render.
-RUN mv ./react/build ./public
+RUN mv ./react/build ./service/public
 
 # Run command for container on start-up
 CMD ["npm", "run", "start"]
