@@ -5,7 +5,7 @@
 FROM node:12.16
 
 # Setup Dockerfile Build Arguments
-ARG port=3001
+ARG port=3003
 
 # Port available to other containers inside Docker Private Network, NOT HOST.
 EXPOSE ${port}

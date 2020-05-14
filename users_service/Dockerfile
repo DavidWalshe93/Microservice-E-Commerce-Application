@@ -5,7 +5,8 @@
 FROM node:12.16
 
 # Setup Dockerfile Build Arguments
-ARG port=3004
+ARG port=3001
+ARG jwt="secret"
 
 # Port available to other containers inside Docker Private Network, NOT HOST.
 EXPOSE ${port}
@@ -24,6 +25,7 @@ COPY . .
 
 # Setup Environment Variables for Application
 ENV PORT=${port}
+ENV JWT=${jwt}
 
 # Run command for container on start-up
 CMD ["npm", "run", "dev"]

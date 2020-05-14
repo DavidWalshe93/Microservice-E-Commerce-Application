@@ -79,6 +79,7 @@ const Customer = sequelize.define("customer", {
 // Generates a JWT authentication token.
 Customer.prototype.generateAuthToken = async function () {
     const customer = this;
+    console.log("FIND ME", customer)
     const token = await jwt.sign({id: customer.customerID}, process.env.JWT_SECRET);
 
     await Customer.update({
