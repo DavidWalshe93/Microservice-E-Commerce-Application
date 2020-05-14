@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Front end shop.",
   "scripts": {
-    "start": "node server.js",
-    "dev": "env-cmd -f ./config/dev.env nodemon ./src/index.js -e js,hbs,html"
+    "start": "node src/index.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js -e js,hbs,html"
   },
   "dependencies": {
     "async": "^1.5.2",
