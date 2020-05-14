@@ -25,9 +25,4 @@ const jsxRoot = (
     </Provider>
 );
 
-// const unsubscribe = store.subscribe(() => {
-//     // localStorage.setItem("customer", {});
-//     // localStorage.setItem("customer", JSON.stringify(store.getState().customer));
-// });
-
 ReactDOM.render(jsxRoot, document.getElementById('root'));
