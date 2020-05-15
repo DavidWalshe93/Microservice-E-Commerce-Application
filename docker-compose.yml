@@ -16,17 +16,22 @@ services:
         sqlite_db_path: ${DEFAULT_SQLITE_DB_PATH}
         sql_logger: ${SQL_LOGGER}
         jwt_secret: ${JWT_SECRET}
+    ports:
+      - "${USER_SERVICE_PORT}:${USER_SERVICE_PORT}"
     volumes:
       - user-db:/user-service/persistence
 
 
   mysql:
-    image: mysql:5.7
+    image: mysql-catalog-service
+    build:
+      context: ./mysql_catalog_service
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
+      - ./mysql_catalog_service/sql_scripts:/docker-entrypoint-initdb.d/
       - mysql-db:/var/lib/mysql
 
 
@@ -41,6 +46,8 @@ services:
         sql_password: ${MYSQL_ROOT_PASSWORD}
         sql_database: shop
         sql_logger: ${SQL_LOGGER}
+    ports:
+      - "${CATALOG_SERVICE_PORT}:${CATALOG_SERVICE_PORT}"
     depends_on:
       - mysql
 
@@ -53,6 +60,8 @@ services:
         port: ${CART_SERVICE_PORT}
         sqlite_db_path: ${DEFAULT_SQLITE_DB_PATH}
         sql_logger: ${SQL_LOGGER}
+    ports:
+      - "${CART_SERVICE_PORT}:${CART_SERVICE_PORT}"
     volumes:
       - cart-db:/cart-service/persistence
 
@@ -65,6 +74,8 @@ services:
         port: ${ORDER_SERVICE_PORT}
         sqlite_db_path: ${DEFAULT_SQLITE_DB_PATH}
         sql_logger: ${SQL_LOGGER}
+    ports:
+      - "${ORDER_SERVICE_PORT}:${ORDER_SERVICE_PORT}"
     volumes:
       - order-db:/order-service/persistence
 

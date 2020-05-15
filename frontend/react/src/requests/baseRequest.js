@@ -1,11 +1,11 @@
 // Created by David Walshe on 14/03/2020
 
-const services = {
-    customer: process.env.REACT_APP_USER_SERVICE_DEST,
-    catalog: process.env.REACT_APP_CATALOG_SERVICE_DEST,
-    cart: process.env.REACT_APP_CART_SERVICE_DEST,
-    order: process.env.REACT_APP_ORDER_SERVICE_DEST
-};
+// const services = {
+//     customer: process.env.REACT_APP_USER_SERVICE_DEST,
+//     catalog: process.env.REACT_APP_CATALOG_SERVICE_DEST,
+//     cart: process.env.REACT_APP_CART_SERVICE_DEST,
+//     order: process.env.REACT_APP_ORDER_SERVICE_DEST
+// };
 
 const ports = {
     customer: process.env.REACT_APP_USER_SERVICE_PORT || 3001,
@@ -56,10 +56,10 @@ const serviceRequest = async (options) => {
     }
 
     // Request template
-    let uri = services[service]
-    console.log("URI BEFORE", uri)
-    uri = uri || "http://localhost"
-    console.log("URI AFTER", uri)
+    // let uri = services[service]
+    // console.log("URI BEFORE", uri)
+    uri = process.env.HOSTNAME || "http://localhost"
+    // console.log("URI AFTER", uri)
     const request = `${uri}:${ports[service]}/${endpoint}`
     console.log("REQ", request)
     const response = await fetch(request, requestContent);

@@ -10,10 +10,8 @@ CREATE TABLE IF NOT EXISTS products (
          PRIMARY KEY  (productID)
        );
 
-INSERT INTO products (name, quantity, price, image) VALUES
-     ('Car 1', 30, 10.10, 'car1.jpeg'),
-     ('Car 2', 20, 50.80, 'car2.jpeg'),
-    ('Car 5', 15, 55.30, 'car3.jpeg'),
-    ('Car 6', 25, 100.50, 'car4.jpeg');
-);
-
+INSERT IGNORE INTO products (productID, name, quantity, price, image) VALUES
+     (1, 'Car 1', 30, 10.10, 'car1.jpeg'),
+     (2, 'Car 2', 20, 50.80, 'car2.jpeg'),
+    (3, 'Car 5', 15, 55.30, 'car3.jpeg'),
+    (4, 'Car 6', 25, 100.50, 'car4.jpeg');
