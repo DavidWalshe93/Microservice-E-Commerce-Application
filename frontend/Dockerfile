@@ -5,25 +5,19 @@
 FROM node:12.16
 
 # Setup Dockerfile Build Arguments
+ARG hostname=http://localhost
 ARG port=8079
-ARG user_service_dest="user-service"
 ARG user_service_port=3001
-ARG catalog_service_dest="catalog_service"
 ARG catalog_service_port=3002
-ARG cart_service_dest="cart_service"
 ARG cart_service_port=3003
-ARG order_service_dest="order_service"
 ARG order_service_port=3004
 
 # Setup Environment Variables for Application
 ENV PORT=${port}
-ENV REACT_APP_USER_SERVICE_DEST=${user_service_dest}
+ENV REACT_APP_HOSTNAME=${hostname}
 ENV REACT_APP_USER_SERVICE_PORT=${user_service_port}
-ENV REACT_APP_CATALOG_SERVICE_DEST=${catalog_service_dest}
 ENV REACT_APP_CATALOG_SERVICE_PORT=${catalog_service_port}
-ENV REACT_APP_CART_SERVICE_DEST=${cart_service_dest}
 ENV REACT_APP_CART_SERVICE_PORT=${cart_service_port}
-ENV REACT_APP_ORDER_SERVICE_DEST=${order_service_dest}
 ENV REACT_APP_ORDER_SERVICE_PORT=${order_service_port}
 
 # Port available to other containers inside Docker Private Network, NOT HOST.

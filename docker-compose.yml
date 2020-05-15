@@ -85,14 +85,11 @@ services:
     build:
       context: ./frontend
       args:
+        hostname: ${HOSTNAME}
         port: ${FRONT_END_SERVICE_PORT}
-        user_service_dest: user-service
         user_service_port: ${USER_SERVICE_PORT}
-        catalog_service_dest: catalog-service
         catalog_service_port: ${CATALOG_SERVICE_PORT}
-        cart_service_dest: cart-service
         cart_service_port: ${CART_SERVICE_PORT}
-        order_service_dest: order-service
         order_service_port: ${ORDER_SERVICE_PORT}
     ports:
       - "${FRONT_END_SERVICE_PORT}:${FRONT_END_SERVICE_PORT}"

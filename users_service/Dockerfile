@@ -8,7 +8,7 @@ FROM node:12.16
 ARG port
 ARG sqlite_db_path
 ARG sql_logger
-ARG jwt="secret"
+ARG jwt_secret="secret"
 
 # Port available to other containers inside Docker Private Network, NOT HOST.
 EXPOSE ${port}
@@ -29,7 +29,7 @@ COPY . .
 ENV PORT=${port}
 ENV SQLITE_DB_PATH=${sqlite_db_path}
 ENV SQL_LOGGER=${sql_logger}
-ENV JWT=${jwt}
+ENV JWT_SECRET=${jwt_secret}
 
 # Run command for container on start-up
 CMD ["npm", "run", "start"]
