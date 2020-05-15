@@ -15,8 +15,8 @@ const LoginValidator = (props) => {
 
     return useFormik({
         initialValues: {
-            email: "mytest@example.com",
-            password: "myPass"
+            email: "test@example.com",
+            password: "12345678"
         },
         validationSchema: Yup.object({
             email: Yup.string()

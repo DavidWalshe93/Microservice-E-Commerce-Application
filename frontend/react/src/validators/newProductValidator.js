@@ -10,7 +10,7 @@ const NewProductValidator = () => {
             name: "",
             price: "",
             quantity: "",
-            image: "/images/"
+            image: ""
         },
         validationSchema: Yup.object({
             name: Yup.string()

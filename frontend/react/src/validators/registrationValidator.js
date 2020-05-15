@@ -11,7 +11,7 @@ const RegistrationValidator = (dispatch, setShowToast) => {
         initialValues: {
             firstName: "Fake",
             lastName: "Account",
-            email: "test2@example.com",
+            email: "test@example.com",
             phone: "0871234567",
             password: "12345678",
             verifyPassword: "12345678",
