@@ -52,6 +52,8 @@ services:
 
   frontend-service:
     image: david1993/frontend-service
+    environment:
+        - REACT_APP_HOSTNAME
     ports:
       - "${FRONT_END_SERVICE_PORT}:${FRONT_END_SERVICE_PORT}"
     depends_on:
@@ -64,4 +66,3 @@ volumes:
   cart-db:
   mysql-db:
   order-db:
-  user-db:
