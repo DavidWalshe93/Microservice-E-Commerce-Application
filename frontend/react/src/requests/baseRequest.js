@@ -58,9 +58,9 @@ const serviceRequest = async (options) => {
     // Request template
     // let uri = services[service]
     // console.log("URI BEFORE", uri)
-    const uri = process.env.REACT_APP_HOSTNAME || "http://localhost"
+    const uri = window.location.hostname
     // console.log("URI AFTER", uri)
-    const request = `${uri}:${ports[service]}/${endpoint}`
+    const request = `http://${uri}:${ports[service]}/${endpoint}`
     console.log("REQ", request)
     const response = await fetch(request, requestContent);
 
