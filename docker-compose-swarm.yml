@@ -1,0 +1,67 @@
+# Author: David
+# Date: 13/05/2020
+
+# Docker compose configuration to bring up all microservices
+
+version: "3"
+
+services:
+
+  user-service:
+    image: david1993/user-service
+    ports:
+      - "${USER_SERVICE_PORT}:${USER_SERVICE_PORT}"
+    volumes:
+      - user-db:/user-service/persistence
+
+
+  mysql:
+    image: david1993/mysql-catalog-service
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./mysql_catalog_service/sql_scripts:/docker-entrypoint-initdb.d/
+      - mysql-db:/var/lib/mysql
+
+
+  catalog-service:
+    image: david1993/catalog-service
+    ports:
+      - "${CATALOG_SERVICE_PORT}:${CATALOG_SERVICE_PORT}"
+    depends_on:
+      - mysql
+
+
+  cart-service:
+    image: david1993/cart-service
+    ports:
+      - "${CART_SERVICE_PORT}:${CART_SERVICE_PORT}"
+    volumes:
+      - cart-db:/cart-service/persistence
+
+
+  order-service:
+    image: david1993/order-service
+    ports:
+      - "${ORDER_SERVICE_PORT}:${ORDER_SERVICE_PORT}"
+    volumes:
+      - order-db:/order-service/persistence
+
+
+  frontend-service:
+    image: david1993/frontend-service
+    ports:
+      - "${FRONT_END_SERVICE_PORT}:${FRONT_END_SERVICE_PORT}"
+    depends_on:
+      - user-service
+      - catalog-service
+      - cart-service
+      - order-service
+
+volumes: 
+  cart-db:
+  mysql-db:
+  order-db:
+  user-db:
